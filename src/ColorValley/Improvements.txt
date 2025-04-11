@@ -1,0 +1,6 @@
+Add Time Limit (5 Minutes)
+Background Color should not have same color as boxes
+Boxes should be bigger
+Power Up Items
+Multi Player
+Mehr than 5 Items per Row
