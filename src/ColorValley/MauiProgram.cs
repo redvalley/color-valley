@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 
 namespace ACAB.App
 {
@@ -18,6 +20,7 @@ namespace ACAB.App
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
 
             return builder.Build();
         }

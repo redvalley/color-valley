@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ButtonTextDataPrivacyDeclaration" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="ButtonTextHelp" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="ButtonTextHighScore" xml:space="preserve">
+    <value>🏆</value>
+  </data>
+  <data name="ButtonTextImpressum" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+  <data name="DataPrivacyMainText" xml:space="preserve">
+    <value>Datenschutzerklärung der Red Valley Software GmbH für Color Valley
+
+Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Diese Datenschutzerklärung
+informiert Sie darüber, welche Daten im Rahmen der Nutzung von Color Valley erhoben und
+verarbeitet werden.
+
+1. Verantwortlicher
+Verantwortlich für die Datenverarbeitung im Zusammenhang mit der Nutzung dieser App ist:
+Red Valley Software GmbH
+Am Pumperhölzl 12, 84323 Massing
+E-Mail: rupert.eder@redvalley-software.com
+Webseite: www.redvalley-software.com
+
+2. Erhebung und Verarbeitung personenbezogener Daten
+
+Unsere kostenpflichtige Version der App kann grundsätzlich genutzt werden, ohne dass personenbezogene Daten erhoben werden.  Eine Ausnahme besteht lediglich, wenn Sie uns über die Feedback-Funktion kontaktieren.
+Feedback-Funktion: rupert.eder@redvalley-software.com
+Wenn Sie uns Feedback per E-Mail senden, wird Ihre E-Mail-Adresse verarbeitet, um Ihre Anfrage
+zu beantworten. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer freiwilligen Einwilligung
+gemäß Art. 6 Abs. 1 lit. a DSGVO.
+
+Wir bieten über die Lite Version der App ansonsten auch die Möglichkeit kostenlos mit Werbung zu spielen. Die Werbung in unseren Apps wird von Google AdMob und dessen Partnern ausgeliefert. Es werden dabei ggf. personenbezogene Daten wie IP-Adressen, Gerätekennung etc. genutzt um das Werbeangebot zu verbessern und zu finanzieren. Die Verarbeitung kann ausserhalb der EU/EWR erfolgen. Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
+
+3. Weitergabe von Daten
+Es erfolgt keine Weitergabe Ihrer personenbezogenen Daten an Dritte.
+
+4. Speicherung und Löschung von Daten
+Personenbezogene Daten, die Sie uns per E-Mail übermitteln, werden nur so lange gespeichert, wie
+es zur Bearbeitung Ihrer Anfrage erforderlich ist. Danach werden sie gelöscht, sofern keine
+gesetzlichen Aufbewahrungspflichten bestehen.
+
+5. Ihre Rechte
+Sie haben das Recht auf:
+• Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)
+• Berichtigung unrichtiger Daten (Art. 16 DSGVO)
+• Löschung Ihrer Daten (Art. 17 DSGVO)
+• Einschränkung der Verarbeitung (Art. 18 DSGVO)
+• Datenübertragbarkeit (Art. 20 DSGVO)
+• Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)
+• Beschwerde bei einer Aufsichtsbehörde, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer
+Daten gegen Datenschutzbestimmungen verstößt (Art. 77 DSGVO).
+
+6. Änderungen der Datenschutzerklärung
+Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die jeweils aktuelle Version ist
+in der App verfügbar.
+Bei Fragen zum Datenschutz kontaktieren Sie uns bitte unter:
+rupert.eder@redvalley-software.com
+Diese Datenschutzerklärung erfüllt die Anforderungen der DSGVO und der Apple App Store-
+Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
+  </data>
+  <data name="DataPrivacyPageTitle" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="HelpPageTitle" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="HelpTextExampleMultiMatch" xml:space="preserve">
+    <value>In diesem Beispiel können sogar mehrere Kästchen ausgewählt werden (alle markierten Gelben Kästchen): </value>
+  </data>
+  <data name="HelpTextExampleNoMatch" xml:space="preserve">
+    <value>Im nächsten Beispiel gibt es kein passendes Kästchen. Wird dennoch ein falsches Kästchen ausgewählt, so werden Punkte abgezogen:</value>
+  </data>
+  <data name="HelpTextExampleSingleMatch" xml:space="preserve">
+    <value>Im folgenden Beispiel kann nur ein Kästchen ausgewählt werden (das gelb markierte Blaue). Dieses hat die selbe Farbe wie das zentrale innere Kästchen:</value>
+  </data>
+  <data name="HelpTextGameGoal" xml:space="preserve">
+    <value>Ziel des Spiels ist es immer so schnell wie möglich die richtigen äußeren Kästchen durch Berühren mit dem Finger auszuwählen.</value>
+  </data>
+  <data name="HelpTextInitial" xml:space="preserve">
+    <value>Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Pukte zu erhalten.</value>
+  </data>
+  <data name="HighScorePageTitle" xml:space="preserve">
+    <value>Highscore Liste</value>
+  </data>
+  <data name="ImpressumMainText" xml:space="preserve">
+    <value>Impressum:
+Angaben nach § 5 TMG:
+Verantwortliche Firma:
+Red Valley Software GmbH
+Geschäftssitz: Am Pumperhölzl 12, 84323 Massing
+Das Unternehmen ist im Handelsregister eingetragen und gehört der Industrie- und Handelskammer
+(IHK) Niederbayern an (ihk@passau.ihk.de).
+Telefon: 08724/2071850
+E-Mail: 
+Webseite: www.redvalley-software.com
+Geschäftsführung: Rupert Eder
+Registernummer: HRB 11508
+Umsatzsteuer-Identifikationsnummer gem. § 27a UStG: DE322142672
+Programmierung: rupert.eder@redvalley-software.com
+
+Datenschutz:
+Unsere Datenschutzhinweise finden Sie unter der Schaltfläche Datenschutz.
+
+Urheberrechtshinweis:
+
+Copyright 2025 by:
+Red Valley Software GmbH
+Alle in dieser Applikation veröffentlichten Darstellungen und Inhalte sind urheber-rechtlich geschützt.
+Kein Teil dieser Applikation darf außerhalb der engen Grenzen des Urheberrechtsgesetzes ohne
+schriftliche Genehmigung des Urhebers in irgendeiner Form reproduziert, verbreitet oder sonst verwertet
+werden.
+
+Haftung:
+
+Wir sind für die Inhalte unserer App nach Maßgabe der allgemeinen Gesetze, insbesondere nach § 7 I
+TMG verantwortlich.
+Alle Inhalte wurden nach bestem Wissen und Gewissen unter Einhaltung der gebotenen Sorgfalt erstellt.
+Es wird jedoch keine Gewähr für deren Vollständigkeit und Richtigkeit oder für Ausfälle übernommen.
+Die Firma Red Valley Software GmbH haftet insbesondere nicht für wirtschaft-
+liche Schäden, die durch den Gebrauch unvollständiger oder fehlerhafter Dateninhalte entstehen.</value>
+  </data>
+  <data name="ImpressumPageTitle" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+</root>

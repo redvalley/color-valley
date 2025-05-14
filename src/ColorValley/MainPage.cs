@@ -1,24 +1,40 @@
-﻿namespace ACAB.App;
+﻿using System.Diagnostics;
+using ColorValley;
+using ColorValley.Models;
+using ColorValley.Settings;
+using iJus.Core.Settings;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls.Shapes;
+using Plugin.Maui.Audio;
+
+namespace ACAB.App;
 
 public class MainPage : ContentPage
 {
     private readonly Grid _gameGrid = new();
     private readonly List<Button> _outerBoxes = new();
+    private const string DefaultPlayerName = "Color Valley";
 
-    private readonly List<(int row, int col)> _positions = new()
+    private readonly List<(int row, int col)> _allValidPositions = new()
     {
-        (0, 2), (2, 0), (2, 4), (4, 2), (0, 4) // Specific outer positions
+        (0,0),(0,2), (0,4),
+        (2,0),(2,4),
+        (4,0),(4,2), (4,4)
     };
+
+    private readonly Grid _mainGrid = new();
 
     private readonly Random _random = new();
     private Button _middleBox;
     private const int currentLevel = 1;
     private const int rowCount = 5;
     private const int columnCount = 5;
+    private int _gameTimerIntervallSeconds = 2; 
+    private const int gameGridBoxCount = 5;
     private int _currentScore;
     private readonly Label _scoreLabel = new();
     private Label _timeLabel = new();
-    private TimeSpan _levelTimeSpan = TimeSpan.FromMinutes(1);
+    private TimeSpan _levelTimeSpan = TimeSpan.FromSeconds(60);
     private TimeSpan _currentTimeSpan = new TimeSpan();
     private const int _boxLength = 70;
     private IDispatcherTimer _gameTimer;
@@ -27,18 +43,37 @@ public class MainPage : ContentPage
     private Button _startOrTryAgainButton = new Button();
     private bool _isRunning = false;
     private int _comboHit = 0;
+    private Button _impressumButton = new Button();
+    private Button _dataPrivacyButton = new Button();
+    private Button _helpButton = new Button();
+    private Button _highScoreButton = new Button()
+    {
+        Text = ColorValley.Properties.Resources.ButtonTextHighScore
+    };
+
+    private Button _helpOverlayButton = new Button() { Text = ColorValley.Properties.Resources.ButtonTextHelp };
+    private IAudioPlayer _audioPlayerSuccessSound;
+    private IAudioPlayer _audioPlayerFailedSound;
+    private IAudioPlayer _audioPlayerGameCountdown;
+    private Grid _launcherOverlayGrid = new Grid();
+    private Border _launchOverlayBorder = new Border();
+    private Entry _playerEntry = new Entry();
+
     public MainPage()
     {
         _gameTimer = Dispatcher.CreateTimer();
         _timeTimer = Dispatcher.CreateTimer();
         Title = "Dynamic Box Game";
         UpdatePageBackground();
+        InitializeSound();
         InitializeGameUi();
         AddMiddleBox();
         UpdateOuterBoxes();
         AddGameInfoLabel();
-        AddStartOrTryAgainButton(false);
+        AddLauncherOverlay(false);
     }
+
+
 
     private void InitializeTime()
     {
@@ -60,11 +95,28 @@ public class MainPage : ContentPage
             new Point(1, 1));
     }
 
+    private void InitializeSound()
+    {
+        IAudioManager audioManager = AudioManager.Current;
+        Stream successSoundStream = FileSystem.OpenAppPackageFileAsync("game_success.mp3").Result;
+        _audioPlayerSuccessSound = audioManager.CreatePlayer(successSoundStream);
+
+        Stream failedSoundStream = FileSystem.OpenAppPackageFileAsync("game_failed.mp3").Result;
+        _audioPlayerFailedSound = audioManager.CreatePlayer(failedSoundStream);
+
+        Stream gameCountDownSoundStream = FileSystem.OpenAppPackageFileAsync("game_countdown.mp3").Result;
+        _audioPlayerGameCountdown = audioManager.CreatePlayer(gameCountDownSoundStream);
+
+
+
+    }
+
     private void InitializeGameUi()
     {
-        _gameGrid.Margin = new Thickness(10,150,10,150);
+
+        _gameGrid.Margin = new Thickness(10, 150, 10, 150);
         _gameGrid.Padding = 20;
-        _gameGrid.BackgroundColor = new Color(0xFF, 0xFF, 0xFF,0x1A);
+        _gameGrid.BackgroundColor = new Color(0xFF, 0xFF, 0xFF, 0x1A);
 
         for (var i = 0; i < rowCount; i++)
         {
@@ -72,13 +124,17 @@ public class MainPage : ContentPage
             _gameGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
         }
 
-        var mainGrid = new Grid();
-        mainGrid.AddRowDefinition(new RowDefinition(50));
-        mainGrid.AddRowDefinition(new RowDefinition(GridLength.Star));
+
+
+
+        _mainGrid.AddRowDefinition(new RowDefinition(GridLength.Auto));
+        _mainGrid.AddRowDefinition(new RowDefinition(GridLength.Star));
+        _mainGrid.AddRowDefinition(new RowDefinition(GridLength.Auto));
 
         var headerLayout = new Grid();
         headerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Star));
         headerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Star));
+
 
         _scoreLabel.HorizontalOptions = LayoutOptions.Start;
         _scoreLabel.Margin = 5;
@@ -89,9 +145,16 @@ public class MainPage : ContentPage
 
         headerLayout.Add(_scoreLabel, 0);
 
-        
-        mainGrid.Add(headerLayout, 0);
-        mainGrid.Add(_gameGrid, 0, 1);
+        _timeLabel.TextColor = Colors.White;
+        _timeLabel.FontSize = 30;
+        _timeLabel.HorizontalOptions = LayoutOptions.Center;
+
+        headerLayout.Add(_timeLabel, 1);
+
+
+
+        _mainGrid.Add(headerLayout, 0);
+        _mainGrid.Add(_gameGrid, 0, 1);
         var swipeGestureRecognizer = new SwipeGestureRecognizer()
         {
             Direction = SwipeDirection.Right,
@@ -101,25 +164,135 @@ public class MainPage : ContentPage
             UpdateGame();
         };
         _gameGrid.GestureRecognizers.Add(swipeGestureRecognizer);
-        
-        
 
-        headerLayout.Add(_timeLabel,1);
-        _timeLabel.TextColor = Colors.White;
-        _timeLabel.FontSize = 30;
-        _timeLabel.HorizontalOptions = LayoutOptions.Center;
-        Content = mainGrid;
+
+
+        Content = _mainGrid;
+
+        var footerLayout = new Grid();
+        footerLayout.AddRowDefinition(new RowDefinition(GridLength.Auto));
+        footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
+        footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
+        footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
+        footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
+
+        _impressumButton.HorizontalOptions = LayoutOptions.Start;
+        _impressumButton.Margin = 5;
+        _impressumButton.FontSize = 15;
+        _impressumButton.TextColor = Colors.White;
+        _impressumButton.Text = ColorValley.Properties.Resources.ButtonTextImpressum;
+        _impressumButton.BackgroundColor = Colors.Transparent;
+        _impressumButton.Clicked += ImpressumButtonOnClicked;
+        footerLayout.Add(_impressumButton, 0);
+
+        _helpButton.HorizontalOptions = LayoutOptions.Start;
+        _helpButton.Margin = 5;
+        _helpButton.FontSize = 15;
+        _helpButton.TextColor = Colors.White;
+        _helpButton.Text = ColorValley.Properties.Resources.ButtonTextHelp;
+        _helpButton.BackgroundColor = Colors.Transparent;
+        _helpButton.Clicked += HelpButtonOnClicked;
+        footerLayout.Add(_helpButton, 1);
+
+        _highScoreButton.HorizontalOptions = LayoutOptions.Start;
+        _highScoreButton.Margin = 5;
+        _highScoreButton.FontSize = 20;
+        _highScoreButton.FontAttributes = FontAttributes.Bold;
+        _highScoreButton.TextColor = Colors.White;
+        _highScoreButton.Text = ColorValley.Properties.Resources.ButtonTextHighScore;
+        _highScoreButton.BackgroundColor = Colors.Transparent;
+        _highScoreButton.Clicked += HighScoreButtonOnClicked;
+        footerLayout.Add(_highScoreButton, 2);
+
+        _dataPrivacyButton.HorizontalOptions = LayoutOptions.Start;
+        _dataPrivacyButton.Margin = 5;
+        _dataPrivacyButton.FontSize = 15;
+        _dataPrivacyButton.WidthRequest = 150;
+        _dataPrivacyButton.TextColor = Colors.White;
+        _dataPrivacyButton.Text = ColorValley.Properties.Resources.ButtonTextDataPrivacyDeclaration;
+        _dataPrivacyButton.LineBreakMode = LineBreakMode.WordWrap;
+        _dataPrivacyButton.BackgroundColor = Colors.Transparent;
+        _dataPrivacyButton.Clicked += DataPrivacyButtonOnClicked;
+        footerLayout.Add(_dataPrivacyButton, 3);
+
+        _mainGrid.Add(footerLayout, 0, 2);
 
         _gameInfoLabel.FontSize = 50;
         _gameInfoLabel.TextColor = Colors.White;
         _gameInfoLabel.VerticalOptions = LayoutOptions.Center;
         _gameInfoLabel.HorizontalOptions = LayoutOptions.Center;
-        _startOrTryAgainButton.BackgroundColor = Colors.White;
-        _startOrTryAgainButton.TextColor = Colors.Black;
+
+        _startOrTryAgainButton.BackgroundColor = Colors.Blue;
+        _startOrTryAgainButton.TextColor = Colors.White;
         _startOrTryAgainButton.FontSize = 20;
         _startOrTryAgainButton.WidthRequest = 200;
         _startOrTryAgainButton.HeightRequest = 50;
 
+        _helpOverlayButton.BackgroundColor = Colors.Blue;
+        _helpOverlayButton.TextColor = Colors.White;
+        _helpOverlayButton.FontSize = 20;
+        _helpOverlayButton.WidthRequest = 200;
+        _helpOverlayButton.HeightRequest = 50;
+
+        _launcherOverlayGrid.BackgroundColor = new Color(0xFF,0xFF,0xFF);
+        _launcherOverlayGrid.RowDefinitions = new RowDefinitionCollection()
+        {
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto),
+            new RowDefinition(GridLength.Auto)
+        };
+        _launchOverlayBorder.BackgroundColor = new Color(0xFF, 0xFF, 0xFF);
+        _launchOverlayBorder.Content = _launcherOverlayGrid;
+        _launchOverlayBorder.StrokeShape = new RoundRectangle()
+        {
+            CornerRadius = new CornerRadius(45)
+        };
+        _launchOverlayBorder.HeightRequest = 500;
+        _launchOverlayBorder.Margin = new Thickness(20);
+
+        _playerEntry.Margin = new Thickness(20, 0, 20, 0);
+        _playerEntry.FontSize = 15;
+        _playerEntry.Placeholder = DefaultPlayerName;
+
+        NavigationPage.SetHasNavigationBar(this, false);
+
+    }
+
+    private void HighScoreButtonOnClicked(object? sender, EventArgs e)
+    {
+        this.Navigation.PushAsync(new HighScorePage()
+        {
+            Background = this.Background
+        });
+    }
+
+    private void HelpButtonOnClicked(object? sender, EventArgs e)
+    {
+        this.Navigation.PushAsync(new HelpPage()
+        {
+            Background = this.Background
+        });
+    }
+
+
+    private void DataPrivacyButtonOnClicked(object? sender, EventArgs e)
+    {
+        this.Navigation.PushAsync(new DataPrivacyPage()
+        {
+            Background = this.Background
+        });
+    }
+
+    private void ImpressumButtonOnClicked(object? sender, EventArgs e)
+    {
+        this.Navigation.PushAsync(new ImpressumPage()
+        {
+            Background = this.Background
+        });
     }
 
     private void AddGameInfoLabel()
@@ -129,21 +302,188 @@ public class MainPage : ContentPage
         this._gameGrid.SetRowSpan(_gameInfoLabel, _boxLength);
     }
 
-    private void AddStartOrTryAgainButton(bool retry)
+    private void AddLauncherOverlay(bool retry)
     {
-        this._gameGrid.Add(_startOrTryAgainButton, 0, 0);
-        this._gameGrid.SetColumnSpan(_startOrTryAgainButton, _boxLength);
-        this._gameGrid.SetRowSpan(_startOrTryAgainButton, _boxLength);
-        this._startOrTryAgainButton.Text = retry ? "Retry?" : "\ud83d\ude80 Start?";
+        _launcherOverlayGrid.Clear();
+        
+        var currentSettings = UserSettings.LoadDecrypted<AppUserSettings>();
+        HighScoreEntry? topScore = currentSettings.GetTopScore();
+        var topScoreString = topScore?.Score == null ? "-" : topScore.Score.ToString();
+        var topScorePlayerString = topScore?.Name == null ? "" : $"({topScore.Name})";
+
+        this._startOrTryAgainButton.Text = retry ? "\ud83d\ude80 Nochmal?" : "\ud83d\ude80 Start?";
+
+        if (!retry)
+        {
+            if (currentSettings.IsGameStartedFirstTime)
+            {
+                var titleLabelLaunchFirstTime = new Label()
+                {
+                    Text = "Hallo 🙂", 
+                    Margin = 20,
+                    FontSize = 20,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                };
+                _launcherOverlayGrid.Add(titleLabelLaunchFirstTime,0,0);
+
+                var titleLabelLaunchPlayerName = new Label()
+                {
+                    Text = "Bitte gib hier deinen Spielernamen für die Highscore Liste ein: ",
+                    Margin = new Thickness(20,20,20,5),
+                    FontSize = 15
+                };
+
+                _launcherOverlayGrid.Add(titleLabelLaunchPlayerName, 0, 1);
+
+                _launcherOverlayGrid.Add(_playerEntry,0,2);
+                var labelStart = new Label()
+                {
+                    Text = "Möchtest du direkt starten?",
+                    Margin = 20,
+                    FontSize = 15
+                };
+                _launcherOverlayGrid.Add(labelStart,0,3);
+                
+                _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 4);
+                var titleLabelLaunchFirstTimeManual = new Label()
+                {
+                    Text = "oder zuerst die Anleitung anschaun: ",
+                    Margin = 20,
+                    FontSize = 15
+                };
+                _launcherOverlayGrid.Add(titleLabelLaunchFirstTimeManual, 0, 5);
+                _launcherOverlayGrid.Add(_helpOverlayButton, 0, 6);
+            }
+            else
+            {
+                
+
+                var titleLabelLaunchNotFirstTime = new Label()
+                {
+                    Text = $"Hallo {currentSettings.PlayerName} 🙂",
+                    Margin = 20,
+                    FontSize = 25,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                };
+                _launcherOverlayGrid.Add(titleLabelLaunchNotFirstTime, 0, 0);
+
+
+                if (topScore != null)
+                {
+                    var labelCurrentHighScore = new Label()
+                    {
+                        Text = $"🏆 Top Score: {topScoreString} \u2b50\ufe0f {topScorePlayerString}",
+                        Margin = new Thickness(20, 10, 20, 5),
+                        FontSize = 20,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        HorizontalOptions = LayoutOptions.Center
+                    };
+                    _launcherOverlayGrid.Add(labelCurrentHighScore, 0, 1);
+                }
+                
+
+                var labelStart = new Label()
+                {
+                    Text = "Möchtest du direkt starten?",
+                    Margin = 20,
+                    FontSize = 15,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                };
+                _launcherOverlayGrid.Add(labelStart, 0, 2);
+                _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 3);
+                var labelChangePlayerName = new Label()
+                {
+                    Text = "... oder deinen Spielernamen (für die Highscore Liste) ändern: ",
+                    Margin = new Thickness(20, 20, 20, 5),
+                    FontSize = 15
+                };
+                _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
+                _playerEntry.Text = currentSettings.PlayerName;
+                
+                _launcherOverlayGrid.Add(_playerEntry, 0, 5);
+            }
+        }
+        else
+        {
+            if (this._currentScore > (topScore?.Score??0))
+            {
+                var titleLabelLaunchNotFirstTime = new Label()
+                {
+                    Text= $"🏆 Super {currentSettings.PlayerName} - Neuer Highscore!!!\nDu hast {this._currentScore} Punkte!",
+                    Margin = 20,
+                    FontSize = 20,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                };
+                _launcherOverlayGrid.Add(titleLabelLaunchNotFirstTime, 0, 0);
+            }
+            else
+            {
+                var scoreText = $"🎖 Super {currentSettings.PlayerName}\n\n du hast {this._currentScore} Punkte!";
+
+                if (this._currentScore == 0)
+                {
+                    scoreText = $"🙁 Schade {currentSettings.PlayerName}, du hast leider {this._currentScore} Punkte!";
+                }
+
+                var titleLabelLaunchNotFirstTime = new Label()
+                {
+                    Text = scoreText,
+                    Margin = 20,
+                    FontSize = 20,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                };
+                _launcherOverlayGrid.Add(titleLabelLaunchNotFirstTime, 0, 0);
+
+                if (topScore != null)
+                {
+                    var labelCurrentHighScore = new Label()
+                    {
+                        Text = $"🏆 Top Score: {topScoreString} \u2b50\ufe0f {topScorePlayerString}",
+                        Margin = 20,
+                        FontSize = 20,
+                    };
+                    _launcherOverlayGrid.Add(labelCurrentHighScore, 0, 1);
+                }
+                
+            }
+
+            _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 2);
+            var labelChangePlayerName = new Label()
+            {
+                Text = "... oder Spielernamen (für die Highscore Liste) ändern: ",
+                Margin = new Thickness(20, 20, 20, 5),
+                FontSize = 15
+            };
+            _launcherOverlayGrid.Add(labelChangePlayerName, 0, 3);
+            _playerEntry.Text = currentSettings.PlayerName;
+            _launcherOverlayGrid.Add(_playerEntry, 0, 4);
+        }
+
+
+
+        this._mainGrid.Add(_launchOverlayBorder, 0, 1);
+
+
 
         _startOrTryAgainButton.Clicked += StartOrTryAgainButtonOnClicked;
+        _helpOverlayButton.Clicked += HelpButtonOnClicked;
+
+        if (currentSettings.IsGameStartedFirstTime)
+        {
+            currentSettings.IsGameStartedFirstTime = false;
+            currentSettings.SaveEncrypted();
+        }
     }
 
     private void StartOrTryAgainButtonOnClicked(object? sender, EventArgs e)
     {
         StartGame();
-        _gameGrid.Remove(_startOrTryAgainButton);
-        _startOrTryAgainButton.Clicked -= StartOrTryAgainButtonOnClicked;
     }
 
     private void AddMiddleBox()
@@ -171,15 +511,22 @@ public class MainPage : ContentPage
 
     private async Task StartGame()
     {
+        AppUserSettings appUserSettings = UserSettings.LoadDecrypted<AppUserSettings>();
+        appUserSettings.PlayerName = string.IsNullOrEmpty(_playerEntry.Text) ? DefaultPlayerName : _playerEntry.Text;
+        appUserSettings.SaveEncrypted();
+
+        _mainGrid.Remove(_launchOverlayBorder);
+
         _currentScore = 0;
         _scoreLabel.Text = "⭐️ " + _currentScore;
         this.InitializeTime();
 
-        this._gameTimer.Interval = TimeSpan.FromSeconds(2);
+        this._gameTimer.Interval = TimeSpan.FromSeconds(_gameTimerIntervallSeconds);
         this._gameTimer.Tick += GameTimerOnTick;
         this._timeTimer.Interval = TimeSpan.FromSeconds(1);
         this._timeTimer.Tick += TimeTimerOnTick;
-        
+
+        _audioPlayerGameCountdown.Play();
         for (int gameCountDown = 3; gameCountDown > 0; gameCountDown--)
         {
             _gameInfoLabel.Text = gameCountDown.ToString();
@@ -187,27 +534,25 @@ public class MainPage : ContentPage
             _gameInfoLabel.Animate("GameInfoLabelCountDown", d =>
             {
                 _gameInfoLabel.FontSize += 1;
-            },0, 2000, 10, 2000);
-            await Task.Delay(TimeSpan.FromSeconds(2));
+            }, 0, 1000, 10, 1000);
+            await Task.Delay(TimeSpan.FromSeconds(1));
         }
 
         _gameInfoLabel.Text = "GO!";
         _gameInfoLabel.FontSize = 50;
-        
         _gameInfoLabel.Animate("GameInfoLabelCountDown", d =>
         {
             _gameInfoLabel.FontSize += 1;
-        }, 0, 2000, 10, 2000,finished: (d, b) =>
+        }, 0, 1000, 10, 1000, finished: (d, b) =>
         {
             _gameInfoLabel.Text = string.Empty;
             _gameTimer.Start();
             _timeTimer.Start();
             _isRunning = true;
         });
-        
-        
 
-
+        
+        _startOrTryAgainButton.Clicked -= StartOrTryAgainButtonOnClicked;
     }
 
     private void TimeTimerOnTick(object? sender, EventArgs e)
@@ -237,7 +582,14 @@ public class MainPage : ContentPage
 
     private void AskTryAgain()
     {
-        AddStartOrTryAgainButton(true);
+        var currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>();
+        currentUserSettings.AddHighScore(new HighScoreEntry()
+        {
+            Name = currentUserSettings.PlayerName,
+            Score = _currentScore
+        });
+        currentUserSettings.SaveEncrypted();
+        AddLauncherOverlay(true);
     }
 
     private void GameTimerOnTick(object? sender, EventArgs e)
@@ -268,11 +620,10 @@ public class MainPage : ContentPage
 
         _outerBoxes.Clear();
 
-        // Create new outer boxes with random positions and colors
-        var shuffledPositions = new List<(int row, int col)>(_positions);
-        ShuffleList(shuffledPositions);
 
-        foreach (var pos in shuffledPositions)
+        var randomPositions = GetRandomPositions(_allValidPositions);
+
+        foreach (var pos in randomPositions)
         {
             var outerBox = new Button
             {
@@ -284,7 +635,7 @@ public class MainPage : ContentPage
                 HeightRequest = _boxLength,
                 Shadow = new Shadow()
                 {
-                    Offset = new Point(5,5),
+                    Offset = new Point(5, 5),
                     Brush = new SolidColorBrush(Colors.Black)
                 }
             };
@@ -310,7 +661,7 @@ public class MainPage : ContentPage
         }
         var clickedBox = (Button)sender;
 
-        if (clickedBox.BackgroundColor.Equals(_middleBox.BackgroundColor) && 
+        if (clickedBox.BackgroundColor.Equals(_middleBox.BackgroundColor) &&
             !clickedBox.BackgroundColor.Equals(Colors.Transparent))
         {
             clickedBox.BackgroundColor = Colors.Transparent;
@@ -327,18 +678,20 @@ public class MainPage : ContentPage
             var scoreToAdd = 5 * currentLevel;
             if (_comboHit > 1)
             {
-                scoreToAdd = scoreToAdd * (int)Math.Pow(10, _comboHit -1);
+                scoreToAdd = scoreToAdd * (int)Math.Pow(10, _comboHit - 1);
             }
-            
-            UpdateScore(scoreToAdd);
+
+            _audioPlayerSuccessSound.Play();
+            UpdateScore(clickedBox, scoreToAdd);
         }
         else
         {
-            UpdateScore(-1);
+            _audioPlayerFailedSound.Play();
+            UpdateScore(clickedBox, -1);
         }
     }
 
-    private void UpdateScore(int scoreToAdd)
+    private void UpdateScore(Button clickedBox, int scoreToAdd)
     {
         _currentScore += scoreToAdd;
         _scoreLabel.Text = "⭐️ " + _currentScore;
@@ -355,10 +708,12 @@ public class MainPage : ContentPage
             if (_comboHit == 2)
             {
                 newScoreLabel.Text = "\ud83c\udf1f +" + scoreToAdd;
-            } else if (_comboHit == 3)
+            }
+            else if (_comboHit == 3)
             {
                 newScoreLabel.Text = "\u2604\ufe0f +" + scoreToAdd;
-            } else if (_comboHit > 3)
+            }
+            else if (_comboHit > 3)
             {
                 newScoreLabel.Text = "\ud83c\udf96 +" + scoreToAdd;
             }
@@ -366,25 +721,25 @@ public class MainPage : ContentPage
             {
                 newScoreLabel.Text = "\u2b50\ufe0f +" + scoreToAdd;
             }
-            
-            
+
+
         }
-            
+
         newScoreLabel.VerticalOptions = LayoutOptions.Center;
         newScoreLabel.HorizontalOptions = LayoutOptions.Center;
-        
-        this._gameGrid.Add(newScoreLabel, 0, 0);
-        this._gameGrid.SetColumnSpan(newScoreLabel, _boxLength);
-        this._gameGrid.SetRowSpan(newScoreLabel, _boxLength);
+
+        this._gameGrid.Add(newScoreLabel, Grid.GetColumn(clickedBox), Grid.GetRow(clickedBox));
+
+
         if (_comboHit > 1)
         {
             newScoreLabel.Margin = new Thickness(-_comboHit * 50, -_comboHit * 50);
         }
-        newScoreLabel.Animate("GameInfoLabelCountDown", d =>
+        newScoreLabel.Animate("NewScoreLabel", d =>
         {
             newScoreLabel.FontSize += 1;
-            
-        }, 0, 1000, 10, 1000, finished: (d, b) =>
+
+        }, 0, 500, 100, 500, finished: (d, b) =>
         {
             newScoreLabel.Text = string.Empty;
             this._gameGrid.Remove(newScoreLabel);
@@ -398,12 +753,18 @@ public class MainPage : ContentPage
         return colors[_random.Next(colors.Count)];
     }
 
-    private void ShuffleList<T>(IList<T> list)
+    private List<(int row, int col)> GetRandomPositions(List<(int row, int col)> allValidPositions)
     {
-        for (var i = list.Count - 1; i > 0; i--)
+        var positionsForRandomization = allValidPositions.ToList();
+        var randomPositions = new List<(int row, int col)>();
+
+        for (int i = 0; i < gameGridBoxCount; i++)
         {
-            var j = _random.Next(i + 1);
-            (list[i], list[j]) = (list[j], list[i]);
+            var randomItemIndex = _random.Next(0, positionsForRandomization.Count);
+            randomPositions.Add(positionsForRandomization[randomItemIndex]);
+            positionsForRandomization.RemoveAt(randomItemIndex);
         }
+
+        return randomPositions;
     }
 }

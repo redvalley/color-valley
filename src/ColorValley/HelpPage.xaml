@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ColorValley.Properties"
+             x:Class="ColorValley.HelpPage"
+             Title="{x:Static resources:Resources.HelpPageTitle}">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Margin="20" Text="{x:Static resources:Resources.HelpTextGameGoal }" 
+                   TextColor="White"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+            
+            <Label Margin="20" Text="{x:Static resources:Resources.HelpTextInitial }" TextColor="White" />
+
+
+            <Label Margin="20,50,20,20" Text="{x:Static resources:Resources.HelpTextExampleSingleMatch }" TextColor="White" />
+            <Image Source="help_one_match.png" />
+
+            <Label Margin="20,50,20,20" Text="{x:Static resources:Resources.HelpTextExampleNoMatch }" TextColor="White" />
+            <Image Source="help_no_match.png" />
+
+            <Label Margin="20, 50, 20, 20" Text="{x:Static resources:Resources.HelpTextExampleMultiMatch }" TextColor="White" />
+            <Image Source="help_multi_match.png" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

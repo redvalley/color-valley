@@ -1,4 +1,6 @@
-﻿namespace ACAB.App
+﻿using ColorValley;
+
+namespace ACAB.App
 {
     public partial class App : Application
     {
@@ -9,7 +11,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage());
+            return new Window(new NavigationPage(new MainPage()));
         }
     }
 }
