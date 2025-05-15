@@ -12,6 +12,12 @@ public class HighScoreEntry
     /// </summary>
     public string RankOrTrophy { get; set; }
 
+    /// <summary>
+    /// The high score value.
+    /// </summary>
+    [JsonInclude]
+    public int Level { get; set; }
+
 
     /// <summary>
     /// The high score value.

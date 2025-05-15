@@ -97,6 +97,15 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🏃‍♂️‍➡️ Nächster Level.
+        /// </summary>
+        internal static string ButtonTextNextLevel {
+            get {
+                return ResourceManager.GetString("ButtonTextNextLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datenschutzerklärung der Red Valley Software GmbH für Color Valley
         ///
         ///Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Diese Datenschutzerklärung
@@ -218,6 +227,69 @@ namespace ColorValley.Properties {
         internal static string ImpressumPageTitle {
             get {
                 return ResourceManager.GetString("ImpressumPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level:.
+        /// </summary>
+        internal static string LabelLevelText {
+            get {
+                return ResourceManager.GetString("LabelLevelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🍋 Easy peasy lemon squeezy.
+        /// </summary>
+        internal static string Level1Name {
+            get {
+                return ResourceManager.GetString("Level1Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🤸‍♂️ Quick slick turbo trick.
+        /// </summary>
+        internal static string Level2Name {
+            get {
+                return ResourceManager.GetString("Level2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🕹 Much too much mega clutch.
+        /// </summary>
+        internal static string Level3Name {
+            get {
+                return ResourceManager.GetString("Level3Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎨 Bright light color delight.
+        /// </summary>
+        internal static string Level4Name {
+            get {
+                return ResourceManager.GetString("Level4Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🌈 Flash dash color splash.
+        /// </summary>
+        internal static string Level5Name {
+            get {
+                return ResourceManager.GetString("Level5Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color Valley.
+        /// </summary>
+        internal static string MainPageTitle {
+            get {
+                return ResourceManager.GetString("MainPageTitle", resourceCulture);
             }
         }
     }

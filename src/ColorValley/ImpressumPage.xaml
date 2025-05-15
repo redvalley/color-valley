@@ -5,5 +5,7 @@
              x:Class="ColorValley.ImpressumPage"
              Title="{x:Static resources:Resources.ImpressumPageTitle}"
              >
-    <Label Margin="20" Text="{x:Static resources:Resources.ImpressumMainText }" TextColor="White"></Label>
+	<ScrollView>
+		<Label Margin="20" Text="{x:Static resources:Resources.ImpressumMainText }" TextColor="White"></Label>
+	</ScrollView>
 </ContentPage>

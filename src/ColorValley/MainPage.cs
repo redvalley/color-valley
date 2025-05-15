@@ -15,32 +15,24 @@ public class MainPage : ContentPage
     private readonly List<Button> _outerBoxes = new();
     private const string DefaultPlayerName = "Color Valley";
 
-    private readonly List<(int row, int col)> _allValidPositions = new()
-    {
-        (0,0),(0,2), (0,4),
-        (2,0),(2,4),
-        (4,0),(4,2), (4,4)
-    };
-
     private readonly Grid _mainGrid = new();
-
     private readonly Random _random = new();
     private Button _middleBox;
-    private const int currentLevel = 1;
-    private const int rowCount = 5;
-    private const int columnCount = 5;
-    private int _gameTimerIntervallSeconds = 2; 
-    private const int gameGridBoxCount = 5;
+
     private int _currentScore;
     private readonly Label _scoreLabel = new();
+    private readonly Label _levelNumberLabel = new();
+    private readonly Label _levelNameLabel = new();
+
     private Label _timeLabel = new();
-    private TimeSpan _levelTimeSpan = TimeSpan.FromSeconds(60);
-    private TimeSpan _currentTimeSpan = new TimeSpan();
-    private const int _boxLength = 70;
+    private TimeSpan _currentTimeSpan = TimeSpan.Zero;
+
     private IDispatcherTimer _gameTimer;
     private IDispatcherTimer _timeTimer;
     private Label _gameInfoLabel = new Label();
-    private Button _startOrTryAgainButton = new Button();
+    private Button _startOrRestartButton = new Button();
+    private Button _nextLevelButton = new Button();
+
     private bool _isRunning = false;
     private int _comboHit = 0;
     private Button _impressumButton = new Button();
@@ -59,17 +51,19 @@ public class MainPage : ContentPage
     private Border _launchOverlayBorder = new Border();
     private Entry _playerEntry = new Entry();
 
+    private LevelSettings _levelSettings = new LevelSettings();
+
     public MainPage()
     {
         _gameTimer = Dispatcher.CreateTimer();
         _timeTimer = Dispatcher.CreateTimer();
-        Title = "Dynamic Box Game";
-        UpdatePageBackground();
+        _levelSettings = LevelSettings.CreateLevel1Settings();
+        Title = ColorValley.Properties.Resources.MainPageTitle;
         InitializeSound();
         InitializeGameUi();
-        AddMiddleBox();
-        UpdateOuterBoxes();
-        AddGameInfoLabel();
+
+        UpdateGame();
+
         AddLauncherOverlay(false);
     }
 
@@ -77,22 +71,12 @@ public class MainPage : ContentPage
 
     private void InitializeTime()
     {
-        this._currentTimeSpan = _levelTimeSpan;
+        this._currentTimeSpan = TimeSpan.FromSeconds(_levelSettings.TotalTimeSeconds);
     }
 
     private void UpdatePageBackground()
     {
-        var firstColor = GetRandomColor();
-        var secondColor = GetRandomColor(firstColor);
-
-        // Random gradient background
-        Background = new LinearGradientBrush(
-            [
-                new GradientStop { Color = firstColor, Offset = 0.0f },
-                new GradientStop { Color = secondColor, Offset = 1.0f }
-            ],
-            new Point(0, 0),
-            new Point(1, 1));
+        Background = _levelSettings.GetRandomLinearGradientBrush();
     }
 
     private void InitializeSound()
@@ -113,19 +97,11 @@ public class MainPage : ContentPage
 
     private void InitializeGameUi()
     {
+        Background = _levelSettings.GetRandomLinearGradientBrush();
 
         _gameGrid.Margin = new Thickness(10, 150, 10, 150);
         _gameGrid.Padding = 20;
         _gameGrid.BackgroundColor = new Color(0xFF, 0xFF, 0xFF, 0x1A);
-
-        for (var i = 0; i < rowCount; i++)
-        {
-            _gameGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            _gameGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-        }
-
-
-
 
         _mainGrid.AddRowDefinition(new RowDefinition(GridLength.Auto));
         _mainGrid.AddRowDefinition(new RowDefinition(GridLength.Star));
@@ -134,6 +110,9 @@ public class MainPage : ContentPage
         var headerLayout = new Grid();
         headerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Star));
         headerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Star));
+        headerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Star));
+        headerLayout.AddRowDefinition(new RowDefinition(GridLength.Auto));
+        headerLayout.AddRowDefinition(new RowDefinition(GridLength.Auto));
 
 
         _scoreLabel.HorizontalOptions = LayoutOptions.Start;
@@ -142,14 +121,32 @@ public class MainPage : ContentPage
         _scoreLabel.TextColor = Colors.White;
         _scoreLabel.Text = "\u2b50\ufe0f " + _currentScore;
 
-
         headerLayout.Add(_scoreLabel, 0);
+
+        _levelNumberLabel.HorizontalOptions = LayoutOptions.Start;
+        _levelNumberLabel.Margin = 5;
+        _levelNumberLabel.FontSize = 30;
+        _levelNumberLabel.TextColor = Colors.White;
+        _levelNumberLabel.Text = ColorValley.Properties.Resources.LabelLevelText + " " + _levelSettings.Level;
+
+        headerLayout.Add(_levelNumberLabel, 1);
+
+        _levelNameLabel.HorizontalOptions = LayoutOptions.Center;
+        _levelNameLabel.Margin = 5;
+        _levelNameLabel.FontSize = 20;
+        _levelNameLabel.HorizontalTextAlignment = TextAlignment.Center;
+        _levelNameLabel.TextColor = Colors.White;
+        _levelNameLabel.Text = _levelSettings.Name;
+
+        headerLayout.Add(_levelNameLabel, 0, 1);
+        Grid.SetColumnSpan(_levelNameLabel, 3);
+
 
         _timeLabel.TextColor = Colors.White;
         _timeLabel.FontSize = 30;
         _timeLabel.HorizontalOptions = LayoutOptions.Center;
 
-        headerLayout.Add(_timeLabel, 1);
+        headerLayout.Add(_timeLabel, 2);
 
 
 
@@ -157,14 +154,14 @@ public class MainPage : ContentPage
         _mainGrid.Add(_gameGrid, 0, 1);
         var swipeGestureRecognizer = new SwipeGestureRecognizer()
         {
-            Direction = SwipeDirection.Right,
+            Direction = SwipeDirection.Right | SwipeDirection.Left
         };
         swipeGestureRecognizer.Swiped += (s, e) =>
         {
             UpdateGame();
         };
         _gameGrid.GestureRecognizers.Add(swipeGestureRecognizer);
-
+        _mainGrid.GestureRecognizers.Add(swipeGestureRecognizer);
 
 
         Content = _mainGrid;
@@ -222,11 +219,21 @@ public class MainPage : ContentPage
         _gameInfoLabel.VerticalOptions = LayoutOptions.Center;
         _gameInfoLabel.HorizontalOptions = LayoutOptions.Center;
 
-        _startOrTryAgainButton.BackgroundColor = Colors.Blue;
-        _startOrTryAgainButton.TextColor = Colors.White;
-        _startOrTryAgainButton.FontSize = 20;
-        _startOrTryAgainButton.WidthRequest = 200;
-        _startOrTryAgainButton.HeightRequest = 50;
+        _startOrRestartButton.BackgroundColor = Colors.Blue;
+        _startOrRestartButton.TextColor = Colors.White;
+        _startOrRestartButton.FontSize = 20;
+        _startOrRestartButton.WidthRequest = 200;
+        _startOrRestartButton.HeightRequest = 50;
+        _startOrRestartButton.Margin = new Thickness(20);
+
+        _nextLevelButton.BackgroundColor = Colors.Blue;
+        _nextLevelButton.TextColor = Colors.White;
+        _nextLevelButton.FontSize = 20;
+        _nextLevelButton.WidthRequest = 200;
+        _nextLevelButton.HeightRequest = 50;
+        _nextLevelButton.Text = ColorValley.Properties.Resources.ButtonTextNextLevel;
+        _nextLevelButton.Margin = new Thickness(20);
+        
 
         _helpOverlayButton.BackgroundColor = Colors.Blue;
         _helpOverlayButton.TextColor = Colors.White;
@@ -234,7 +241,7 @@ public class MainPage : ContentPage
         _helpOverlayButton.WidthRequest = 200;
         _helpOverlayButton.HeightRequest = 50;
 
-        _launcherOverlayGrid.BackgroundColor = new Color(0xFF,0xFF,0xFF);
+        _launcherOverlayGrid.BackgroundColor = new Color(0xFF, 0xFF, 0xFF);
         _launcherOverlayGrid.RowDefinitions = new RowDefinitionCollection()
         {
             new RowDefinition(GridLength.Auto),
@@ -260,7 +267,41 @@ public class MainPage : ContentPage
 
         NavigationPage.SetHasNavigationBar(this, false);
 
+        _middleBox = new Button
+        {
+            BackgroundColor = _levelSettings.GetRandomColor(),
+            BorderWidth = 2,
+            CornerRadius = 5,
+            BorderColor = Colors.Black,
+            Margin = new Thickness(_levelSettings.BoxMargin),
+            Shadow = new Shadow()
+            {
+                Offset = new Point(10, 10),
+                Brush = new SolidColorBrush(Colors.Goldenrod)
+            },
+            Text = "🌟",
+            FontSize = 20,
+            VerticalOptions = LayoutOptions.Fill,
+            HorizontalOptions = LayoutOptions.Fill
+        };
     }
+
+    private void UpdateGameGridRowsAndColumns()
+    {
+        _gameGrid.RowDefinitions.Clear();
+        _gameGrid.ColumnDefinitions.Clear();
+
+        for (var i = 0; i < _levelSettings.RowCount; i++)
+        {
+            _gameGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+        }
+
+        for (var i = 0; i < _levelSettings.ColumnCount; i++)
+        {
+            _gameGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+        }
+    }
+
 
     private void HighScoreButtonOnClicked(object? sender, EventArgs e)
     {
@@ -297,55 +338,56 @@ public class MainPage : ContentPage
 
     private void AddGameInfoLabel()
     {
+        this._gameGrid.Remove(_gameInfoLabel);
         this._gameGrid.Add(_gameInfoLabel, 0, 0);
-        this._gameGrid.SetColumnSpan(_gameInfoLabel, _boxLength);
-        this._gameGrid.SetRowSpan(_gameInfoLabel, _boxLength);
+        this._gameGrid.SetColumnSpan(_gameInfoLabel, _levelSettings.ColumnCount);
+        this._gameGrid.SetRowSpan(_gameInfoLabel, _levelSettings.RowCount);
     }
 
-    private void AddLauncherOverlay(bool retry)
+    private void AddLauncherOverlay(bool levelDone)
     {
         _launcherOverlayGrid.Clear();
-        
+
         var currentSettings = UserSettings.LoadDecrypted<AppUserSettings>();
         HighScoreEntry? topScore = currentSettings.GetTopScore();
         var topScoreString = topScore?.Score == null ? "-" : topScore.Score.ToString();
         var topScorePlayerString = topScore?.Name == null ? "" : $"({topScore.Name})";
 
-        this._startOrTryAgainButton.Text = retry ? "\ud83d\ude80 Nochmal?" : "\ud83d\ude80 Start?";
+        this._startOrRestartButton.Text = levelDone ? "\ud83d\ude80 Neustart?" : "\ud83d\ude80 Start?";
 
-        if (!retry)
+        if (!levelDone)
         {
             if (currentSettings.IsGameStartedFirstTime)
             {
                 var titleLabelLaunchFirstTime = new Label()
                 {
-                    Text = "Hallo 🙂", 
+                    Text = "Hallo 🙂",
                     Margin = 20,
                     FontSize = 20,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
-                _launcherOverlayGrid.Add(titleLabelLaunchFirstTime,0,0);
+                _launcherOverlayGrid.Add(titleLabelLaunchFirstTime, 0, 0);
 
                 var titleLabelLaunchPlayerName = new Label()
                 {
                     Text = "Bitte gib hier deinen Spielernamen für die Highscore Liste ein: ",
-                    Margin = new Thickness(20,20,20,5),
+                    Margin = new Thickness(20, 20, 20, 5),
                     FontSize = 15
                 };
 
                 _launcherOverlayGrid.Add(titleLabelLaunchPlayerName, 0, 1);
 
-                _launcherOverlayGrid.Add(_playerEntry,0,2);
+                _launcherOverlayGrid.Add(_playerEntry, 0, 2);
                 var labelStart = new Label()
                 {
                     Text = "Möchtest du direkt starten?",
                     Margin = 20,
                     FontSize = 15
                 };
-                _launcherOverlayGrid.Add(labelStart,0,3);
-                
-                _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 4);
+                _launcherOverlayGrid.Add(labelStart, 0, 3);
+
+                _launcherOverlayGrid.Add(_startOrRestartButton, 0, 4);
                 var titleLabelLaunchFirstTimeManual = new Label()
                 {
                     Text = "oder zuerst die Anleitung anschaun: ",
@@ -357,7 +399,7 @@ public class MainPage : ContentPage
             }
             else
             {
-                
+
 
                 var titleLabelLaunchNotFirstTime = new Label()
                 {
@@ -383,7 +425,7 @@ public class MainPage : ContentPage
                     };
                     _launcherOverlayGrid.Add(labelCurrentHighScore, 0, 1);
                 }
-                
+
 
                 var labelStart = new Label()
                 {
@@ -394,7 +436,7 @@ public class MainPage : ContentPage
                     HorizontalOptions = LayoutOptions.Center
                 };
                 _launcherOverlayGrid.Add(labelStart, 0, 2);
-                _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 3);
+                _launcherOverlayGrid.Add(_startOrRestartButton, 0, 3);
                 var labelChangePlayerName = new Label()
                 {
                     Text = "... oder deinen Spielernamen (für die Highscore Liste) ändern: ",
@@ -403,17 +445,17 @@ public class MainPage : ContentPage
                 };
                 _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
                 _playerEntry.Text = currentSettings.PlayerName;
-                
+
                 _launcherOverlayGrid.Add(_playerEntry, 0, 5);
             }
         }
         else
         {
-            if (this._currentScore > (topScore?.Score??0))
+            if (this._currentScore > (topScore?.Score ?? 0))
             {
                 var titleLabelLaunchNotFirstTime = new Label()
                 {
-                    Text= $"🏆 Super {currentSettings.PlayerName} - Neuer Highscore!!!\nDu hast {this._currentScore} Punkte!",
+                    Text = $"🏆 Super {currentSettings.PlayerName} - Neuer Highscore!!!\nDu hast {this._currentScore} Punkte!",
                     Margin = 20,
                     FontSize = 20,
                     HorizontalTextAlignment = TextAlignment.Center,
@@ -450,19 +492,24 @@ public class MainPage : ContentPage
                     };
                     _launcherOverlayGrid.Add(labelCurrentHighScore, 0, 1);
                 }
-                
+
             }
 
-            _launcherOverlayGrid.Add(_startOrTryAgainButton, 0, 2);
+            _launcherOverlayGrid.Add(_startOrRestartButton, 0, 2);
+            if (_levelSettings.Level != LevelSettings.LastLevel)
+            {
+                _launcherOverlayGrid.Add(_nextLevelButton, 0, 3);
+            }
+            
             var labelChangePlayerName = new Label()
             {
                 Text = "... oder Spielernamen (für die Highscore Liste) ändern: ",
                 Margin = new Thickness(20, 20, 20, 5),
                 FontSize = 15
             };
-            _launcherOverlayGrid.Add(labelChangePlayerName, 0, 3);
+            _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
             _playerEntry.Text = currentSettings.PlayerName;
-            _launcherOverlayGrid.Add(_playerEntry, 0, 4);
+            _launcherOverlayGrid.Add(_playerEntry, 0, 5);
         }
 
 
@@ -471,7 +518,8 @@ public class MainPage : ContentPage
 
 
 
-        _startOrTryAgainButton.Clicked += StartOrTryAgainButtonOnClicked;
+        _startOrRestartButton.Clicked += StartOrRestartButtonOnClicked;
+        _nextLevelButton.Clicked += NextLevelButtonOnClicked;
         _helpOverlayButton.Clicked += HelpButtonOnClicked;
 
         if (currentSettings.IsGameStartedFirstTime)
@@ -481,47 +529,44 @@ public class MainPage : ContentPage
         }
     }
 
-    private void StartOrTryAgainButtonOnClicked(object? sender, EventArgs e)
+    private void NextLevelButtonOnClicked(object? sender, EventArgs e)
     {
-        StartGame();
+        StartGame(true);
     }
 
-    private void AddMiddleBox()
+    private void StartOrRestartButtonOnClicked(object? sender, EventArgs e)
     {
-        _middleBox = new Button
+        StartGame(false);
+    }
+
+
+    private async Task StartGame(bool nextLevel)
+    {
+        if (nextLevel)
         {
-            BackgroundColor = GetRandomColor(),
-            BorderWidth = 2,
-            CornerRadius = 5,
-            BorderColor = Colors.White,
-            WidthRequest = _boxLength + 20,
-            HeightRequest = _boxLength + 20,
-            Shadow = new Shadow()
-            {
-                Offset = new Point(5, 5),
-                Brush = new SolidColorBrush(Colors.Goldenrod)
-            }
-        };
+            UpdateLevel(false);
+        }
+        else
+        {
+            UpdateLevel(true);
+        }
 
-        _middleBox.VerticalOptions = LayoutOptions.Fill;
-        _middleBox.HorizontalOptions = LayoutOptions.Fill;
+        UpdateGame();
 
-        _gameGrid.Add(_middleBox, 2, 2); // Place in the center of the grid
-    }
-
-    private async Task StartGame()
-    {
         AppUserSettings appUserSettings = UserSettings.LoadDecrypted<AppUserSettings>();
         appUserSettings.PlayerName = string.IsNullOrEmpty(_playerEntry.Text) ? DefaultPlayerName : _playerEntry.Text;
         appUserSettings.SaveEncrypted();
 
         _mainGrid.Remove(_launchOverlayBorder);
+        if (!nextLevel)
+        {
+            _currentScore = 0;
+        }
 
-        _currentScore = 0;
         _scoreLabel.Text = "⭐️ " + _currentScore;
         this.InitializeTime();
 
-        this._gameTimer.Interval = TimeSpan.FromSeconds(_gameTimerIntervallSeconds);
+        this._gameTimer.Interval = TimeSpan.FromSeconds(_levelSettings.GameTimerIntervallSeconds);
         this._gameTimer.Tick += GameTimerOnTick;
         this._timeTimer.Interval = TimeSpan.FromSeconds(1);
         this._timeTimer.Tick += TimeTimerOnTick;
@@ -551,8 +596,36 @@ public class MainPage : ContentPage
             _isRunning = true;
         });
 
-        
-        _startOrTryAgainButton.Clicked -= StartOrTryAgainButtonOnClicked;
+
+        _startOrRestartButton.Clicked -= StartOrRestartButtonOnClicked;
+        _nextLevelButton.Clicked -= NextLevelButtonOnClicked;
+    }
+
+    private void UpdateLevel(bool restart)
+    {
+        if (restart)
+        {
+            _levelSettings = LevelSettings.CreateLevel1Settings();
+        }
+        else
+        {
+            if (_levelSettings.Level == 1)
+            {
+                _levelSettings = LevelSettings.CreateLevel2Settings();
+            } else if (_levelSettings.Level == 2)
+            {
+                _levelSettings = LevelSettings.CreateLevel3Settings();
+            } else if (_levelSettings.Level == 3)
+            {
+                _levelSettings = LevelSettings.CreateLevel4Settings();
+            } else if (_levelSettings.Level == 4)
+            {
+                _levelSettings = LevelSettings.CreateLevel5Settings();
+            }
+        }
+
+        _levelNumberLabel.Text = ColorValley.Properties.Resources.LabelLevelText + " " + _levelSettings.Level;
+        _levelNameLabel.Text = _levelSettings.Name;
     }
 
     private void TimeTimerOnTick(object? sender, EventArgs e)
@@ -586,7 +659,8 @@ public class MainPage : ContentPage
         currentUserSettings.AddHighScore(new HighScoreEntry()
         {
             Name = currentUserSettings.PlayerName,
-            Score = _currentScore
+            Score = _currentScore,
+            Level = _levelSettings.Level
         });
         currentUserSettings.SaveEncrypted();
         AddLauncherOverlay(true);
@@ -599,18 +673,36 @@ public class MainPage : ContentPage
 
     private void UpdateGame()
     {
+        if (_levelSettings.GameTimerIntervallSeconds > 1)
+        {
+            RemoveOldGameGrid();
+        }
+        
+        UpdateGameGridRowsAndColumns();
         UpdatePageBackground();
-        UpdateMiddleBoxColor();
+        UpdateMiddleBox();
         UpdateOuterBoxes();
+        AddGameInfoLabel();
         this._comboHit = 0;
     }
 
-
-    private void UpdateMiddleBoxColor()
+    private void RemoveOldGameGrid()
     {
-        _middleBox.BackgroundColor = GetRandomColor();
-        _middleBox.Shadow.Offset = new Point(5, 5);
-        _middleBox.Shadow.Brush = Brush.Goldenrod;
+        _gameGrid.Animate("Remove Old Game Grid", d =>
+        {
+            _gameGrid.TranslationX = d;
+
+        }, 0, -500, 100, 500, finished: (d, b) =>
+        {
+            _gameGrid.TranslationX = 0;
+        });
+    }
+
+    private void UpdateMiddleBox()
+    {
+        _gameGrid.Remove(_middleBox);
+        _gameGrid.Add(_middleBox, _levelSettings.MiddleColumnIndex, _levelSettings.MiddleRowIndex);
+        _middleBox.BackgroundColor = _levelSettings.GetRandomColor();
     }
 
     private void UpdateOuterBoxes()
@@ -621,18 +713,17 @@ public class MainPage : ContentPage
         _outerBoxes.Clear();
 
 
-        var randomPositions = GetRandomPositions(_allValidPositions);
+        var randomPositions = GetRandomPositions(GenerateValidPositions());
 
         foreach (var pos in randomPositions)
         {
             var outerBox = new Button
             {
-                BackgroundColor = GetRandomColor(),
+                BackgroundColor = _levelSettings.GetRandomColor(),
                 BorderWidth = 1,
                 CornerRadius = 5,
                 BorderColor = Colors.White,
-                WidthRequest = _boxLength,
-                HeightRequest = _boxLength,
+                Margin = _levelSettings.BoxMargin,
                 Shadow = new Shadow()
                 {
                     Offset = new Point(5, 5),
@@ -675,7 +766,7 @@ public class MainPage : ContentPage
 
             _comboHit++;
 
-            var scoreToAdd = 5 * currentLevel;
+            var scoreToAdd = 5 * _levelSettings.Level;
             if (_comboHit > 1)
             {
                 scoreToAdd = scoreToAdd * (int)Math.Pow(10, _comboHit - 1);
@@ -746,19 +837,13 @@ public class MainPage : ContentPage
         });
     }
 
-    private Color GetRandomColor(Color? exeptColor = null)
-    {
-        var colors = new List<Color> { Colors.Red, Colors.Blue, Colors.Green, Colors.Yellow, Colors.Purple };
-        if (exeptColor != null) colors.Remove(exeptColor);
-        return colors[_random.Next(colors.Count)];
-    }
 
     private List<(int row, int col)> GetRandomPositions(List<(int row, int col)> allValidPositions)
     {
         var positionsForRandomization = allValidPositions.ToList();
         var randomPositions = new List<(int row, int col)>();
 
-        for (int i = 0; i < gameGridBoxCount; i++)
+        for (int i = 0; i < _levelSettings.BoxCount; i++)
         {
             var randomItemIndex = _random.Next(0, positionsForRandomization.Count);
             randomPositions.Add(positionsForRandomization[randomItemIndex]);
@@ -766,5 +851,26 @@ public class MainPage : ContentPage
         }
 
         return randomPositions;
+    }
+
+    private List<(int row, int col)> GenerateValidPositions()
+    {
+        var midColumnIndex = _levelSettings.MiddleColumnIndex;
+        var midRowIndex = _levelSettings.MiddleRowIndex;
+
+        List<(int row, int col)> validPositions = new List<(int row, int col)>();
+
+        for (int columnIndex = 0; columnIndex < _levelSettings.ColumnCount; columnIndex++)
+        {
+            for (int rowIndex = 0; rowIndex < _levelSettings.RowCount; rowIndex++)
+            {
+                if (!(columnIndex == midColumnIndex && rowIndex == midRowIndex))
+                {
+                    validPositions.Add((rowIndex, columnIndex));
+                }
+            }
+        }
+
+        return validPositions;
     }
 }

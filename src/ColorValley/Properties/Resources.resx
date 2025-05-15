@@ -129,6 +129,9 @@
   <data name="ButtonTextImpressum" xml:space="preserve">
     <value>Impressum</value>
   </data>
+  <data name="ButtonTextNextLevel" xml:space="preserve">
+    <value>🏃‍♂️‍➡️ Nächster Level</value>
+  </data>
   <data name="DataPrivacyMainText" xml:space="preserve">
     <value>Datenschutzerklärung der Red Valley Software GmbH für Color Valley
 
@@ -243,5 +246,26 @@ liche Schäden, die durch den Gebrauch unvollständiger oder fehlerhafter Dateni
   </data>
   <data name="ImpressumPageTitle" xml:space="preserve">
     <value>Impressum</value>
+  </data>
+  <data name="LabelLevelText" xml:space="preserve">
+    <value>Level:</value>
+  </data>
+  <data name="Level1Name" xml:space="preserve">
+    <value>🍋 Easy peasy lemon squeezy</value>
+  </data>
+  <data name="Level2Name" xml:space="preserve">
+    <value>🤸‍♂️ Quick slick turbo trick</value>
+  </data>
+  <data name="Level3Name" xml:space="preserve">
+    <value>🕹 Much too much mega clutch</value>
+  </data>
+  <data name="Level4Name" xml:space="preserve">
+    <value>🎨 Bright light color delight</value>
+  </data>
+  <data name="Level5Name" xml:space="preserve">
+    <value>🌈 Flash dash color splash</value>
+  </data>
+  <data name="MainPageTitle" xml:space="preserve">
+    <value>Color Valley</value>
   </data>
 </root>

@@ -49,7 +49,7 @@ public class AppUserSettings : UserSettings
             return;
         }
 
-        if (HighScoreEntries.Any(entry => entry.Score == newHighScoreEntry.Score))
+        if (HighScoreEntries.Any(entry => entry.Score == newHighScoreEntry.Score && entry.Level == newHighScoreEntry.Level))
         {
             return;
         }
