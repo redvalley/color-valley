@@ -61,7 +61,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datenschutzerklärung.
+        ///   Looks up a localized string similar to Datenschutz.
         /// </summary>
         internal static string ButtonTextDataPrivacyDeclaration {
             get {
@@ -126,7 +126,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datenschutzerklärung.
+        ///   Looks up a localized string similar to Datenschutz.
         /// </summary>
         internal static string DataPrivacyPageTitle {
             get {
@@ -180,7 +180,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Pukte zu erhalten..
+        ///   Looks up a localized string similar to Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Punkte zu erhalten..
         /// </summary>
         internal static string HelpTextInitial {
             get {
@@ -290,6 +290,15 @@ namespace ColorValley.Properties {
         internal static string MainPageTitle {
             get {
                 return ResourceManager.GetString("MainPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ....
+        /// </summary>
+        internal static string SplashWelcomeAddExplaination {
+            get {
+                return ResourceManager.GetString("SplashWelcomeAddExplaination", resourceCulture);
             }
         }
     }

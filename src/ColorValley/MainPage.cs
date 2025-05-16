@@ -5,6 +5,7 @@ using ColorValley.Settings;
 using iJus.Core.Settings;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls.Shapes;
+using Plugin.AdMob;
 using Plugin.Maui.Audio;
 
 namespace ACAB.App;
@@ -116,16 +117,20 @@ public class MainPage : ContentPage
 
 
         _scoreLabel.HorizontalOptions = LayoutOptions.Start;
+        _scoreLabel.VerticalOptions = LayoutOptions.Center;
+        _scoreLabel.VerticalTextAlignment = TextAlignment.Center;
         _scoreLabel.Margin = 5;
-        _scoreLabel.FontSize = 30;
+        _scoreLabel.FontSize = 20;
         _scoreLabel.TextColor = Colors.White;
         _scoreLabel.Text = "\u2b50\ufe0f " + _currentScore;
 
         headerLayout.Add(_scoreLabel, 0);
 
         _levelNumberLabel.HorizontalOptions = LayoutOptions.Start;
+        _levelNumberLabel.VerticalOptions = LayoutOptions.Center;
+        _levelNumberLabel.VerticalTextAlignment = TextAlignment.Center;
         _levelNumberLabel.Margin = 5;
-        _levelNumberLabel.FontSize = 30;
+        _levelNumberLabel.FontSize = 20;
         _levelNumberLabel.TextColor = Colors.White;
         _levelNumberLabel.Text = ColorValley.Properties.Resources.LabelLevelText + " " + _levelSettings.Level;
 
@@ -135,6 +140,7 @@ public class MainPage : ContentPage
         _levelNameLabel.Margin = 5;
         _levelNameLabel.FontSize = 20;
         _levelNameLabel.HorizontalTextAlignment = TextAlignment.Center;
+        _levelNameLabel.VerticalTextAlignment = TextAlignment.Center;
         _levelNameLabel.TextColor = Colors.White;
         _levelNameLabel.Text = _levelSettings.Name;
 
@@ -143,8 +149,9 @@ public class MainPage : ContentPage
 
 
         _timeLabel.TextColor = Colors.White;
-        _timeLabel.FontSize = 30;
-        _timeLabel.HorizontalOptions = LayoutOptions.Center;
+        _timeLabel.FontSize = 20;
+        _timeLabel.VerticalOptions = LayoutOptions.Center;
+        _timeLabel.VerticalTextAlignment = TextAlignment.Center;
 
         headerLayout.Add(_timeLabel, 2);
 
@@ -168,10 +175,18 @@ public class MainPage : ContentPage
 
         var footerLayout = new Grid();
         footerLayout.AddRowDefinition(new RowDefinition(GridLength.Auto));
+        footerLayout.AddRowDefinition(new RowDefinition(GridLength.Auto));
+
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
+
+        var bannerAd = new Plugin.AdMob.BannerAd();
+        bannerAd.AdUnitId = "ca-app-pub-6864374918270893/6672681529";
+        bannerAd.AdSize = AdSize.SmartBanner;
+        footerLayout.Add(bannerAd, 0, 0);
+        Grid.SetColumnSpan(bannerAd, 4);
 
         _impressumButton.HorizontalOptions = LayoutOptions.Start;
         _impressumButton.Margin = 5;
@@ -180,7 +195,7 @@ public class MainPage : ContentPage
         _impressumButton.Text = ColorValley.Properties.Resources.ButtonTextImpressum;
         _impressumButton.BackgroundColor = Colors.Transparent;
         _impressumButton.Clicked += ImpressumButtonOnClicked;
-        footerLayout.Add(_impressumButton, 0);
+        footerLayout.Add(_impressumButton, 0, 1);
 
         _helpButton.HorizontalOptions = LayoutOptions.Start;
         _helpButton.Margin = 5;
@@ -189,7 +204,7 @@ public class MainPage : ContentPage
         _helpButton.Text = ColorValley.Properties.Resources.ButtonTextHelp;
         _helpButton.BackgroundColor = Colors.Transparent;
         _helpButton.Clicked += HelpButtonOnClicked;
-        footerLayout.Add(_helpButton, 1);
+        footerLayout.Add(_helpButton, 1, 1);
 
         _highScoreButton.HorizontalOptions = LayoutOptions.Start;
         _highScoreButton.Margin = 5;
@@ -199,7 +214,7 @@ public class MainPage : ContentPage
         _highScoreButton.Text = ColorValley.Properties.Resources.ButtonTextHighScore;
         _highScoreButton.BackgroundColor = Colors.Transparent;
         _highScoreButton.Clicked += HighScoreButtonOnClicked;
-        footerLayout.Add(_highScoreButton, 2);
+        footerLayout.Add(_highScoreButton, 2, 1);
 
         _dataPrivacyButton.HorizontalOptions = LayoutOptions.Start;
         _dataPrivacyButton.Margin = 5;
@@ -210,7 +225,7 @@ public class MainPage : ContentPage
         _dataPrivacyButton.LineBreakMode = LineBreakMode.WordWrap;
         _dataPrivacyButton.BackgroundColor = Colors.Transparent;
         _dataPrivacyButton.Clicked += DataPrivacyButtonOnClicked;
-        footerLayout.Add(_dataPrivacyButton, 3);
+        footerLayout.Add(_dataPrivacyButton, 3, 1);
 
         _mainGrid.Add(footerLayout, 0, 2);
 

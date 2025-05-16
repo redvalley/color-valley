@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using Plugin.AdMob;
 using Plugin.Maui.Audio;
 
 namespace ACAB.App
@@ -11,6 +12,7 @@ namespace ACAB.App
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseAdMob()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:ColorValley.Properties"
+             x:Class="ColorValley.SplashPage">
+    <Grid>
+        
+
+        <Image Margin="50"
+               Source="logo_color_valley.png"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+        <Label Text="Color Valley"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               Margin="15, 200,15,0"
+               FontSize="35"
+               TextColor="Black"
+               FontAttributes="Bold"
+        >
+        </Label>
+
+        <Label Text="{x:Static resources:Resources.SplashWelcomeAddExplaination }"
+               VerticalOptions="End" 
+               HorizontalOptions="End"
+               Margin="15,0,15,50"
+               FontSize="15"
+               TextColor="Black"
+               FontAttributes="Bold"
+               >
+        </Label>
+    </Grid>
+</ContentPage>

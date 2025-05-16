@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonTextDataPrivacyDeclaration" xml:space="preserve">
-    <value>Datenschutzerklärung</value>
+    <value>Datenschutz</value>
   </data>
   <data name="ButtonTextHelp" xml:space="preserve">
     <value>Hilfe</value>
@@ -184,7 +184,7 @@ Diese Datenschutzerklärung erfüllt die Anforderungen der DSGVO und der Apple A
 Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
   </data>
   <data name="DataPrivacyPageTitle" xml:space="preserve">
-    <value>Datenschutzerklärung</value>
+    <value>Datenschutz</value>
   </data>
   <data name="HelpPageTitle" xml:space="preserve">
     <value>Hilfe</value>
@@ -202,7 +202,7 @@ Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
     <value>Ziel des Spiels ist es immer so schnell wie möglich die richtigen äußeren Kästchen durch Berühren mit dem Finger auszuwählen.</value>
   </data>
   <data name="HelpTextInitial" xml:space="preserve">
-    <value>Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Pukte zu erhalten.</value>
+    <value>Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Punkte zu erhalten.</value>
   </data>
   <data name="HighScorePageTitle" xml:space="preserve">
     <value>Highscore Liste</value>
@@ -267,5 +267,8 @@ liche Schäden, die durch den Gebrauch unvollständiger oder fehlerhafter Dateni
   </data>
   <data name="MainPageTitle" xml:space="preserve">
     <value>Color Valley</value>
+  </data>
+  <data name="SplashWelcomeAddExplaination" xml:space="preserve">
+    <value>Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ...</value>
   </data>
 </root>
