@@ -118,164 +118,170 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonTextDataPrivacyDeclaration" xml:space="preserve">
-    <value>Data privacy</value>
+    <value>Datenschutz</value>
   </data>
   <data name="ButtonTextHelp" xml:space="preserve">
-    <value>Help</value>
+    <value>Hilfe</value>
   </data>
   <data name="ButtonTextHighScore" xml:space="preserve">
     <value>🏆</value>
   </data>
   <data name="ButtonTextImpressum" xml:space="preserve">
-    <value>Imprint</value>
+    <value>Impressum</value>
   </data>
   <data name="ButtonTextNextLevel" xml:space="preserve">
-    <value>🏃‍♂️‍➡️ Next Level</value>
+    <value>🏃‍♂️‍➡️ Nächstes Level</value>
   </data>
   <data name="DataPrivacyMainText" xml:space="preserve">
-    <value>Red Valley Software GmbH Privacy Policy for Color Valley
+    <value>Datenschutzerklärung der Red Valley Software GmbH für Color Valley
 
-The protection of your personal data is important to us. This privacy policy
-informs you about which data is collected and processed when you use Color Valley.
+Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Diese Datenschutzerklärung
+informiert Sie darüber, welche Daten im Rahmen der Nutzung von Color Valley erhoben und
+verarbeitet werden.
 
-1. Controller
-The controller responsible for data processing in connection with the use of this app is:
+1. Verantwortlicher
+Verantwortlich für die Datenverarbeitung im Zusammenhang mit der Nutzung dieser App ist:
 Red Valley Software GmbH
 Am Pumperhölzl 12, 84323 Massing
-Email: rupert.eder@redvalley-software.com
-Website: www.redvalley-software.com
+E-Mail: rupert.eder@redvalley-software.com
+Webseite: www.redvalley-software.com
 
-2. Collection and Processing of Personal Data
+2. Erhebung und Verarbeitung personenbezogener Daten
 
-Our paid version of the app can generally be used without collecting personal data. The only exception is if you contact us via the feedback function.
-Feedback function: rupert.eder@redvalley-software.com
-If you send us feedback by email, your email address will be processed to answer your inquiry. This data is processed based on your voluntary consent
-in accordance with Art. 6 (1) (a) GDPR.
+Unsere kostenpflichtige Version der App kann grundsätzlich genutzt werden, ohne dass personenbezogene Daten erhoben werden.  Eine Ausnahme besteht lediglich, wenn Sie uns über die Feedback-Funktion kontaktieren.
+Feedback-Funktion: rupert.eder@redvalley-software.com
+Wenn Sie uns Feedback per E-Mail senden, wird Ihre E-Mail-Adresse verarbeitet, um Ihre Anfrage
+zu beantworten. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer freiwilligen Einwilligung
+gemäß Art. 6 Abs. 1 lit. a DSGVO.
 
-We also offer the option of playing with advertising for free via the Lite version of the app. Advertising in our apps is delivered by Google AdMob and its partners. Personal data such as IP addresses, device identifiers, etc. may be used to improve and finance the advertising offer. Processing may take place outside the EU/EEA. We would like to point out that data transmission over the Internet may have security gaps. Complete protection of data from access by third parties is not possible.
+Wir bieten über die Lite Version der App ansonsten auch die Möglichkeit kostenlos mit Werbung zu spielen. Die Werbung in unseren Apps wird von Google AdMob und dessen Partnern ausgeliefert. Es werden dabei ggf. personenbezogene Daten wie IP-Adressen, Gerätekennung etc. genutzt um das Werbeangebot zu verbessern und zu finanzieren. Die Verarbeitung kann ausserhalb der EU/EWR erfolgen. Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
 
-3. Sharing of data
-Your personal data will not be shared with third parties.
+3. Weitergabe von Daten
+Es erfolgt keine Weitergabe Ihrer personenbezogenen Daten an Dritte.
 
-4. Storage and deletion of data
-Personal data that you send us via email will only be stored for as long as necessary to process your request. After that, it will be deleted unless there are legal retention obligations.
+4. Speicherung und Löschung von Daten
+Personenbezogene Daten, die Sie uns per E-Mail übermitteln, werden nur so lange gespeichert, wie
+es zur Bearbeitung Ihrer Anfrage erforderlich ist. Danach werden sie gelöscht, sofern keine
+gesetzlichen Aufbewahrungspflichten bestehen.
 
-5. Your rights
-You have the right to:
-• Information about the data stored about you (Art. 15 GDPR)
-• Correction of incorrect data (Art. 16 GDPR)
-• Deletion of your data (Art. 17 GDPR)
-• Restriction of processing (Art. 18 GDPR)
-• Data portability (Art. 20 GDPR)
-• Revocation of consent granted with future effect (Art. 7 (3) GDPR)
-• Complaint to a supervisory authority if you believe that the processing of your data violates data protection regulations (Art. 77 GDPR).
+5. Ihre Rechte
+Sie haben das Recht auf:
+• Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)
+• Berichtigung unrichtiger Daten (Art. 16 DSGVO)
+• Löschung Ihrer Daten (Art. 17 DSGVO)
+• Einschränkung der Verarbeitung (Art. 18 DSGVO)
+• Datenübertragbarkeit (Art. 20 DSGVO)
+• Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)
+• Beschwerde bei einer Aufsichtsbehörde, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer
+Daten gegen Datenschutzbestimmungen verstößt (Art. 77 DSGVO).
 
-6. Changes to the Privacy Policy
-This Privacy Policy may be updated from time to time. The most current version is available in the app.
-For questions about data protection, please contact us at:
+6. Änderungen der Datenschutzerklärung
+Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die jeweils aktuelle Version ist
+in der App verfügbar.
+Bei Fragen zum Datenschutz kontaktieren Sie uns bitte unter:
 rupert.eder@redvalley-software.com
-This Privacy Policy complies with the requirements of the GDPR and the Apple App Store/Google Playstore guidelines for apps that process minimal data.</value>
+Diese Datenschutzerklärung erfüllt die Anforderungen der DSGVO und der Apple App Store / Google Play Store -
+Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
   </data>
   <data name="DataPrivacyPageTitle" xml:space="preserve">
-    <value>Data privacy</value>
+    <value>Datenschutz</value>
   </data>
   <data name="HeaderHighscoreName" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="HeaderHighscoreScore" xml:space="preserve">
-    <value>Score</value>
+    <value>Punkte</value>
   </data>
   <data name="HelpPageTitle" xml:space="preserve">
-    <value>Help</value>
+    <value>Hilfe</value>
   </data>
   <data name="HelpTextExampleMultiMatch" xml:space="preserve">
-    <value>In this example, even multiple boxes can be selected (all marked yellow boxes):</value>
+    <value>In diesem Beispiel können sogar mehrere Kästchen ausgewählt werden (alle markierten Gelben Kästchen): </value>
   </data>
   <data name="HelpTextExampleNoMatch" xml:space="preserve">
-    <value>In the next example, there is no matching box. If an incorrect box is selected, points are deducted:</value>
+    <value>Im nächsten Beispiel gibt es kein passendes Kästchen. Wird dennoch ein falsches Kästchen ausgewählt, so werden Punkte abgezogen:</value>
   </data>
   <data name="HelpTextExampleSingleMatch" xml:space="preserve">
-    <value>In the following example, only one box can be selected (the blue one marked in yellow). This has the same color as the central inner box:</value>
+    <value>Im folgenden Beispiel kann nur ein Kästchen ausgewählt werden (das gelb markierte Blaue). Dieses hat die selbe Farbe wie das zentrale innere Kästchen:</value>
   </data>
   <data name="HelpTextGameGoal" xml:space="preserve">
-    <value>The aim of the game is to select the correct outer boxes as quickly as possible by touching them with your finger.</value>
+    <value>Ziel des Spiels ist es immer so schnell wie möglich die richtigen äußeren Kästchen durch Berühren mit dem Finger auszuwählen.</value>
   </data>
   <data name="HelpTextInitial" xml:space="preserve">
-    <value>The central inner box always indicates the target color. This color must be searched for in the outer boxes and selected as quickly as possible to score points.</value>
+    <value>Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Punkte zu erhalten.</value>
   </data>
   <data name="HighScorePageTitle" xml:space="preserve">
-    <value>Highscore List</value>
+    <value>Highscore Liste</value>
   </data>
   <data name="ImpressumMainText" xml:space="preserve">
-    <value>Legal Notice:
-Information according to Section 5 of the German Telemedia Act (TMG):
-Responsible company:
+    <value>Impressum:
+Angaben nach § 5 TMG:
+Verantwortliche Firma:
 Red Valley Software GmbH
-Headquarters: Am Pumperhölzl 12, 84323 Massing
-The company is registered in the commercial register and is a member of the Lower Bavaria Chamber of Industry and Commerce (IHK) (ihk@passau.ihk.de).
-Telephone: +49 8724 2071850
-Email:
-Website: www.redvalley-software.com
-Management: Rupert Eder
-Registration number: HRB 11508
-VAT identification number according to Section 27a of the German VAT Act (UStG): DE322142672
-Programming: rupert.eder@redvalley-software.com
+Geschäftssitz: Am Pumperhölzl 12, 84323 Massing
+Das Unternehmen ist im Handelsregister eingetragen und gehört der Industrie- und Handelskammer
+(IHK) Niederbayern an (ihk@passau.ihk.de).
+Telefon: 08724/2071850
+E-Mail: 
+Webseite: www.redvalley-software.com
+Geschäftsführung: Rupert Eder
+Registernummer: HRB 11508
+Umsatzsteuer-Identifikationsnummer gem. § 27a UStG: DE322142672
+Programmierung: rupert.eder@redvalley-software.com
 
-Data protection:
-You can find our data protection information under the "Data protection" button.
+Datenschutz:
+Unsere Datenschutzhinweise finden Sie unter der Schaltfläche Datenschutz.
 
-Copyright Notice:
+Urheberrechtshinweis:
 
 Copyright 2025 by:
 Red Valley Software GmbH
-All images and content published in this application are protected by copyright.
+Alle in dieser Applikation veröffentlichten Darstellungen und Inhalte sind urheber-rechtlich geschützt.
+Kein Teil dieser Applikation darf außerhalb der engen Grenzen des Urheberrechtsgesetzes ohne
+schriftliche Genehmigung des Urhebers in irgendeiner Form reproduziert, verbreitet oder sonst verwertet
+werden.
 
-No part of this application may be reproduced, distributed, or otherwise used in any form outside the strict limits of copyright law without the written permission of the author.
+Haftung:
 
-Liability:
-
-We are responsible for the content of our app in accordance with general law, in particular Section 7 I of the German Telemedia Act (TMG).
-
-All content was created to the best of our knowledge and belief, exercising due care.
-
-However, no guarantee is given for its completeness and accuracy, or for any errors.
-
-Red Valley Software GmbH is particularly not liable for economic damages resulting from the use of incomplete or incorrect data content.
-
-</value>
+Wir sind für die Inhalte unserer App nach Maßgabe der allgemeinen Gesetze, insbesondere nach § 7 I
+TMG verantwortlich.
+Alle Inhalte wurden nach bestem Wissen und Gewissen unter Einhaltung der gebotenen Sorgfalt erstellt.
+Es wird jedoch keine Gewähr für deren Vollständigkeit und Richtigkeit oder für Ausfälle übernommen.
+Die Firma Red Valley Software GmbH haftet insbesondere nicht für wirtschaft-
+liche Schäden, die durch den Gebrauch unvollständiger oder fehlerhafter Dateninhalte entstehen.</value>
   </data>
   <data name="ImpressumPageTitle" xml:space="preserve">
     <value>Impressum</value>
   </data>
   <data name="LabelLaunchChangePlayerName" xml:space="preserve">
-    <value>... or change your player name (for the highscore list):</value>
+    <value>... oder deinen Spielernamen (für die Highscore Liste) ändern: </value>
   </data>
   <data name="LabelLaunchFirstTime" xml:space="preserve">
-    <value>Hello 🙂</value>
+    <value>Hallo 🙂</value>
   </data>
   <data name="LabelLaunchFirstTimeHelp" xml:space="preserve">
-    <value>or look at the instructions first:</value>
+    <value>oder zuerst die Anleitung anschaun: </value>
   </data>
   <data name="LabelLaunchNotFirstTime" xml:space="preserve">
-    <value>Hello {0} 🙂</value>
+    <value>Hallo {0} 🙂</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNewHighScore" xml:space="preserve">
-    <value>🏆 Super {0} - New high score!!!
-You have {1} points!</value>
+    <value>🏆 Super {0} - Neuer Highscore!!!
+Du hast {1} Punkte!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNewScore" xml:space="preserve">
-    <value>🎖 Great {0}
+    <value>🎖 Super {0}
 
-You have {1} points!</value>
+du hast {1} Punkte!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNoScore" xml:space="preserve">
-    <value>🙁 Too bad {0}, unfortunately you have zero points!</value>
+    <value>🙁 Schade {0}, du hast leider null Punkte!</value>
   </data>
   <data name="LabelLaunchPlayerName" xml:space="preserve">
-    <value>Please enter your player name here for the highscore list:</value>
+    <value>Bitte gib hier deinen Spielernamen für die Highscore Liste ein: </value>
   </data>
   <data name="LabelLaunchStart" xml:space="preserve">
-    <value>Would you like to start right away?</value>
+    <value>Möchtest du direkt starten?</value>
   </data>
   <data name="LabelLaunchTopScore" xml:space="preserve">
     <value>🏆 Top Score: {0} ⭐️ {1}</value>
@@ -302,6 +308,6 @@ You have {1} points!</value>
     <value>Color Valley</value>
   </data>
   <data name="SplashWelcomeAddExplaination" xml:space="preserve">
-    <value>This app is ad-supported 😉, the game starts immediately after the following advertisement...</value>
+    <value>Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ...</value>
   </data>
 </root>

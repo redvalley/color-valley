@@ -18,7 +18,7 @@ public class MainPage : ContentPage
 
     private readonly Grid _mainGrid = new();
     private readonly Random _random = new();
-    private Button _middleBox;
+    private Button _middleBox = new();
 
     private int _currentScore;
     private readonly Label _scoreLabel = new();
@@ -51,6 +51,9 @@ public class MainPage : ContentPage
     private Grid _launcherOverlayGrid = new Grid();
     private Border _launchOverlayBorder = new Border();
     private Entry _playerEntry = new Entry();
+    private Border _playerEntryBorder = new Border();
+
+    //playerEntryBorder.Content = _playerEntry;
 
     private LevelSettings _levelSettings = new LevelSettings();
 
@@ -182,12 +185,13 @@ public class MainPage : ContentPage
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
 
+        
         var bannerAd = new Plugin.AdMob.BannerAd();
         bannerAd.AdUnitId = "ca-app-pub-6864374918270893/6672681529";
         bannerAd.AdSize = AdSize.SmartBanner;
         footerLayout.Add(bannerAd, 0, 0);
         Grid.SetColumnSpan(bannerAd, 4);
-
+        
         _impressumButton.HorizontalOptions = LayoutOptions.Start;
         _impressumButton.Margin = 5;
         _impressumButton.FontSize = 15;
@@ -279,6 +283,22 @@ public class MainPage : ContentPage
         _playerEntry.Margin = new Thickness(20, 0, 20, 0);
         _playerEntry.FontSize = 15;
         _playerEntry.Placeholder = DefaultPlayerName;
+        _playerEntry.ClearButtonVisibility = ClearButtonVisibility.WhileEditing;
+        _playerEntry.BackgroundColor = Colors.Transparent;
+        _playerEntry.PlaceholderColor = Colors.Grey;
+        _playerEntry.TextColor = Colors.Black;
+
+        _playerEntryBorder.Stroke = Colors.DarkGray;
+        _playerEntryBorder.StrokeThickness = 1;
+        _playerEntryBorder.BackgroundColor = Colors.White;
+        _playerEntryBorder.Margin = 20;
+        _playerEntryBorder.StrokeShape = new RoundRectangle()
+        {
+            CornerRadius = 5
+        };
+        _playerEntryBorder.WidthRequest = 200;
+
+        _playerEntryBorder.Content = _playerEntry;
 
         NavigationPage.SetHasNavigationBar(this, false);
 
@@ -299,6 +319,8 @@ public class MainPage : ContentPage
             VerticalOptions = LayoutOptions.Fill,
             HorizontalOptions = LayoutOptions.Fill
         };
+
+
     }
 
     private void UpdateGameGridRowsAndColumns()
@@ -366,7 +388,7 @@ public class MainPage : ContentPage
         var currentSettings = UserSettings.LoadDecrypted<AppUserSettings>();
         HighScoreEntry? topScore = currentSettings.GetTopScore();
         var topScoreString = topScore?.Score == null ? "-" : topScore.Score.ToString();
-        var topScorePlayerString = topScore?.Name == null ? "" : $"({topScore.Name})";
+        var topScorePlayerString = topScore?.Name == null ? "" : $"{topScore.Name}";
 
         this._startOrRestartButton.Text = levelDone ? "\ud83d\ude80 Neustart?" : "\ud83d\ude80 Start?";
 
@@ -374,122 +396,133 @@ public class MainPage : ContentPage
         {
             if (currentSettings.IsGameStartedFirstTime)
             {
-                var titleLabelLaunchFirstTime = new Label()
+                var labelLaunchFirstTime = new Label()
                 {
-                    Text = "Hallo 🙂",
+                    Text = ColorValley.Properties.Resources.LabelLaunchFirstTime,
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 20,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
-                _launcherOverlayGrid.Add(titleLabelLaunchFirstTime, 0, 0);
+                _launcherOverlayGrid.Add(labelLaunchFirstTime, 0, 0);
 
-                var titleLabelLaunchPlayerName = new Label()
+                var labelLaunchPlayerName = new Label()
                 {
-                    Text = "Bitte gib hier deinen Spielernamen für die Highscore Liste ein: ",
+                    Text = ColorValley.Properties.Resources.LabelLaunchPlayerName,
+                    TextColor = Colors.Black,
                     Margin = new Thickness(20, 20, 20, 5),
                     FontSize = 15
                 };
 
-                _launcherOverlayGrid.Add(titleLabelLaunchPlayerName, 0, 1);
+                _launcherOverlayGrid.Add(labelLaunchPlayerName, 0, 1);
 
-                _launcherOverlayGrid.Add(_playerEntry, 0, 2);
-                var labelStart = new Label()
+                _launcherOverlayGrid.Add(_playerEntryBorder, 0, 2);
+
+                var labelLaunchStart = new Label()
                 {
-                    Text = "Möchtest du direkt starten?",
+                    Text = ColorValley.Properties.Resources.LabelLaunchStart,
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 15
                 };
-                _launcherOverlayGrid.Add(labelStart, 0, 3);
+                _launcherOverlayGrid.Add(labelLaunchStart, 0, 3);
 
                 _launcherOverlayGrid.Add(_startOrRestartButton, 0, 4);
-                var titleLabelLaunchFirstTimeManual = new Label()
+                var labelLaunchFirstTimeHelp = new Label()
                 {
-                    Text = "oder zuerst die Anleitung anschaun: ",
+                    Text = ColorValley.Properties.Resources.LabelLaunchFirstTimeHelp,
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 15
                 };
-                _launcherOverlayGrid.Add(titleLabelLaunchFirstTimeManual, 0, 5);
+                _launcherOverlayGrid.Add(labelLaunchFirstTimeHelp, 0, 5);
                 _launcherOverlayGrid.Add(_helpOverlayButton, 0, 6);
             }
             else
             {
 
 
-                var titleLabelLaunchNotFirstTime = new Label()
+                var labelLaunchNotFirstTime = new Label()
                 {
-                    Text = $"Hallo {currentSettings.PlayerName} 🙂",
+                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTime, currentSettings.PlayerName),
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 25,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
-                _launcherOverlayGrid.Add(titleLabelLaunchNotFirstTime, 0, 0);
+                _launcherOverlayGrid.Add(labelLaunchNotFirstTime, 0, 0);
 
 
                 if (topScore != null)
                 {
-                    var labelCurrentHighScore = new Label()
+                    var labelLaunchCurrentHighScore = new Label()
                     {
-                        Text = $"🏆 Top Score: {topScoreString} \u2b50\ufe0f {topScorePlayerString}",
+                        Text = string.Format(ColorValley.Properties.Resources.LabelLaunchTopScore,  topScoreString, topScorePlayerString),
+                        TextColor = Colors.Black,
                         Margin = new Thickness(20, 10, 20, 5),
                         FontSize = 20,
                         FontAttributes = FontAttributes.Bold,
                         HorizontalTextAlignment = TextAlignment.Center,
                         HorizontalOptions = LayoutOptions.Center
                     };
-                    _launcherOverlayGrid.Add(labelCurrentHighScore, 0, 1);
+                    _launcherOverlayGrid.Add(labelLaunchCurrentHighScore, 0, 1);
                 }
 
 
-                var labelStart = new Label()
+                var labelLaunchStart = new Label()
                 {
-                    Text = "Möchtest du direkt starten?",
+                    Text = ColorValley.Properties.Resources.LabelLaunchStart,
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 15,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
-                _launcherOverlayGrid.Add(labelStart, 0, 2);
+                _launcherOverlayGrid.Add(labelLaunchStart, 0, 2);
                 _launcherOverlayGrid.Add(_startOrRestartButton, 0, 3);
-                var labelChangePlayerName = new Label()
+                var labelLaunchChangePlayerName = new Label()
                 {
-                    Text = "... oder deinen Spielernamen (für die Highscore Liste) ändern: ",
-                    Margin = new Thickness(20, 20, 20, 5),
+                    Text = ColorValley.Properties.Resources.LabelLaunchChangePlayerName,
+                    TextColor = Colors.Black,
+                    Margin = new Thickness(20, 0, 20, 5),
                     FontSize = 15
                 };
-                _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
+                _launcherOverlayGrid.Add(labelLaunchChangePlayerName, 0, 4);
                 _playerEntry.Text = currentSettings.PlayerName;
 
-                _launcherOverlayGrid.Add(_playerEntry, 0, 5);
+                _launcherOverlayGrid.Add(_playerEntryBorder, 0, 5);
             }
         }
         else
         {
             if (this._currentScore > (topScore?.Score ?? 0))
             {
-                var titleLabelLaunchNotFirstTime = new Label()
+                var labelLaunchNotFirstTimeNewHighScore = new Label()
                 {
-                    Text = $"🏆 Super {currentSettings.PlayerName} - Neuer Highscore!!!\nDu hast {this._currentScore} Punkte!",
+                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewHighScore, currentSettings.PlayerName, this._currentScore),
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 20,
                     HorizontalTextAlignment = TextAlignment.Center,
                     HorizontalOptions = LayoutOptions.Center
                 };
-                _launcherOverlayGrid.Add(titleLabelLaunchNotFirstTime, 0, 0);
+                _launcherOverlayGrid.Add(labelLaunchNotFirstTimeNewHighScore, 0, 0);
             }
             else
             {
-                var scoreText = $"🎖 Super {currentSettings.PlayerName}\n\n du hast {this._currentScore} Punkte!";
+                var scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewScore, currentSettings.PlayerName, this._currentScore);
 
                 if (this._currentScore == 0)
                 {
-                    scoreText = $"🙁 Schade {currentSettings.PlayerName}, du hast leider {this._currentScore} Punkte!";
+                    scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNoScore, currentSettings.PlayerName);
                 }
 
                 var titleLabelLaunchNotFirstTime = new Label()
                 {
                     Text = scoreText,
+                    TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 20,
                     HorizontalTextAlignment = TextAlignment.Center,
@@ -501,7 +534,8 @@ public class MainPage : ContentPage
                 {
                     var labelCurrentHighScore = new Label()
                     {
-                        Text = $"🏆 Top Score: {topScoreString} \u2b50\ufe0f {topScorePlayerString}",
+                        Text = string.Format(ColorValley.Properties.Resources.LabelLaunchTopScore, topScoreString, topScorePlayerString),
+                        TextColor = Colors.Black,
                         Margin = 20,
                         FontSize = 20,
                     };
@@ -518,13 +552,15 @@ public class MainPage : ContentPage
             
             var labelChangePlayerName = new Label()
             {
-                Text = "... oder Spielernamen (für die Highscore Liste) ändern: ",
+                Text = ColorValley.Properties.Resources.LabelLaunchChangePlayerName,
+                TextColor = Colors.Black,
                 Margin = new Thickness(20, 20, 20, 5),
                 FontSize = 15
             };
             _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
             _playerEntry.Text = currentSettings.PlayerName;
-            _launcherOverlayGrid.Add(_playerEntry, 0, 5);
+
+            _launcherOverlayGrid.Add(_playerEntryBorder, 0, 5);
         }
 
 
@@ -718,6 +754,11 @@ public class MainPage : ContentPage
         _gameGrid.Remove(_middleBox);
         _gameGrid.Add(_middleBox, _levelSettings.MiddleColumnIndex, _levelSettings.MiddleRowIndex);
         _middleBox.BackgroundColor = _levelSettings.GetRandomColor();
+        _middleBox.Shadow = new Shadow()
+        {
+            Offset = new Point(10, 10),
+            Brush = new SolidColorBrush(Colors.Goldenrod)
+        };
     }
 
     private void UpdateOuterBoxes()

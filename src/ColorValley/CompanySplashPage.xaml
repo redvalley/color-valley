@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:ColorValley.Properties"
              x:Class="ColorValley.CompanySplashPage">
-    <Grid>
+    <Grid BackgroundColor="White">
         <Image Margin="50"
                Source="logo_redvalley_software.png"
                VerticalOptions="Center" 

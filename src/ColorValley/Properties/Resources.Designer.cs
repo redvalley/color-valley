@@ -61,7 +61,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datenschutz.
+        ///   Looks up a localized string similar to Data privacy.
         /// </summary>
         internal static string ButtonTextDataPrivacyDeclaration {
             get {
@@ -70,7 +70,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hilfe.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string ButtonTextHelp {
             get {
@@ -88,7 +88,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Impressum.
+        ///   Looks up a localized string similar to Imprint.
         /// </summary>
         internal static string ButtonTextImpressum {
             get {
@@ -97,7 +97,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🏃‍♂️‍➡️ Nächster Level.
+        ///   Looks up a localized string similar to 🏃‍♂️‍➡️ Next Level.
         /// </summary>
         internal static string ButtonTextNextLevel {
             get {
@@ -106,18 +106,19 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datenschutzerklärung der Red Valley Software GmbH für Color Valley
+        ///   Looks up a localized string similar to Red Valley Software GmbH Privacy Policy for Color Valley
         ///
-        ///Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Diese Datenschutzerklärung
-        ///informiert Sie darüber, welche Daten im Rahmen der Nutzung von Color Valley erhoben und
-        ///verarbeitet werden.
+        ///The protection of your personal data is important to us. This privacy policy
+        ///informs you about which data is collected and processed when you use Color Valley.
         ///
-        ///1. Verantwortlicher
-        ///Verantwortlich für die Datenverarbeitung im Zusammenhang mit der Nutzung dieser App ist:
+        ///1. Controller
+        ///The controller responsible for data processing in connection with the use of this app is:
         ///Red Valley Software GmbH
         ///Am Pumperhölzl 12, 84323 Massing
-        ///E-Mail: rupert.eder@redvalley-software.com
-        ///Webseite: www.redvalley-soft [rest of string was truncated]&quot;;.
+        ///Email: rupert.eder@redvalley-software.com
+        ///Website: www.redvalley-software.com
+        ///
+        ///2. Collection and Processing of Personal [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DataPrivacyMainText {
             get {
@@ -126,7 +127,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datenschutz.
+        ///   Looks up a localized string similar to Data privacy.
         /// </summary>
         internal static string DataPrivacyPageTitle {
             get {
@@ -135,7 +136,25 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hilfe.
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string HeaderHighscoreName {
+            get {
+                return ResourceManager.GetString("HeaderHighscoreName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        internal static string HeaderHighscoreScore {
+            get {
+                return ResourceManager.GetString("HeaderHighscoreScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string HelpPageTitle {
             get {
@@ -144,7 +163,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In diesem Beispiel können sogar mehrere Kästchen ausgewählt werden (alle markierten Gelben Kästchen): .
+        ///   Looks up a localized string similar to In this example, even multiple boxes can be selected (all marked yellow boxes):.
         /// </summary>
         internal static string HelpTextExampleMultiMatch {
             get {
@@ -153,7 +172,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Im nächsten Beispiel gibt es kein passendes Kästchen. Wird dennoch ein falsches Kästchen ausgewählt, so werden Punkte abgezogen:.
+        ///   Looks up a localized string similar to In the next example, there is no matching box. If an incorrect box is selected, points are deducted:.
         /// </summary>
         internal static string HelpTextExampleNoMatch {
             get {
@@ -162,7 +181,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Im folgenden Beispiel kann nur ein Kästchen ausgewählt werden (das gelb markierte Blaue). Dieses hat die selbe Farbe wie das zentrale innere Kästchen:.
+        ///   Looks up a localized string similar to In the following example, only one box can be selected (the blue one marked in yellow). This has the same color as the central inner box:.
         /// </summary>
         internal static string HelpTextExampleSingleMatch {
             get {
@@ -171,7 +190,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ziel des Spiels ist es immer so schnell wie möglich die richtigen äußeren Kästchen durch Berühren mit dem Finger auszuwählen..
+        ///   Looks up a localized string similar to The aim of the game is to select the correct outer boxes as quickly as possible by touching them with your finger..
         /// </summary>
         internal static string HelpTextGameGoal {
             get {
@@ -180,7 +199,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Das zentrale innere Kästchen gibt hierbei immer die Zielfarbe vor. Diese Farbe muss bei den äußeren Kästchen gesucht und so schnell wie möglich ausgewählt werden um Punkte zu erhalten..
+        ///   Looks up a localized string similar to The central inner box always indicates the target color. This color must be searched for in the outer boxes and selected as quickly as possible to score points..
         /// </summary>
         internal static string HelpTextInitial {
             get {
@@ -189,7 +208,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Highscore Liste.
+        ///   Looks up a localized string similar to Highscore List.
         /// </summary>
         internal static string HighScorePageTitle {
             get {
@@ -198,22 +217,18 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Impressum:
-        ///Angaben nach § 5 TMG:
-        ///Verantwortliche Firma:
+        ///   Looks up a localized string similar to Legal Notice:
+        ///Information according to Section 5 of the German Telemedia Act (TMG):
+        ///Responsible company:
         ///Red Valley Software GmbH
-        ///Geschäftssitz: Am Pumperhölzl 12, 84323 Massing
-        ///Das Unternehmen ist im Handelsregister eingetragen und gehört der Industrie- und Handelskammer
-        ///(IHK) Niederbayern an (ihk@passau.ihk.de).
-        ///Telefon: 08724/2071850
-        ///E-Mail: 
-        ///Webseite: www.redvalley-software.com
-        ///Geschäftsführung: Rupert Eder
-        ///Registernummer: HRB 11508
-        ///Umsatzsteuer-Identifikationsnummer gem. § 27a UStG: DE322142672
-        ///Programmierung: rupert.eder@redvalley-software.com
-        ///
-        ///Dat [rest of string was truncated]&quot;;.
+        ///Headquarters: Am Pumperhölzl 12, 84323 Massing
+        ///The company is registered in the commercial register and is a member of the Lower Bavaria Chamber of Industry and Commerce (IHK) (ihk@passau.ihk.de).
+        ///Telephone: +49 8724 2071850
+        ///Email:
+        ///Website: www.redvalley-software.com
+        ///Management: Rupert Eder
+        ///Registration number: HRB 11508
+        ///VAT identification number according to Section 2 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ImpressumMainText {
             get {
@@ -227,6 +242,99 @@ namespace ColorValley.Properties {
         internal static string ImpressumPageTitle {
             get {
                 return ResourceManager.GetString("ImpressumPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... or change your player name (for the highscore list):.
+        /// </summary>
+        internal static string LabelLaunchChangePlayerName {
+            get {
+                return ResourceManager.GetString("LabelLaunchChangePlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello 🙂.
+        /// </summary>
+        internal static string LabelLaunchFirstTime {
+            get {
+                return ResourceManager.GetString("LabelLaunchFirstTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or look at the instructions first:.
+        /// </summary>
+        internal static string LabelLaunchFirstTimeHelp {
+            get {
+                return ResourceManager.GetString("LabelLaunchFirstTimeHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello {0} 🙂.
+        /// </summary>
+        internal static string LabelLaunchNotFirstTime {
+            get {
+                return ResourceManager.GetString("LabelLaunchNotFirstTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🏆 Super {0} - New high score!!!
+        ///You have {1} points!.
+        /// </summary>
+        internal static string LabelLaunchNotFirstTimeNewHighScore {
+            get {
+                return ResourceManager.GetString("LabelLaunchNotFirstTimeNewHighScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🎖 Great {0}
+        ///
+        ///You have {1} points!.
+        /// </summary>
+        internal static string LabelLaunchNotFirstTimeNewScore {
+            get {
+                return ResourceManager.GetString("LabelLaunchNotFirstTimeNewScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🙁 Too bad {0}, unfortunately you have zero points!.
+        /// </summary>
+        internal static string LabelLaunchNotFirstTimeNoScore {
+            get {
+                return ResourceManager.GetString("LabelLaunchNotFirstTimeNoScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter your player name here for the highscore list:.
+        /// </summary>
+        internal static string LabelLaunchPlayerName {
+            get {
+                return ResourceManager.GetString("LabelLaunchPlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to start right away?.
+        /// </summary>
+        internal static string LabelLaunchStart {
+            get {
+                return ResourceManager.GetString("LabelLaunchStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🏆 Top Score: {0} ⭐️ {1}.
+        /// </summary>
+        internal static string LabelLaunchTopScore {
+            get {
+                return ResourceManager.GetString("LabelLaunchTopScore", resourceCulture);
             }
         }
         
@@ -294,7 +402,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ....
+        ///   Looks up a localized string similar to This app is ad-supported 😉, the game starts immediately after the following advertisement....
         /// </summary>
         internal static string SplashWelcomeAddExplaination {
             get {
