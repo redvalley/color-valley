@@ -12,6 +12,11 @@ namespace ColorValley
         public static IInterstitialAd? MainInterstitialAd { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating if interstitial ad is showing already.
+        /// </summary>
+        public static bool IsInterstitialAdShowing { get; set; }
+
+        /// <summary>
         /// The app open Ad
         /// </summary>
         public IAppOpenAd? AppOpenAd { get; set; }
@@ -24,12 +29,18 @@ namespace ColorValley
         protected override Window CreateWindow(IActivationState? activationState)
         {
             var interstitialAdService = IPlatformApplication.Current?.Services.GetService<IInterstitialAdService>();
-            MainInterstitialAd = interstitialAdService.CreateAd("ca-app-pub-6864374918270893/4065633825");
-            MainInterstitialAd.Load();
-
+            if (interstitialAdService != null)
+            {
+                MainInterstitialAd = interstitialAdService.CreateAd("ca-app-pub-6864374918270893/4065633825");
+                MainInterstitialAd.Load();
+            }
+            
             var appOpenAdService = IPlatformApplication.Current?.Services.GetService<IAppOpenAdService>();
-            AppOpenAd = appOpenAdService.CreateAd("ca-app-pub-6864374918270893/3232269588");
-            AppOpenAd.Load();
+            if (appOpenAdService != null)
+            {
+                AppOpenAd = appOpenAdService.CreateAd("ca-app-pub-6864374918270893/3232269588");
+                AppOpenAd.Load();
+            }
 
             var mainWindow = new Window(new CompanySplashPage());
             mainWindow.Resumed += MainWindowOnResumed;
@@ -41,7 +52,11 @@ namespace ColorValley
         {
             if (AppOpenAd is { IsLoaded: true })
             {
-                AppOpenAd.Show();
+                if (!IsInterstitialAdShowing)
+                {
+                    AppOpenAd.Show();
+                }
+                
             }
         }
     }

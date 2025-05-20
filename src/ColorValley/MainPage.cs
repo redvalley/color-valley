@@ -732,6 +732,10 @@ public class MainPage : ContentPage
 
     private void UpdateGame()
     {
+        if (!_isRunning)
+        {
+            return;
+        }
         if (_levelSettings.GameTimerIntervallSeconds > 1)
         {
             RemoveOldGameGrid();

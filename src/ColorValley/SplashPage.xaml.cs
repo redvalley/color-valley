@@ -23,6 +23,7 @@ public partial class SplashPage : ContentPage
         {
             App.MainInterstitialAd.OnAdFailedToShow += MainInterstitialAdOnOnAdFailedToShow;
             App.MainInterstitialAd.OnAdFailedToLoad += MainInterstitialAdOnOnAdFailedToLoad;
+            App.MainInterstitialAd.OnAdDismissed += MainInterstitialAdOnOnAdDismissed;
         }
 
         await Task.Run(async () =>
@@ -34,6 +35,7 @@ public partial class SplashPage : ContentPage
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
+                        App.IsInterstitialAdShowing = true;
                         App.MainInterstitialAd.Show();
                         ShowMainPage();
                     });
@@ -44,6 +46,11 @@ public partial class SplashPage : ContentPage
                 }
             }
         });
+    }
+
+    private void MainInterstitialAdOnOnAdDismissed(object? sender, EventArgs e)
+    {
+        App.IsInterstitialAdShowing = false;
     }
 
     private void MainInterstitialAdOnOnAdFailedToShow(object? sender, IAdError e)
