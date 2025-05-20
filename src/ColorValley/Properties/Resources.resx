@@ -248,7 +248,8 @@ Red Valley Software GmbH is particularly not liable for economic damages resulti
     <value>Impressum</value>
   </data>
   <data name="LabelLaunchChangePlayerName" xml:space="preserve">
-    <value>... or change your player name (for the highscore list):</value>
+    <value>... or change your player name 
+(for the highscore list):</value>
   </data>
   <data name="LabelLaunchFirstTime" xml:space="preserve">
     <value>Hello 🙂</value>
@@ -265,7 +266,6 @@ You have {1} points!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNewScore" xml:space="preserve">
     <value>🎖 Great {0}
-
 You have {1} points!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNoScore" xml:space="preserve">

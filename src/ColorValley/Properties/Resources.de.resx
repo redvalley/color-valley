@@ -254,7 +254,8 @@ liche Schäden, die durch den Gebrauch unvollständiger oder fehlerhafter Dateni
     <value>Impressum</value>
   </data>
   <data name="LabelLaunchChangePlayerName" xml:space="preserve">
-    <value>... oder deinen Spielernamen (für die Highscore Liste) ändern: </value>
+    <value>... oder deinen Spielernamen 
+(für die Highscore Liste) ändern: </value>
   </data>
   <data name="LabelLaunchFirstTime" xml:space="preserve">
     <value>Hallo 🙂</value>
@@ -271,7 +272,6 @@ Du hast {1} Punkte!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNewScore" xml:space="preserve">
     <value>🎖 Super {0}
-
 du hast {1} Punkte!</value>
   </data>
   <data name="LabelLaunchNotFirstTimeNoScore" xml:space="preserve">

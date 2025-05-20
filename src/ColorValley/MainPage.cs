@@ -14,7 +14,7 @@ public class MainPage : ContentPage
 {
     private readonly Grid _gameGrid = new();
     private readonly List<Button> _outerBoxes = new();
-    private const string DefaultPlayerName = "Color Valley";
+    
 
     private readonly Grid _mainGrid = new();
     private readonly Random _random = new();
@@ -45,9 +45,9 @@ public class MainPage : ContentPage
     };
 
     private Button _helpOverlayButton = new Button() { Text = ColorValley.Properties.Resources.ButtonTextHelp };
-    private IAudioPlayer _audioPlayerSuccessSound;
-    private IAudioPlayer _audioPlayerFailedSound;
-    private IAudioPlayer _audioPlayerGameCountdown;
+    private IAudioPlayer? _audioPlayerSuccessSound;
+    private IAudioPlayer? _audioPlayerFailedSound;
+    private IAudioPlayer? _audioPlayerGameCountdown;
     private Grid _launcherOverlayGrid = new Grid();
     private Border _launchOverlayBorder = new Border();
     private Entry _playerEntry = new Entry();
@@ -282,7 +282,7 @@ public class MainPage : ContentPage
 
         _playerEntry.Margin = new Thickness(20, 0, 20, 0);
         _playerEntry.FontSize = 15;
-        _playerEntry.Placeholder = DefaultPlayerName;
+        _playerEntry.Placeholder = AppUserSettings.DefaultPlayerName;
         _playerEntry.ClearButtonVisibility = ClearButtonVisibility.WhileEditing;
         _playerEntry.BackgroundColor = Colors.Transparent;
         _playerEntry.PlaceholderColor = Colors.Grey;
@@ -385,7 +385,10 @@ public class MainPage : ContentPage
     {
         _launcherOverlayGrid.Clear();
 
-        var currentSettings = UserSettings.LoadDecrypted<AppUserSettings>();
+        AppUserSettings currentSettings = UserSettings.LoadDecrypted<AppUserSettings>()??new AppUserSettings();
+        var isGameStartedFirstTime = currentSettings.IsGameStartedFirstTime;
+        
+        string playerName = currentSettings.PlayerName;
         HighScoreEntry? topScore = currentSettings.GetTopScore();
         var topScoreString = topScore?.Score == null ? "-" : topScore.Score.ToString();
         var topScorePlayerString = topScore?.Name == null ? "" : $"{topScore.Name}";
@@ -394,7 +397,7 @@ public class MainPage : ContentPage
 
         if (!levelDone)
         {
-            if (currentSettings.IsGameStartedFirstTime)
+            if (isGameStartedFirstTime)
             {
                 var labelLaunchFirstTime = new Label()
                 {
@@ -412,7 +415,9 @@ public class MainPage : ContentPage
                     Text = ColorValley.Properties.Resources.LabelLaunchPlayerName,
                     TextColor = Colors.Black,
                     Margin = new Thickness(20, 20, 20, 5),
-                    FontSize = 15
+                    FontSize = 15,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
                 };
 
                 _launcherOverlayGrid.Add(labelLaunchPlayerName, 0, 1);
@@ -424,7 +429,9 @@ public class MainPage : ContentPage
                     Text = ColorValley.Properties.Resources.LabelLaunchStart,
                     TextColor = Colors.Black,
                     Margin = 20,
-                    FontSize = 15
+                    FontSize = 15,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
                 };
                 _launcherOverlayGrid.Add(labelLaunchStart, 0, 3);
 
@@ -434,7 +441,9 @@ public class MainPage : ContentPage
                     Text = ColorValley.Properties.Resources.LabelLaunchFirstTimeHelp,
                     TextColor = Colors.Black,
                     Margin = 20,
-                    FontSize = 15
+                    FontSize = 15,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
                 };
                 _launcherOverlayGrid.Add(labelLaunchFirstTimeHelp, 0, 5);
                 _launcherOverlayGrid.Add(_helpOverlayButton, 0, 6);
@@ -445,7 +454,7 @@ public class MainPage : ContentPage
 
                 var labelLaunchNotFirstTime = new Label()
                 {
-                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTime, currentSettings.PlayerName),
+                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTime, playerName),
                     TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 25,
@@ -487,10 +496,12 @@ public class MainPage : ContentPage
                     Text = ColorValley.Properties.Resources.LabelLaunchChangePlayerName,
                     TextColor = Colors.Black,
                     Margin = new Thickness(20, 0, 20, 5),
-                    FontSize = 15
+                    FontSize = 15,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    HorizontalOptions = LayoutOptions.Center
                 };
                 _launcherOverlayGrid.Add(labelLaunchChangePlayerName, 0, 4);
-                _playerEntry.Text = currentSettings.PlayerName;
+                _playerEntry.Text = playerName;
 
                 _launcherOverlayGrid.Add(_playerEntryBorder, 0, 5);
             }
@@ -501,7 +512,7 @@ public class MainPage : ContentPage
             {
                 var labelLaunchNotFirstTimeNewHighScore = new Label()
                 {
-                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewHighScore, currentSettings.PlayerName, this._currentScore),
+                    Text = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewHighScore, playerName, this._currentScore),
                     TextColor = Colors.Black,
                     Margin = 20,
                     FontSize = 20,
@@ -512,11 +523,11 @@ public class MainPage : ContentPage
             }
             else
             {
-                var scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewScore, currentSettings.PlayerName, this._currentScore);
+                var scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNewScore, playerName, this._currentScore);
 
                 if (this._currentScore == 0)
                 {
-                    scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNoScore, currentSettings.PlayerName);
+                    scoreText = string.Format(ColorValley.Properties.Resources.LabelLaunchNotFirstTimeNoScore, playerName);
                 }
 
                 var titleLabelLaunchNotFirstTime = new Label()
@@ -554,11 +565,13 @@ public class MainPage : ContentPage
             {
                 Text = ColorValley.Properties.Resources.LabelLaunchChangePlayerName,
                 TextColor = Colors.Black,
-                Margin = new Thickness(20, 20, 20, 5),
-                FontSize = 15
+                Margin = new Thickness(20, 5, 20, 5),
+                FontSize = 15,
+                HorizontalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.Center
             };
             _launcherOverlayGrid.Add(labelChangePlayerName, 0, 4);
-            _playerEntry.Text = currentSettings.PlayerName;
+            _playerEntry.Text = playerName;
 
             _launcherOverlayGrid.Add(_playerEntryBorder, 0, 5);
         }
@@ -580,32 +593,26 @@ public class MainPage : ContentPage
         }
     }
 
-    private void NextLevelButtonOnClicked(object? sender, EventArgs e)
+    private async void NextLevelButtonOnClicked(object? sender, EventArgs e)
     {
-        StartGame(true);
+        await StartGame(true);
     }
 
-    private void StartOrRestartButtonOnClicked(object? sender, EventArgs e)
+    private async void StartOrRestartButtonOnClicked(object? sender, EventArgs e)
     {
-        StartGame(false);
+        await StartGame(false);
     }
 
 
     private async Task StartGame(bool nextLevel)
     {
-        if (nextLevel)
-        {
-            UpdateLevel(false);
-        }
-        else
-        {
-            UpdateLevel(true);
-        }
+        UpdateLevel(!nextLevel);
 
         UpdateGame();
 
-        AppUserSettings appUserSettings = UserSettings.LoadDecrypted<AppUserSettings>();
-        appUserSettings.PlayerName = string.IsNullOrEmpty(_playerEntry.Text) ? DefaultPlayerName : _playerEntry.Text;
+        AppUserSettings appUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
+
+        appUserSettings.PlayerName = string.IsNullOrEmpty(_playerEntry.Text) ? AppUserSettings.DefaultPlayerName : _playerEntry.Text;
         appUserSettings.SaveEncrypted();
 
         _mainGrid.Remove(_launchOverlayBorder);
@@ -622,7 +629,8 @@ public class MainPage : ContentPage
         this._timeTimer.Interval = TimeSpan.FromSeconds(1);
         this._timeTimer.Tick += TimeTimerOnTick;
 
-        _audioPlayerGameCountdown.Play();
+        _audioPlayerGameCountdown?.Play();
+
         for (int gameCountDown = 3; gameCountDown > 0; gameCountDown--)
         {
             _gameInfoLabel.Text = gameCountDown.ToString();
@@ -706,7 +714,7 @@ public class MainPage : ContentPage
 
     private void AskTryAgain()
     {
-        var currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>();
+        AppUserSettings currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
         currentUserSettings.AddHighScore(new HighScoreEntry()
         {
             Name = currentUserSettings.PlayerName,
@@ -800,12 +808,18 @@ public class MainPage : ContentPage
         this._timeLabel.Text = "\u23f1 " + _currentTimeSpan.ToString("mm\\:ss");
     }
 
-    private void OnOuterBoxClicked(object sender, EventArgs e)
+    private void OnOuterBoxClicked(object? sender, EventArgs e)
     {
         if (!_isRunning)
         {
             return;
         }
+
+        if (sender == null)
+        {
+            return;
+        }
+
         var clickedBox = (Button)sender;
 
         if (clickedBox.BackgroundColor.Equals(_middleBox.BackgroundColor) &&
@@ -828,12 +842,12 @@ public class MainPage : ContentPage
                 scoreToAdd = scoreToAdd * (int)Math.Pow(10, _comboHit - 1);
             }
 
-            _audioPlayerSuccessSound.Play();
+            _audioPlayerSuccessSound?.Play();
             UpdateScore(clickedBox, scoreToAdd);
         }
         else
         {
-            _audioPlayerFailedSound.Play();
+            _audioPlayerFailedSound?.Play();
             UpdateScore(clickedBox, -1);
         }
     }

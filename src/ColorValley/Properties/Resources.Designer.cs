@@ -246,7 +246,8 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ... or change your player name (for the highscore list):.
+        ///   Looks up a localized string similar to ... or change your player name 
+        ///(for the highscore list):.
         /// </summary>
         internal static string LabelLaunchChangePlayerName {
             get {
@@ -293,7 +294,6 @@ namespace ColorValley.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to 🎖 Great {0}
-        ///
         ///You have {1} points!.
         /// </summary>
         internal static string LabelLaunchNotFirstTimeNewScore {

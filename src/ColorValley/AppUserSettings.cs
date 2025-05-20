@@ -8,6 +8,8 @@ public class AppUserSettings : UserSettings
 {
     public const int MaxHighScoreEntries = 20;
 
+    public const string DefaultPlayerName = "Color Valley"; 
+
     /// <summary>
     /// The list of high score entries
     /// </summary>
@@ -24,7 +26,7 @@ public class AppUserSettings : UserSettings
     /// The name of the current player.
     /// </summary>
     [JsonInclude]
-    public string PlayerName { get; set; }
+    public string PlayerName { get; set; } = DefaultPlayerName;
 
     /// <summary>
     /// Gets the current high score.
