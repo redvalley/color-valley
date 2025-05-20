@@ -11,7 +11,7 @@ namespace ACAB.App
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>()
+                .UseMauiApp<ColorValley.App>()
                 .UseAdMob()
                 .ConfigureFonts(fonts =>
                 {

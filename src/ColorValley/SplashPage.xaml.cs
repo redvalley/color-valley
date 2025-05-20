@@ -1,4 +1,5 @@
 using ACAB.App;
+using Android.Gms.Ads.Interstitial;
 using Plugin.AdMob;
 using Plugin.AdMob.Services;
 using Debug = System.Diagnostics.Debug;
@@ -7,41 +8,59 @@ namespace ColorValley;
 
 public partial class SplashPage : ContentPage
 {
-    private IInterstitialAdService? _interstitialAdService;
-    private IInterstitialAd _interstitialAd;
 
     public SplashPage()
     {
         InitializeComponent();
-        _interstitialAdService = IPlatformApplication.Current.Services.GetService<IInterstitialAdService>();
+        
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        _interstitialAd = _interstitialAdService.CreateAd("ca-app-pub-6864374918270893/4065633825");
-        _interstitialAd.OnAdLoaded += InterstitialAd_OnAdLoaded;
-        _interstitialAd.OnAdFailedToLoad += InterstitialAdOnOnAdFailedToLoad;
-        await Task.Delay(3000);
-        _interstitialAd.Load();
 
+        if (App.MainInterstitialAd != null)
+        {
+            App.MainInterstitialAd.OnAdFailedToShow += MainInterstitialAdOnOnAdFailedToShow;
+            App.MainInterstitialAd.OnAdFailedToLoad += MainInterstitialAdOnOnAdFailedToLoad;
+        }
+
+        await Task.Run(async () =>
+        {
+            await Task.Delay(3000);
+            if (App.MainInterstitialAd != null)
+            {
+                if (App.MainInterstitialAd.IsLoaded)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        App.MainInterstitialAd.Show();
+                        ShowMainPage();
+                    });
+                }
+                else
+                {
+                    await MainThread.InvokeOnMainThreadAsync(ShowMainPage);
+                }
+            }
+        });
     }
 
-    private void InterstitialAdOnOnAdFailedToLoad(object? sender, IAdError e)
+    private void MainInterstitialAdOnOnAdFailedToShow(object? sender, IAdError e)
+    {
+        ShowMainPage();
+    }
+
+    private void MainInterstitialAdOnOnAdFailedToLoad(object? sender, IAdError e)
+    {
+        ShowMainPage();
+    }
+
+    private static void ShowMainPage()
     {
         if (Application.Current?.Windows != null)
         {
             Application.Current.Windows[0].Page = new NavigationPage(new MainPage());
         }
     }
-
-    private void InterstitialAd_OnAdLoaded(object? sender, EventArgs e)
-    {
-        _interstitialAd.Show();
-        if (Application.Current?.Windows != null)
-        {
-            Application.Current.Windows[0].Page = new NavigationPage(new MainPage());
-        }
-    }
-
 }
