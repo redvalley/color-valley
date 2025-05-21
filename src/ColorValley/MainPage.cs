@@ -168,7 +168,10 @@ public class MainPage : ContentPage
         };
         swipeGestureRecognizer.Swiped += (s, e) =>
         {
-            UpdateGame();
+            if (_isRunning)
+            {
+                UpdateGame();
+            }
         };
         _gameGrid.GestureRecognizers.Add(swipeGestureRecognizer);
         _mainGrid.GestureRecognizers.Add(swipeGestureRecognizer);
@@ -732,10 +735,6 @@ public class MainPage : ContentPage
 
     private void UpdateGame()
     {
-        if (!_isRunning)
-        {
-            return;
-        }
         if (_levelSettings.GameTimerIntervallSeconds > 1)
         {
             RemoveOldGameGrid();
