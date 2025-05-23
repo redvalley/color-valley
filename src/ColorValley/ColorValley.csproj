@@ -10,41 +10,49 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		
-
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.9</ApplicationDisplayVersion>
-		<ApplicationVersion>9</ApplicationVersion>
+		
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Configurations>Debug;Release;Debug_Pro;Release_Pro</Configurations>
+		<DefineConstants>PRO_VERSION</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug_Pro' Or '$(Configuration)' == 'Release_Pro'">
-		<DefineConstants>PRO_VERSION</DefineConstants>
+	<PropertyGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('PRO_VERSION'))">
+		<ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+
 		<!-- Display name -->
 		<ApplicationTitle>Color Valley Pro</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.redvalley-software.colorvalley_pro</ApplicationId>
+
+		<!-- Android Manifest -->
+		<AndroidManifest>Platforms\Android\ProVersion\AndroidManifest.xml</AndroidManifest>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' != 'Debug_Pro' And '$(Configuration)' != 'Release_Pro'">
+	<PropertyGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('STANDARD_VERSION'))">
+		<ApplicationDisplayVersion>1.0.10</ApplicationDisplayVersion>
+		<ApplicationVersion>10</ApplicationVersion>
+
 		<!-- Display name -->
 		<ApplicationTitle>Color Valley</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.redvalley-software.colorvalley</ApplicationId>
+
+		<!-- Android Manifest -->
+		<AndroidManifest>Platforms\Android\DefaultVersion\AndroidManifest.xml</AndroidManifest>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(Configuration)' == 'Debug_Pro' Or '$(Configuration)' == 'Release_Pro'">
+	<ItemGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('PRO_VERSION'))">
 		<MauiSplashScreen Include="Resources\Splash\splash_pro.png" Color="White" />
-		<MauiIcon Include="Resources\AppIconPro\appicon.png" Color="White" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)' != 'Debug_Pro' And '$(Configuration)' != 'Release_Pro'">
+	<ItemGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('STANDARD_VERSION'))">
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="White" />
 		<MauiIcon Include="Resources\AppIcon\appicon.png" Color="White" />
 	</ItemGroup>
@@ -59,6 +67,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIconPro\appicon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIconPro\appicon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.60" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		
@@ -66,7 +82,7 @@
 		<PackageReference Include="System.Text.Json" Version="9.0.4" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(Configuration)' != 'Debug_Pro' And '$(Configuration)' != 'Release_Pro'">
+	<ItemGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('STANDARD_VERSION'))">
 		<PackageReference Include="Plugin.AdMob" Version="2.3.1" />
 	</ItemGroup>
 

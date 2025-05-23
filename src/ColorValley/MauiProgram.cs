@@ -1,4 +1,6 @@
-﻿#if !PRO_VERSION
+﻿
+using Microsoft.Extensions.Logging;
+#if !PRO_VERSION
 using Plugin.AdMob;
 #endif
 

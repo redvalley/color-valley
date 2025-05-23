@@ -20,12 +20,18 @@ public partial class SplashPage : ContentPage
 
         this.LabelSplashWelcomePro.IsVisible = true;
         this.LabelSplashWelcome.IsVisible = false;
+
+        this.ImageColorValleyPro.IsVisible = true;
+        this.ImageColorValley.IsVisible = false;
 #else
         this.LabelAppNameColorValleyPro.IsVisible = false;
         this.LabelAppNameColorValley.IsVisible = true;
 
         this.LabelSplashWelcomePro.IsVisible = false;
         this.LabelSplashWelcome.IsVisible = true;
+
+        this.ImageColorValleyPro.IsVisible = false;
+        this.ImageColorValley.IsVisible = true;
 #endif
     }
 
@@ -96,7 +102,7 @@ public partial class SplashPage : ContentPage
         await Task.Run(async () =>
         {
             await Task.Delay(2000);
-            ShowMainPage();
+            await MainThread.InvokeOnMainThreadAsync(ShowMainPage);
         });
     }
 #endif

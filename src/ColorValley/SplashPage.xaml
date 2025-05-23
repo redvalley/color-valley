@@ -8,7 +8,14 @@
         
 
         <Image Margin="50"
+               x:Name="ImageColorValley"
                Source="logo_color_valley.png"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+        <Image Margin="50"
+               x:Name="ImageColorValleyPro"
+               Source="logo_color_valley_pro.png"
                VerticalOptions="Center" 
                HorizontalOptions="Center" />
 
@@ -22,7 +29,7 @@
                FontAttributes="Bold"
          />
 
-        <Label Text="Color Valley Pro"
+        <Label Text="Color Valley"
                x:Name="LabelAppNameColorValleyPro"
                VerticalOptions="Center" 
                HorizontalOptions="Center"

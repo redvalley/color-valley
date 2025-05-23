@@ -10,7 +10,8 @@ public class HighScoreEntry
     /// <summary>
     /// The rank or trophy
     /// </summary>
-    public string RankOrTrophy { get; set; }
+    [JsonInclude]
+    public string RankOrTrophy { get; set; } = string.Empty;
 
     /// <summary>
     /// The high score value.
@@ -29,6 +30,6 @@ public class HighScoreEntry
     /// The name of the person that has created the high score.
     /// </summary>
     [JsonInclude]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }
 
