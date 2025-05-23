@@ -13,16 +13,27 @@
                HorizontalOptions="Center" />
 
         <Label Text="Color Valley"
+               x:Name="LabelAppNameColorValley"
                VerticalOptions="Center" 
                HorizontalOptions="Center"
                Margin="15, 200,15,0"
                FontSize="35"
                TextColor="Black"
                FontAttributes="Bold"
-        >
-        </Label>
+         />
+
+        <Label Text="Color Valley Pro"
+               x:Name="LabelAppNameColorValleyPro"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               Margin="15, 200,15,0"
+               FontSize="35"
+               TextColor="Black"
+               FontAttributes="Bold"
+        />
 
         <Label Text="{x:Static resources:Resources.SplashWelcomeAddExplaination }"
+               x:Name="LabelSplashWelcome"
                VerticalOptions="End" 
                HorizontalOptions="End"
                Margin="15,0,15,50"
@@ -30,6 +41,17 @@
                TextColor="Black"
                FontAttributes="Bold"
                >
+        </Label>
+
+        <Label Text="{x:Static resources:Resources.SplashWelcome }"
+               x:Name="LabelSplashWelcomePro"
+               VerticalOptions="End" 
+               HorizontalOptions="End"
+               Margin="15,0,15,50"
+               FontSize="15"
+               TextColor="Black"
+               FontAttributes="Bold"
+        >
         </Label>
     </Grid>
 </ContentPage>

@@ -1,11 +1,15 @@
 ﻿using System.Diagnostics;
+#if !PRO_VERSION
 using Plugin.AdMob;
 using Plugin.AdMob.Services;
+#endif
 
 namespace ColorValley
 {
     public partial class App : Application
     {
+
+#if !PRO_VERSION
         /// <summary>
         /// The main interstitial Ad
         /// </summary>
@@ -20,13 +24,25 @@ namespace ColorValley
         /// The app open Ad
         /// </summary>
         public IAppOpenAd? AppOpenAd { get; set; }
-
+#endif
         public App()
         {
             InitializeComponent();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
+        {
+#if !PRO_VERSION
+            InitializeAds();
+#endif
+            var mainWindow = new Window(new CompanySplashPage());
+#if !PRO_VERSION
+            mainWindow.Resumed += MainWindowOnResumed;
+#endif
+            return mainWindow;
+        }
+#if !PRO_VERSION
+        private void InitializeAds()
         {
             var interstitialAdService = IPlatformApplication.Current?.Services.GetService<IInterstitialAdService>();
             if (interstitialAdService != null)
@@ -41,12 +57,8 @@ namespace ColorValley
                 AppOpenAd = appOpenAdService.CreateAd("ca-app-pub-6864374918270893/3232269588");
                 AppOpenAd.Load();
             }
-
-            var mainWindow = new Window(new CompanySplashPage());
-            mainWindow.Resumed += MainWindowOnResumed;
-
-            return mainWindow;
         }
+
 
         private void MainWindowOnResumed(object? sender, EventArgs e)
         {
@@ -59,5 +71,6 @@ namespace ColorValley
                 
             }
         }
+#endif
     }
 }

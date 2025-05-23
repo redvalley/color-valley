@@ -304,4 +304,7 @@ You have {1} points!</value>
   <data name="SplashWelcomeAddExplaination" xml:space="preserve">
     <value>This app is ad-supported 😉, the game starts immediately after the following advertisement...</value>
   </data>
+  <data name="SplashWelcome" xml:space="preserve">
+    <value>Welcome to Color Valley Pro, the game starts immediately...</value>
+  </data>
 </root>

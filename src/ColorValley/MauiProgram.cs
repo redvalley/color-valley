@@ -1,9 +1,8 @@
-﻿
-using Microsoft.Extensions.Logging;
+﻿#if !PRO_VERSION
 using Plugin.AdMob;
-using Plugin.Maui.Audio;
+#endif
 
-namespace ACAB.App
+namespace ColorValley
 {
     public static class MauiProgram
     {
@@ -12,7 +11,9 @@ namespace ACAB.App
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<ColorValley.App>()
+#if !PRO_VERSION
                 .UseAdMob()
+#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

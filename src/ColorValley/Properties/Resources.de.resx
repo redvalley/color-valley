@@ -310,4 +310,7 @@ du hast {1} Punkte!</value>
   <data name="SplashWelcomeAddExplaination" xml:space="preserve">
     <value>Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ...</value>
   </data>
+  <data name="SplashWelcome" xml:space="preserve">
+    <value>Willkommen zu Color Valley Pro, die App startet sofort ...</value>
+  </data>
 </root>

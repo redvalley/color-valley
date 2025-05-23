@@ -7,15 +7,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorValley", "ColorValley\
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Pro|Any CPU = Debug_Pro|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		Release_Pro|Any CPU = Release_Pro|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug_Pro|Any CPU.ActiveCfg = Debug_Pro|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug_Pro|Any CPU.Build.0 = Debug_Pro|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug_Pro|Any CPU.Deploy.0 = Debug_Pro|Any CPU
 		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release_Pro|Any CPU.ActiveCfg = Release_Pro|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release_Pro|Any CPU.Build.0 = Release_Pro|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release_Pro|Any CPU.Deploy.0 = Release_Pro|Any CPU
 		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6B3A7E-6CED-E440-0752-635EFF371E66}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

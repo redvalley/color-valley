@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-using ColorValley;
+﻿#if !PRO_VERSION
+using Plugin.AdMob;
+#endif
 using ColorValley.Models;
 using ColorValley.Settings;
 using iJus.Core.Settings;
-using Microsoft.Maui;
 using Microsoft.Maui.Controls.Shapes;
-using Plugin.AdMob;
 using Plugin.Maui.Audio;
 
-namespace ACAB.App;
+namespace ColorValley;
 
 public class MainPage : ContentPage
 {
@@ -188,13 +187,10 @@ public class MainPage : ContentPage
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
         footerLayout.AddColumnDefinition(new ColumnDefinition(GridLength.Auto));
 
-        
-        var bannerAd = new Plugin.AdMob.BannerAd();
-        bannerAd.AdUnitId = "ca-app-pub-6864374918270893/6672681529";
-        bannerAd.AdSize = AdSize.SmartBanner;
-        footerLayout.Add(bannerAd, 0, 0);
-        Grid.SetColumnSpan(bannerAd, 4);
-        
+#if !PRO_VERSION
+        AddBannerAd(footerLayout);
+#endif
+
         _impressumButton.HorizontalOptions = LayoutOptions.Start;
         _impressumButton.Margin = 5;
         _impressumButton.FontSize = 15;
@@ -326,6 +322,16 @@ public class MainPage : ContentPage
 
     }
 
+#if !PRO_VERSION
+    private static void AddBannerAd(Grid footerLayout)
+    {
+        var bannerAd = new Plugin.AdMob.BannerAd();
+        bannerAd.AdUnitId = "ca-app-pub-6864374918270893/6672681529";
+        bannerAd.AdSize = AdSize.SmartBanner;
+        footerLayout.Add(bannerAd, 0, 0);
+        Grid.SetColumnSpan(bannerAd, 4);
+    }
+#endif
     private void UpdateGameGridRowsAndColumns()
     {
         _gameGrid.RowDefinitions.Clear();
