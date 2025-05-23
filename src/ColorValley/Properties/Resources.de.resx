@@ -148,13 +148,13 @@ Webseite: www.redvalley-software.com
 
 2. Erhebung und Verarbeitung personenbezogener Daten
 
-Unsere kostenpflichtige Version der App kann grundsätzlich genutzt werden, ohne dass personenbezogene Daten erhoben werden.  Eine Ausnahme besteht lediglich, wenn Sie uns über die Feedback-Funktion kontaktieren.
+Unsere kostenpflichtige Pro-Version der App kann grundsätzlich genutzt werden, ohne dass personenbezogene Daten erhoben werden.  Eine Ausnahme besteht lediglich, wenn Sie uns über die Feedback-Funktion kontaktieren.
 Feedback-Funktion: rupert.eder@redvalley-software.com
 Wenn Sie uns Feedback per E-Mail senden, wird Ihre E-Mail-Adresse verarbeitet, um Ihre Anfrage
 zu beantworten. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer freiwilligen Einwilligung
 gemäß Art. 6 Abs. 1 lit. a DSGVO.
 
-Wir bieten über die Lite Version der App ansonsten auch die Möglichkeit kostenlos mit Werbung zu spielen. Die Werbung in unseren Apps wird von Google AdMob und dessen Partnern ausgeliefert. Es werden dabei ggf. personenbezogene Daten wie IP-Adressen, Gerätekennung etc. genutzt um das Werbeangebot zu verbessern und zu finanzieren. Die Verarbeitung kann ausserhalb der EU/EWR erfolgen. Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
+Wir bieten über die Standard Version der App ansonsten auch die Möglichkeit kostenlos mit Werbung zu spielen. Die Werbung in unseren Apps wird von Google AdMob und dessen Partnern ausgeliefert. Es werden dabei ggf. personenbezogene Daten wie IP-Adressen, Gerätekennung etc. genutzt um das Werbeangebot zu verbessern und zu finanzieren. Die Verarbeitung kann ausserhalb der EU/EWR erfolgen. Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
 
 3. Weitergabe von Daten
 Es erfolgt keine Weitergabe Ihrer personenbezogenen Daten an Dritte.
@@ -309,5 +309,8 @@ du hast {1} Punkte!</value>
   </data>
   <data name="SplashWelcomeAddExplaination" xml:space="preserve">
     <value>Diese App ist werbefinanziert 😉, das Spiel startet sofort nach der folgenden Werbung ...</value>
+  </data>
+  <data name="SplashWelcome" xml:space="preserve">
+    <value>Willkommen zu Color Valley Pro, die App startet sofort ...</value>
   </data>
 </root>

@@ -402,6 +402,15 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Welcome to Color Valley Pro, the game starts immediately....
+        /// </summary>
+        internal static string SplashWelcome {
+            get {
+                return ResourceManager.GetString("SplashWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This app is ad-supported 😉, the game starts immediately after the following advertisement....
         /// </summary>
         internal static string SplashWelcomeAddExplaination {
