@@ -1,6 +1,5 @@
 using ACAB.App;
 #if !PRO_VERSION
-using Android.Gms.Ads.Interstitial;
 using Plugin.AdMob;
 using Plugin.AdMob.Services;
 #endif

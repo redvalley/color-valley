@@ -296,7 +296,10 @@ public class MainPage : ContentPage
             CornerRadius = 5
         };
         _playerEntryBorder.WidthRequest = 200;
-
+        #if IOS
+        _playerEntryBorder.Stroke = Colors.Transparent;
+        #endif
+        
         _playerEntryBorder.Content = _playerEntry;
 
         NavigationPage.SetHasNavigationBar(this, false);
@@ -326,7 +329,12 @@ public class MainPage : ContentPage
     private static void AddBannerAd(Grid footerLayout)
     {
         var bannerAd = new Plugin.AdMob.BannerAd();
-        bannerAd.AdUnitId = "ca-app-pub-6864374918270893/6672681529";
+#if IOS
+        string bannerAddUnitId = "ca-app-pub-6864374918270893/8745430657";
+#else
+        string bannerAddUnitId = "ca-app-pub-6864374918270893/6672681529";
+#endif
+        bannerAd.AdUnitId = bannerAddUnitId;
         bannerAd.AdSize = AdSize.SmartBanner;
         footerLayout.Add(bannerAd, 0, 0);
         Grid.SetColumnSpan(bannerAd, 4);

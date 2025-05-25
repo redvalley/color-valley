@@ -47,14 +47,25 @@ namespace ColorValley
             var interstitialAdService = IPlatformApplication.Current?.Services.GetService<IInterstitialAdService>();
             if (interstitialAdService != null)
             {
-                MainInterstitialAd = interstitialAdService.CreateAd("ca-app-pub-6864374918270893/4065633825");
+                
+                #if IOS
+                string interstitialAddUnitId = "ca-app-pub-6864374918270893/1009817964";
+                #else
+                string interstitialAddUnitId = "ca-app-pub-6864374918270893/4065633825";
+                #endif
+                MainInterstitialAd = interstitialAdService.CreateAd(interstitialAddUnitId);
                 MainInterstitialAd.Load();
             }
             
             var appOpenAdService = IPlatformApplication.Current?.Services.GetService<IAppOpenAdService>();
             if (appOpenAdService != null)
             {
-                AppOpenAd = appOpenAdService.CreateAd("ca-app-pub-6864374918270893/3232269588");
+#if IOS
+                string appOpenAddUnitId = "ca-app-pub-6864374918270893/6262661560";
+#else
+                string appOpenAddUnitId = "ca-app-pub-6864374918270893/3232269588";
+#endif
+                AppOpenAd = appOpenAdService.CreateAd(appOpenAddUnitId);
                 AppOpenAd.Load();
             }
         }
