@@ -2,6 +2,7 @@
 using Plugin.AdMob;
 #endif
 using ColorValley.Models;
+using ColorValley.Services;
 using ColorValley.Settings;
 using iJus.Core.Settings;
 using Microsoft.Maui.Controls.Shapes;
@@ -13,7 +14,7 @@ public class MainPage : ContentPage
 {
     private readonly Grid _gameGrid = new();
     private readonly List<Button> _outerBoxes = new();
-    
+
 
     private readonly Grid _mainGrid = new();
     private readonly Random _random = new();
@@ -55,6 +56,7 @@ public class MainPage : ContentPage
     //playerEntryBorder.Content = _playerEntry;
 
     private LevelSettings _levelSettings = new LevelSettings();
+    private HighScoreService _highScoreService = new HighScoreService();
 
     public MainPage()
     {
@@ -62,14 +64,17 @@ public class MainPage : ContentPage
         _timeTimer = Dispatcher.CreateTimer();
         _levelSettings = LevelSettings.CreateLevel1Settings();
         Title = ColorValley.Properties.Resources.MainPageTitle;
+
         InitializeSound();
         InitializeGameUi();
 
         UpdateGame();
-
-        AddLauncherOverlay(false);
     }
 
+    protected override async void OnAppearing()
+    {
+        await AddLauncherOverlay(false);
+    }
 
 
     private void InitializeTime()
@@ -251,7 +256,7 @@ public class MainPage : ContentPage
         _nextLevelButton.HeightRequest = 50;
         _nextLevelButton.Text = ColorValley.Properties.Resources.ButtonTextNextLevel;
         _nextLevelButton.Margin = new Thickness(20);
-        
+
 
         _helpOverlayButton.BackgroundColor = Colors.Blue;
         _helpOverlayButton.TextColor = Colors.White;
@@ -296,10 +301,10 @@ public class MainPage : ContentPage
             CornerRadius = 5
         };
         _playerEntryBorder.WidthRequest = 200;
-        #if IOS
+#if IOS
         _playerEntryBorder.Stroke = Colors.Transparent;
-        #endif
-        
+#endif
+
         _playerEntryBorder.Content = _playerEntry;
 
         NavigationPage.SetHasNavigationBar(this, false);
@@ -332,7 +337,9 @@ public class MainPage : ContentPage
 #if IOS
         string bannerAddUnitId = "ca-app-pub-6864374918270893/8745430657";
 #else
-        string bannerAddUnitId = "ca-app-pub-6864374918270893/6672681529";
+        //string bannerAddUnitId = "ca-app-pub-6864374918270893/6672681529";
+        //secondary banner
+        string bannerAddUnitId = "ca-app-pub-6864374918270893/2053837719";
 #endif
         bannerAd.AdUnitId = bannerAddUnitId;
         bannerAd.AdSize = AdSize.SmartBanner;
@@ -398,15 +405,26 @@ public class MainPage : ContentPage
         this._gameGrid.SetRowSpan(_gameInfoLabel, _levelSettings.RowCount);
     }
 
-    private void AddLauncherOverlay(bool levelDone)
+    private async Task AddLauncherOverlay(bool levelDone)
     {
+        _mainGrid.Remove(_launchOverlayBorder);
         _launcherOverlayGrid.Clear();
 
-        AppUserSettings currentSettings = UserSettings.LoadDecrypted<AppUserSettings>()??new AppUserSettings();
+        AppUserSettings currentSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
         var isGameStartedFirstTime = currentSettings.IsGameStartedFirstTime;
-        
+
         string playerName = currentSettings.PlayerName;
-        HighScoreEntry? topScore = currentSettings.GetTopScore();
+
+
+
+        HighScoreEntry? topScore = null;
+
+        var overallScoreResult = await _highScoreService.GetOverallScores();
+        if (overallScoreResult.Entries.Any())
+        {
+            topScore = overallScoreResult.Entries.FirstOrDefault();
+        }
+
         var topScoreString = topScore?.Score == null ? "-" : topScore.Score.ToString();
         var topScorePlayerString = topScore?.Name == null ? "" : $"{topScore.Name}";
 
@@ -485,7 +503,7 @@ public class MainPage : ContentPage
                 {
                     var labelLaunchCurrentHighScore = new Label()
                     {
-                        Text = string.Format(ColorValley.Properties.Resources.LabelLaunchTopScore,  topScoreString, topScorePlayerString),
+                        Text = string.Format(ColorValley.Properties.Resources.LabelLaunchTopScore, topScoreString, topScorePlayerString),
                         TextColor = Colors.Black,
                         Margin = new Thickness(20, 10, 20, 5),
                         FontSize = 20,
@@ -577,7 +595,7 @@ public class MainPage : ContentPage
             {
                 _launcherOverlayGrid.Add(_nextLevelButton, 0, 3);
             }
-            
+
             var labelChangePlayerName = new Label()
             {
                 Text = ColorValley.Properties.Resources.LabelLaunchChangePlayerName,
@@ -595,6 +613,7 @@ public class MainPage : ContentPage
 
 
 
+        
         this._mainGrid.Add(_launchOverlayBorder, 0, 1);
 
 
@@ -688,13 +707,16 @@ public class MainPage : ContentPage
             if (_levelSettings.Level == 1)
             {
                 _levelSettings = LevelSettings.CreateLevel2Settings();
-            } else if (_levelSettings.Level == 2)
+            }
+            else if (_levelSettings.Level == 2)
             {
                 _levelSettings = LevelSettings.CreateLevel3Settings();
-            } else if (_levelSettings.Level == 3)
+            }
+            else if (_levelSettings.Level == 3)
             {
                 _levelSettings = LevelSettings.CreateLevel4Settings();
-            } else if (_levelSettings.Level == 4)
+            }
+            else if (_levelSettings.Level == 4)
             {
                 _levelSettings = LevelSettings.CreateLevel5Settings();
             }
@@ -729,17 +751,22 @@ public class MainPage : ContentPage
         }
     }
 
-    private void AskTryAgain()
+    private async Task AskTryAgain()
     {
         AppUserSettings currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
-        currentUserSettings.AddHighScore(new HighScoreEntry()
+
+
+        await _highScoreService.SaveScoreAsync(new HighScoreEntry()
         {
             Name = currentUserSettings.PlayerName,
             Score = _currentScore,
             Level = _levelSettings.Level
         });
-        currentUserSettings.SaveEncrypted();
-        AddLauncherOverlay(true);
+
+
+
+
+        await AddLauncherOverlay(true);
     }
 
     private void GameTimerOnTick(object? sender, EventArgs e)
@@ -753,7 +780,7 @@ public class MainPage : ContentPage
         {
             RemoveOldGameGrid();
         }
-        
+
         UpdateGameGridRowsAndColumns();
         UpdatePageBackground();
         UpdateMiddleBox();

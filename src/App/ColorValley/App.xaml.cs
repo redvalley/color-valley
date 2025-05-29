@@ -35,7 +35,7 @@ namespace ColorValley
 #if !PRO_VERSION
             InitializeAds();
 #endif
-            var mainWindow = new Window(new CompanySplashPage());
+            var mainWindow = new Window(new SplashPage());
 #if !PRO_VERSION
             mainWindow.Resumed += MainWindowOnResumed;
 #endif
@@ -50,9 +50,12 @@ namespace ColorValley
                 
                 #if IOS
                 string interstitialAddUnitId = "ca-app-pub-6864374918270893/1009817964";
-                #else
-                string interstitialAddUnitId = "ca-app-pub-6864374918270893/4065633825";
-                #endif
+#else
+                //string interstitialAddUnitId = "ca-app-pub-6864374918270893/4065633825";
+                //secondary
+
+                string interstitialAddUnitId = "ca-app-pub-6864374918270893/2188976181";
+#endif
                 MainInterstitialAd = interstitialAdService.CreateAd(interstitialAddUnitId);
                 MainInterstitialAd.Load();
             }
@@ -63,7 +66,10 @@ namespace ColorValley
 #if IOS
                 string appOpenAddUnitId = "ca-app-pub-6864374918270893/6262661560";
 #else
-                string appOpenAddUnitId = "ca-app-pub-6864374918270893/3232269588";
+                //string appOpenAddUnitId = "ca-app-pub-6864374918270893/3232269588";
+                //secondary
+
+                string appOpenAddUnitId = "ca-app-pub-6864374918270893/1576917889";
 #endif
                 AppOpenAd = appOpenAdService.CreateAd(appOpenAddUnitId);
                 AppOpenAd.Load();

@@ -11,6 +11,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="ftp.redvalley-software.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/apps/color_valley" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>

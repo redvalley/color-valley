@@ -5,6 +5,13 @@
       <webServer id="fb1fd115-8387-41f6-b760-067aaf572ca1" name="XAMPP" url="http://localhost">
         <fileTransfer mountedRoot="D:\Server\XAMPP\htdocs" accessType="MOUNT" port="0" />
       </webServer>
+      <webServer id="386d9ae5-1b43-447a-af98-eef850dc4ddc" name="ftp.redvalley-software.com" url="http://ftp.redvalley-software.com">
+        <fileTransfer host="ftp.redvalley-software.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

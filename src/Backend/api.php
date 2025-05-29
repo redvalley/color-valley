@@ -23,10 +23,24 @@ $highScoreService = new HighScoreService();
 // Routing logic
 switch ($method) {
     case 'GET':
-        if ($resource === 'scores/overall') {
+        if ($resource === 'scores/top-overall') {
             $highScores = $highScoreService->getOverallTopScores();
             echo json_encode($highScores);
+            break;
         }
+
+        if ($resource === 'scores/top-current-month') {
+            $highScores = $highScoreService->getCurrentMonthTopScores();
+            echo json_encode($highScores);
+            break;
+        }
+
+        if ($resource === 'scores/top-today') {
+            $highScores = $highScoreService->getTodayTopScores();
+            echo json_encode($highScores);
+            break;
+        }
+
         break;
 
     case 'POST':

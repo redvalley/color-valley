@@ -6,27 +6,72 @@
              x:Class="ColorValley.HighScorePage"
              Title="{x:StaticExtension properties:Resources.HighScorePageTitle}"
              >
-    <ListView Margin="25" ItemsSource="{Binding .}">
-        <ListView.Header>
-            <HorizontalStackLayout x:DataType="models:HighScoreEntry" Spacing="0">
-                <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="" />
-                <Label WidthRequest="150" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreName}" />
-                <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreScore}" />
-                <Line></Line>
-            </HorizontalStackLayout>
-        </ListView.Header>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" ></RowDefinition>
+                <RowDefinition Height="*" ></RowDefinition>
+                <RowDefinition Height="Auto" ></RowDefinition>
+                <RowDefinition Height="*" ></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" 
+                   FontSize="25" FontAttributes="Bold" TextColor="White" Margin="10" HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"
+                   Text="{x:StaticExtension properties:Resources.TitleOnlineHighScore}"></Label>
+            <ListView Grid.Row="1" HeightRequest="600" Margin="25" ItemsSource="{Binding OnlineEntries}">
+                <ListView.Header>
                     <HorizontalStackLayout x:DataType="models:HighScoreEntry" Spacing="0">
-                        <Label WidthRequest="100" TextColor="White" FontSize="20" Text="{Binding RankOrTrophy}" />
-                        <Label WidthRequest="150" TextColor="White" FontSize="20" Text="{Binding Name}" />
-                        <Label WidthRequest="100" FontSize="20" TextColor="White" Text="{Binding Score}" />
+                        <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="" />
+                        <Label WidthRequest="150" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreName}" />
+                        <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreScore}" />
                         <Line></Line>
                     </HorizontalStackLayout>
-                </ViewCell>
-                
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout x:DataType="models:HighScoreEntry" Spacing="0">
+                                <Label WidthRequest="100" TextColor="White" FontSize="20" Text="{Binding RankOrTrophy}" />
+                                <Label WidthRequest="150" TextColor="White" FontSize="20" Text="{Binding Name}" />
+                                <Label WidthRequest="100" FontSize="20" TextColor="White" Text="{Binding Score}" />
+                                <Line></Line>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label 
+                FontSize="25" FontAttributes="Bold" TextColor="White" Margin="10" HorizontalTextAlignment="Center"
+                HorizontalOptions="Center"
+                Grid.Row="2" Text="{x:StaticExtension properties:Resources.TitleLocalHighScore}"></Label>
+            <ListView Grid.Row="3" HeightRequest="600" Margin="25" ItemsSource="{Binding LocalEntries}">
+                <ListView.Header>
+                    <HorizontalStackLayout x:DataType="models:HighScoreEntry" Spacing="0">
+                        <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="" />
+                        <Label WidthRequest="150" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreName}" />
+                        <Label WidthRequest="100" FontSize="25" FontAttributes="Bold" TextColor="White" Text="{x:StaticExtension properties:Resources.HeaderHighscoreScore}" />
+                        <Line></Line>
+                    </HorizontalStackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout x:DataType="models:HighScoreEntry" Spacing="0">
+                                <Label WidthRequest="100" TextColor="White" FontSize="20" Text="{Binding RankOrTrophy}" />
+                                <Label WidthRequest="150" TextColor="White" FontSize="20" Text="{Binding Name}" />
+                                <Label WidthRequest="100" FontSize="20" TextColor="White" Text="{Binding Score}" />
+                                <Line></Line>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+        
+    </ScrollView>
+    
 </ContentPage>

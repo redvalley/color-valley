@@ -9,6 +9,8 @@ namespace ColorValley;
 
 public partial class SplashPage : ContentPage
 {
+    private bool _isMainPageShowing = false;
+
 
     public SplashPage()
     {
@@ -36,6 +38,7 @@ public partial class SplashPage : ContentPage
 
     protected override async void OnAppearing()
     {
+        this._isMainPageShowing = false;
         base.OnAppearing();
 
 #if PRO_VERSION
@@ -105,11 +108,18 @@ public partial class SplashPage : ContentPage
         });
     }
 #endif
-    private static void ShowMainPage()
+    private void ShowMainPage()
     {
+        if (_isMainPageShowing)
+        {
+            return;
+        }
+
+        _isMainPageShowing = true;
+
         if (Application.Current?.Windows != null)
         {
-            Application.Current.Windows[0].Page = new NavigationPage(new MainPage());
+            Application.Current.Windows[0].Page = new CompanySplashPage();
         }
     }
 }

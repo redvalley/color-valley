@@ -52,7 +52,6 @@ class HighScoreService {
      *
      * @param HighScoreEntry $entry
      * @return HighScoreEntry|null Returns null if insertion fails or entry already exists
-     * @throws DuplicateEntryException When an identical entry already exists
      */
     public function addHighScore(HighScoreEntry $entry): ?HighScoreEntry {
         $generatedHash = $entry->generateHash();

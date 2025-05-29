@@ -307,4 +307,10 @@ You have {1} points!</value>
   <data name="SplashWelcome" xml:space="preserve">
     <value>Welcome to Color Valley Pro, the game starts immediately...</value>
   </data>
+  <data name="TitleLocalHighScore" xml:space="preserve">
+    <value>Local (Device)</value>
+  </data>
+  <data name="TitleOnlineHighScore" xml:space="preserve">
+    <value>Online</value>
+  </data>
 </root>

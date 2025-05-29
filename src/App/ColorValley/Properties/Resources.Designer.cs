@@ -418,5 +418,23 @@ namespace ColorValley.Properties {
                 return ResourceManager.GetString("SplashWelcomeAddExplaination", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local (Device).
+        /// </summary>
+        internal static string TitleLocalHighScore {
+            get {
+                return ResourceManager.GetString("TitleLocalHighScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        internal static string TitleOnlineHighScore {
+            get {
+                return ResourceManager.GetString("TitleOnlineHighScore", resourceCulture);
+            }
+        }
     }
 }

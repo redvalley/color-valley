@@ -313,4 +313,10 @@ du hast {1} Punkte!</value>
   <data name="SplashWelcome" xml:space="preserve">
     <value>Willkommen zu Color Valley Pro, die App startet sofort ...</value>
   </data>
+  <data name="TitleLocalHighScore" xml:space="preserve">
+    <value>Lokal (Gerät)</value>
+  </data>
+  <data name="TitleOnlineHighScore" xml:space="preserve">
+    <value>Online</value>
+  </data>
 </root>

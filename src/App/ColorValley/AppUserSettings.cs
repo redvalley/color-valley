@@ -14,7 +14,7 @@ public class AppUserSettings : UserSettings
     /// The list of high score entries
     /// </summary>
     [JsonInclude]
-    public IEnumerable<HighScoreEntry> HighScoreEntries { get; set; } = new List<HighScoreEntry>();
+    public IEnumerable<HighScoreEntry> LocalHighScoreEntries { get; set; } = new List<HighScoreEntry>();
 
     /// <summary>
     /// Determines if the game was started for the first time.
@@ -31,42 +31,43 @@ public class AppUserSettings : UserSettings
     /// <summary>
     /// Gets the current high score.
     /// </summary>
-    public HighScoreEntry? GetTopScore()
+    public HighScoreEntry? GetLocalTopScore()
     {
-        if (!HighScoreEntries.Any())
+        if (!LocalHighScoreEntries.Any())
         {
             return null;
         }
-        return HighScoreEntries.OrderByDescending(highScoreEntry => highScoreEntry.Score).First();
+        return LocalHighScoreEntries.OrderByDescending(highScoreEntry => highScoreEntry.Score).First();
     }
 
     /// <summary>
     /// Add the specified high score to the high score list.
     /// </summary>
     /// <param name="newHighScoreEntry">The new high score entry for which a new high score should be created.</param>
-    public void AddHighScore(HighScoreEntry newHighScoreEntry)
+    public bool AddLocalHighScore(HighScoreEntry newHighScoreEntry)
     {
         if (newHighScoreEntry.Score == 0)
         {
-            return;
+            return false;
         }
 
-        if (HighScoreEntries.Any(entry => entry.Score == newHighScoreEntry.Score && entry.Level == newHighScoreEntry.Level))
+        if (LocalHighScoreEntries.Any(entry => entry.Score == newHighScoreEntry.Score && entry.Level == newHighScoreEntry.Level))
         {
-            return;
+            return false;
         }
 
-        var currentHighScoreEntryList = HighScoreEntries.ToList();
+        var currentHighScoreEntryList = LocalHighScoreEntries.ToList();
         currentHighScoreEntryList.Add(newHighScoreEntry);
 
         if (currentHighScoreEntryList.Count > MaxHighScoreEntries)
         {
-            HighScoreEntries = currentHighScoreEntryList.OrderByDescending(highScoreEntry => highScoreEntry.Score).Take(20);
+            LocalHighScoreEntries = currentHighScoreEntryList.OrderByDescending(highScoreEntry => highScoreEntry.Score).Take(20);
         }
         else
         {
-            HighScoreEntries = currentHighScoreEntryList.OrderByDescending(highScoreEntry => highScoreEntry.Score).ToList();
+            LocalHighScoreEntries = currentHighScoreEntryList.OrderByDescending(highScoreEntry => highScoreEntry.Score).ToList();
         }
-        
+
+        return true;
     }
 }

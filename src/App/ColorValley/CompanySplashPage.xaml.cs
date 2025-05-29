@@ -14,7 +14,7 @@ public partial class CompanySplashPage : ContentPage
         await Task.Delay(2000);
         if (Application.Current?.Windows != null)
         {
-            Application.Current.Windows[0].Page = new SplashPage();
+            Application.Current.Windows[0].Page = new NavigationPage(new MainPage());
         }
 
     }
