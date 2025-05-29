@@ -740,13 +740,13 @@ public class MainPage : ContentPage
             _gameInfoLabel.Animate("GameInfoLabelCountDown", d =>
             {
                 _gameInfoLabel.FontSize += 1;
-            }, 0, 1000, 10, 1000, finished: (d, b) =>
+            }, 0, 1000, 10, 1000, finished: async (d, b) =>
             {
                 _gameInfoLabel.Text = string.Empty;
                 _isRunning = false;
                 this._gameTimer.Tick -= GameTimerOnTick;
                 this._timeTimer.Tick -= TimeTimerOnTick;
-                this.AskTryAgain();
+                await this.AskTryAgain();
             });
         }
     }
