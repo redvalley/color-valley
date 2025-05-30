@@ -7,6 +7,7 @@ using ColorValley.Settings;
 using iJus.Core.Settings;
 using Microsoft.Maui.Controls.Shapes;
 using Plugin.Maui.Audio;
+using Plugin.AdMob.Services;
 
 namespace ColorValley;
 
@@ -67,15 +68,15 @@ public class MainPage : ContentPage
 
         InitializeSound();
         InitializeGameUi();
-
-        UpdateGame();
     }
 
     protected override async void OnAppearing()
     {
-        await AddLauncherOverlay(false);
+        if (!_isRunning)
+        {
+            await AddLauncherOverlay(false);
+        }
     }
-
 
     private void InitializeTime()
     {
@@ -174,7 +175,7 @@ public class MainPage : ContentPage
         {
             if (_isRunning)
             {
-                UpdateGame();
+                UpdateGame(false);
             }
         };
         _gameGrid.GestureRecognizers.Add(swipeGestureRecognizer);
@@ -408,6 +409,10 @@ public class MainPage : ContentPage
     private async Task AddLauncherOverlay(bool levelDone)
     {
         _mainGrid.Remove(_launchOverlayBorder);
+        _startOrRestartButton.Clicked -= StartOrRestartButtonOnClicked;
+        _nextLevelButton.Clicked -= NextLevelButtonOnClicked;
+        _helpOverlayButton.Clicked -= HelpButtonOnClicked;
+
         _launcherOverlayGrid.Clear();
 
         AppUserSettings currentSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
@@ -644,7 +649,7 @@ public class MainPage : ContentPage
     {
         UpdateLevel(!nextLevel);
 
-        UpdateGame();
+        UpdateGame(false);
 
         AppUserSettings appUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
 
@@ -771,14 +776,17 @@ public class MainPage : ContentPage
 
     private void GameTimerOnTick(object? sender, EventArgs e)
     {
-        UpdateGame();
+        bool showGameGridMoveOutAnimation = _levelSettings.GameTimerIntervallSeconds > 1;
+        if (showGameGridMoveOutAnimation)
+        {
+            UpdateGame(true);
+        }
     }
 
-    private void UpdateGame()
+    private void UpdateGame(bool showGameGridMoveOutAnimation)
     {
-        if (_levelSettings.GameTimerIntervallSeconds > 1)
-        {
-            RemoveOldGameGrid();
+        if(showGameGridMoveOutAnimation){
+            AnimateGameGridMoveOut();
         }
 
         UpdateGameGridRowsAndColumns();
@@ -789,7 +797,7 @@ public class MainPage : ContentPage
         this._comboHit = 0;
     }
 
-    private void RemoveOldGameGrid()
+    private void AnimateGameGridMoveOut()
     {
         _gameGrid.Animate("Remove Old Game Grid", d =>
         {

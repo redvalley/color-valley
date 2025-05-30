@@ -133,48 +133,110 @@
     <value>🏃‍♂️‍➡️ Next Level</value>
   </data>
   <data name="DataPrivacyMainText" xml:space="preserve">
-    <value>Red Valley Software GmbH Privacy Policy for Color Valley
+    <value>Privacy Policy of Red Valley Software GmbH for the "Color Valley" App
+Protecting your personal data is important to us. This privacy policy informs you about the processing of your personal data in connection with the use of the "Color Valley" app in accordance with applicable data protection laws:
+- EU General Data Protection Regulation (GDPR)
+- Revised Swiss Federal Act on Data Protection (revFADP)
+- UK GDPR in the United Kingdom
 
-The protection of your personal data is important to us. This privacy policy
-informs you about which data is collected and processed when you use Color Valley.
+The app is available in two versions: an ad-supported version and an ad-free version. The processing of personal data is carried out in accordance with the General Data Protection Regulation (GDPR).
 
 1. Controller
+
 The controller responsible for data processing in connection with the use of this app is:
 Red Valley Software GmbH
-Am Pumperhölzl 12, 84323 Massing
+Am Pumperhölzl 12
+84323 Massing, Germany
 Email: rupert.eder@redvalley-software.com
 Website: www.redvalley-software.com
 
-2. Collection and Processing of Personal Data
+2. Types of Data Processed
 
-Our paid pro version of the app can generally be used without collecting personal data. The only exception is if you contact us via the feedback function.
-Feedback function: rupert.eder@redvalley-software.com
-If you send us feedback by email, your email address will be processed to answer your inquiry. This data is processed based on your voluntary consent
-in accordance with Art. 6 (1) (a) GDPR.
+The following personal data may be processed when using the app:
+- Device information (e.g., model, operating system)
+- IP address
+- Location data (if used)
+- Usage behavior (e.g., clicks, time spent)
+- Advertising IDs (e.g., IDFA, GAID) – only in the ad-supported version
+- Username (when publishing high scores)
+- Feedback via email
 
-We also offer the option of playing with advertising for free via the standard version of the app. Advertising in our apps is delivered by Google AdMob and its partners. Personal data such as IP addresses, device identifiers, etc. may be used to improve and finance the advertising offer. Processing may take place outside the EU/EEA. We would like to point out that data transmission over the Internet may have security gaps. Complete protection of data from access by third parties is not possible.
+3. Purposes of Data Processing
 
-3. Sharing of data
-Your personal data will not be shared with third parties.
+Your personal data is processed for the following purposes:
+- To provide app functionality
+- To display personalized advertising (only in the ad-supported version)
+- To analyze and improve the app
+- To publish high scores
+- To process feedback submitted via email
 
-4. Storage and deletion of data
-Personal data that you send us via email will only be stored for as long as necessary to process your request. After that, it will be deleted unless there are legal retention obligations.
+4. Legal Bases for Data Processing
 
-5. Your rights
-You have the right to:
-• Information about the data stored about you (Art. 15 GDPR)
-• Correction of incorrect data (Art. 16 GDPR)
-• Deletion of your data (Art. 17 GDPR)
-• Restriction of processing (Art. 18 GDPR)
-• Data portability (Art. 20 GDPR)
-• Revocation of consent granted with future effect (Art. 7 (3) GDPR)
-• Complaint to a supervisory authority if you believe that the processing of your data violates data protection regulations (Art. 77 GDPR).
+Your personal data is processed based on the following legal grounds:
+- Consent (Art. 6(1)(a) GDPR / Art. 6(6) revFADP / Art. 6 UK GDPR)
+- Contract performance (Art. 6(1)(b) GDPR / UK GDPR)
+- Legitimate interest, where permitted (e.g., for abuse prevention)
 
-6. Changes to the Privacy Policy
-This Privacy Policy may be updated from time to time. The most current version is available in the app.
-For questions about data protection, please contact us at:
-rupert.eder@redvalley-software.com
-This Privacy Policy complies with the requirements of the GDPR and the Apple App Store/Google Playstore guidelines for apps that process minimal data.</value>
+5. Advertising and Tracking (Ad-Supported Version Only)
+
+In the ad-supported version of the app, we use the following third-party providers and tools to display ads:
+- Google AdMob
+- Facebook Audience Network
+- AppLovin
+
+Personal data such as advertising IDs, IP addresses, and usage behavior may be processed. This processing only occurs with your explicit consent in accordance with Art. 6(1)(a) GDPR.
+No advertising-related data processing takes place in the ad-free version of the app.
+
+6. Consent Management
+
+We obtain your consent for data processing via a consent management tool. You can withdraw your consent at any time via the button "Remove Consent" above.
+
+7. Username and High Score
+
+If you choose to provide a username to publicly display your high score, this name will be stored and published along with your game result. Providing a username is voluntary. Processing is based on your consent in accordance with Art. 6(1)(a) GDPR. You can withdraw your consent at any time by deleting the name or contacting us.
+
+8. Feedback via Email
+
+If you send us feedback via email, personal data such as your email address and the content of your message may be processed. Processing is based on your consent in accordance with Art. 6(1)(a) GDPR. Your data will be used solely to process your feedback and will be deleted afterward unless legal retention obligations apply.
+
+9. Data Sharing and Transfers
+
+Data is only shared with third parties if necessary for the stated purposes or if you have given your consent. Transfers to third countries (e.g., the USA) only occur in compliance with applicable legal requirements:
+- EU: Standard Contractual Clauses or adequacy decision
+- Switzerland: Adequacy decision or appropriate safeguards (Art. 16 ff. revFADP)
+- UK: UK IDTA or adequacy decision
+
+10. Data Retention
+
+Your personal data is stored only as long as necessary to fulfill the purposes mentioned above or as required by legal retention obligations. After the retention period, your data will be deleted or anonymized.
+
+11. Your Rights
+
+Depending on your jurisdiction, you have the following rights:
+- Access
+- Rectification
+- Erasure
+- Restriction of processing
+- Data portability
+- Objection
+- Withdrawal of consent
+
+To exercise your rights, please contact us at:
+Email: rupert.eder@redvalley-software.com
+
+12. UK GDPR
+
+For users in the United Kingdom (UK), the UK GDPR applies in addition to the EU GDPR. It is based on the EU GDPR but adapted to UK law and supplemented by the Data Protection Act 2018.
+Your personal data will only be shared with third parties if necessary for the purposes mentioned above or if you have given explicit consent. Transfers of your data outside the UK only occur in compliance with legal requirements and appropriate safeguards (e.g., Standard Contractual Clauses or UK IDTA).
+
+13. Technical and Organizational Measures (TOMs)
+
+We implement appropriate technical and organizational measures (TOMs) to protect your data against unauthorized access, loss, or misuse.
+
+14. Versioning
+
+Effective date: May 2025
+</value>
   </data>
   <data name="DataPrivacyPageTitle" xml:space="preserve">
     <value>Data privacy</value>
@@ -189,7 +251,7 @@ This Privacy Policy complies with the requirements of the GDPR and the Apple App
     <value>Help</value>
   </data>
   <data name="HelpTextExampleMultiMatch" xml:space="preserve">
-    <value>In this example, even multiple boxes can be selected (all marked yellow boxes):</value>
+    <value>In this example, even multiple boxes can be selected (all marked green boxes):</value>
   </data>
   <data name="HelpTextExampleNoMatch" xml:space="preserve">
     <value>In the next example, there is no matching box. If an incorrect box is selected, points are deducted:</value>
@@ -312,5 +374,24 @@ You have {1} points!</value>
   </data>
   <data name="TitleOnlineHighScore" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ButtonTextDataPrivacyConsentRemove" xml:space="preserve">
+    <value>Remove Consent</value>
+  </data>
+  <data name="AlertTitleDataPrivacyConsentRemove" xml:space="preserve">
+    <value>⚠️ Remove data privacy consent?</value>
+    <comment>⚠️ Remove data privacy consent widerrufen?</comment>
+  </data>
+  <data name="AlertMessageDataPrivacyConsentRemove" xml:space="preserve">
+    <value>Do you really want to withdraw your consent to data protection? This app can only be fully used if data protection consent is accepted.</value>
+  </data>
+  <data name="ButtonOkText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ButtonCancelText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="HelpTextHint" xml:space="preserve">
+    <value>Note: Swiping left or right will generate a new arrangement 😉</value>
   </data>
 </root>

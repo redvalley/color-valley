@@ -133,55 +133,117 @@
     <value>🏃‍♂️‍➡️ Nächstes Level</value>
   </data>
   <data name="DataPrivacyMainText" xml:space="preserve">
-    <value>Datenschutzerklärung der Red Valley Software GmbH für Color Valley
+    <value>Datenschutzerklärung der Red Valley Software GmbH für die "App Color Valley"
 
-Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Diese Datenschutzerklärung
-informiert Sie darüber, welche Daten im Rahmen der Nutzung von Color Valley erhoben und
-verarbeitet werden.
+Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. 
+Diese Datenschutzerklärung informiert Sie über die Verarbeitung Ihrer personenbezogenen Daten im Zusammenhang mit der Nutzung der App „Color Valley“ 
+gemäß den geltenden Datenschutzgesetzen:
+
+- Datenschutz-Grundverordnung (DSGVO) der EU
+- revidiertes Datenschutzgesetz (revDSG) der Schweiz
+- UK GDPR im Vereinigten Königreich
+
+Die App ist in zwei Versionen verfügbar: eine werbefinanzierte Version und eine werbefreie Version. 
+Die Verarbeitung personenbezogener Daten erfolgt gemäß der Datenschutz-Grundverordnung (DSGVO).
 
 1. Verantwortlicher
+
 Verantwortlich für die Datenverarbeitung im Zusammenhang mit der Nutzung dieser App ist:
 Red Valley Software GmbH
-Am Pumperhölzl 12, 84323 Massing
+Am Pumperhölzl 12
+84323 Massing
 E-Mail: rupert.eder@redvalley-software.com
 Webseite: www.redvalley-software.com
 
-2. Erhebung und Verarbeitung personenbezogener Daten
 
-Unsere kostenpflichtige Pro-Version der App kann grundsätzlich genutzt werden, ohne dass personenbezogene Daten erhoben werden.  Eine Ausnahme besteht lediglich, wenn Sie uns über die Feedback-Funktion kontaktieren.
-Feedback-Funktion: rupert.eder@redvalley-software.com
-Wenn Sie uns Feedback per E-Mail senden, wird Ihre E-Mail-Adresse verarbeitet, um Ihre Anfrage
-zu beantworten. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer freiwilligen Einwilligung
-gemäß Art. 6 Abs. 1 lit. a DSGVO.
+2. Verarbeitete Datenarten
 
-Wir bieten über die Standard Version der App ansonsten auch die Möglichkeit kostenlos mit Werbung zu spielen. Die Werbung in unseren Apps wird von Google AdMob und dessen Partnern ausgeliefert. Es werden dabei ggf. personenbezogene Daten wie IP-Adressen, Gerätekennung etc. genutzt um das Werbeangebot zu verbessern und zu finanzieren. Die Verarbeitung kann ausserhalb der EU/EWR erfolgen. Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. 
+Im Rahmen der Nutzung der App werden folgende personenbezogene Daten verarbeitet:
+- Geräteinformationen (z. B. Modell, Betriebssystem)
+- IP-Adresse
+- Standortdaten (falls verwendet)
+- Nutzungsverhalten (z. B. Klicks, Verweildauer)
+- Werbe-IDs (z. B. IDFA, GAID) - nur in der werbefinanzierten Version
+- Benutzername (bei Veröffentlichung von Highscores)
+- Feedback per E-Mail
 
-3. Weitergabe von Daten
-Es erfolgt keine Weitergabe Ihrer personenbezogenen Daten an Dritte.
+3. Zwecke der Datenverarbeitung
 
-4. Speicherung und Löschung von Daten
-Personenbezogene Daten, die Sie uns per E-Mail übermitteln, werden nur so lange gespeichert, wie
-es zur Bearbeitung Ihrer Anfrage erforderlich ist. Danach werden sie gelöscht, sofern keine
-gesetzlichen Aufbewahrungspflichten bestehen.
+Die Verarbeitung Ihrer personenbezogenen Daten erfolgt zu folgenden Zwecken:
+- Zur Bereitstellung der App-Funktionen
+- Zur Ausspielung personalisierter Werbung (nur in der werbefinanzierten Version)
+- Zur Analyse und Verbesserung der App
+- Zur Veröffentlichung von Highscores
+- Zur Bearbeitung von Feedback, das per E-Mail übermittelt wird
 
-5. Ihre Rechte
-Sie haben das Recht auf:
-• Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)
-• Berichtigung unrichtiger Daten (Art. 16 DSGVO)
-• Löschung Ihrer Daten (Art. 17 DSGVO)
-• Einschränkung der Verarbeitung (Art. 18 DSGVO)
-• Datenübertragbarkeit (Art. 20 DSGVO)
-• Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)
-• Beschwerde bei einer Aufsichtsbehörde, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer
-Daten gegen Datenschutzbestimmungen verstößt (Art. 77 DSGVO).
+4. Rechtsgrundlagen der Datenverarbeitung
 
-6. Änderungen der Datenschutzerklärung
-Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die jeweils aktuelle Version ist
-in der App verfügbar.
-Bei Fragen zum Datenschutz kontaktieren Sie uns bitte unter:
-rupert.eder@redvalley-software.com
-Diese Datenschutzerklärung erfüllt die Anforderungen der DSGVO und der Apple App Store / Google Play Store -
-Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
+Die Verarbeitung Ihrer personenbezogenen Daten erfolgt auf folgenden Rechtsgrundlagen:
+- Einwilligung (Art. 6 Abs. 1 lit. a DSGVO / Art. 6 Abs. 6 revDSG / Art. 6 UK GDPR)
+- Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO / UK GDPR)
+- Berechtigtes Interesse, sofern zulässig (z. B. zur Missbrauchsprävention)
+
+5. Werbung und Tracking (nur in der werbefinanzierten Version)
+
+In der werbefinanzierten Version der App verwenden wir folgende Drittanbieter und Tools zur Ausspielung von Werbung:
+- Google AdMob
+- Facebook Audience Network
+- AppLovin
+Dabei können personenbezogene Daten wie Werbe-IDs, IP-Adressen und Nutzungsverhalten verarbeitet werden. Diese Verarbeitung erfolgt nur mit Ihrer ausdrücklichen Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.
+In der werbefreien Version der App findet keine werbebezogene Datenverarbeitung statt.
+
+6. Einwilligungsmanagement
+
+Ihre Einwilligung zur Datenverarbeitung holen wir über ein Consent-Management-Tool ein. Sie können Ihre Einwilligung jederzeit über den Button "Einwilligung widerrufen" ganz oben widerrufen.
+
+7. Benutzername und Highscore
+
+Wenn Sie sich entscheiden, einen Benutzernamen anzugeben, um Ihren Highscore öffentlich anzuzeigen, wird dieser Name zusammen mit Ihrem Spielergebnis gespeichert und veröffentlicht. Die Angabe erfolgt freiwillig. Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie den Namen löschen oder uns kontaktieren.
+
+8. Feedback per E-Mail
+
+Wenn Sie uns Feedback per E-Mail senden, können dabei personenbezogene Daten wie Ihre E-Mail-Adresse und der Inhalt Ihrer Nachricht verarbeitet werden. Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Ihre Daten werden ausschließlich zur Bearbeitung Ihres Feedbacks verwendet und anschließend gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.
+
+9. Datenweitergabe und -übermittlung
+
+Eine Weitergabe an Dritte erfolgt nur, wenn dies zur Zweckerfüllung notwendig ist oder Sie eingewilligt haben. Eine Übermittlung in Drittländer (z. B. USA) erfolgt nur unter Einhaltung der jeweiligen gesetzlichen Anforderungen:
+
+- EU: Standardvertragsklauseln oder Angemessenheitsbeschluss
+- Schweiz: Angemessenheitsentscheid oder geeignete Garantien (Art. 16 ff. revDSG)
+- UK: UK IDTA oder Angemessenheitsbeschluss
+
+10. Speicherdauer
+
+Ihre personenbezogenen Daten werden nur so lange gespeichert, wie es für die Erfüllung der oben genannten Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Nach Ablauf der Speicherfristen werden Ihre Daten gelöscht oder anonymisiert.
+
+11. Ihre Rechte
+Sie haben je nach Rechtsraum folgende Rechte:
+
+- Auskunft
+- Berichtigung
+- Löschung
+- Einschränkung der Verarbeitung
+- Datenübertragbarkeit
+- Widerspruch
+- Widerruf erteilter Einwilligungen
+
+Zur Ausübung Ihrer Rechte kontaktieren Sie uns bitte unter:
+E-Mail: rupert.eder@redvalley-software.com
+
+
+Kontakt:
+Bei Fragen zur Verarbeitung Ihrer personenbezogenen Daten oder zur Wahrnehmung Ihrer Rechte können Sie uns unter folgender Adresse kontaktieren:
+E-Mail: rupert.eder@redvalley-software.com
+
+12. UK GDPR
+Für Nutzer im Vereinigten Königreich (UK) gilt zusätzlich zur DSGVO die UK GDPR. Diese basiert auf der EU-DSGVO, wurde jedoch an britisches Recht angepasst und durch den Data Protection Act 2018 ergänzt. Die Verarbeitung personenbezogener Daten erfolgt gemäß der UK GDPR und den entsprechenden nationalen Datenschutzgesetzen.
+Ihre personenbezogenen Daten werden nur dann an Dritte weitergegeben, wenn dies zur Erfüllung der oben genannten Zwecke erforderlich ist oder Sie ausdrücklich eingewilligt haben. Eine Übermittlung Ihrer Daten in Länder außerhalb des UK erfolgt nur unter Einhaltung der gesetzlichen Vorgaben und geeigneter Schutzmaßnahmen (z. B. Standardvertragsklauseln oder UK IDTA).
+
+13. Technische und organisatorische Maßnahmen (TOMs)
+Wir treffen geeignete technische und organisatorische Maßnahmen (TOMs), um Ihre Daten vor unbefugtem Zugriff, Verlust oder Missbrauch zu schützen.
+
+14. Versionierung
+Stand: Mai 2025</value>
   </data>
   <data name="DataPrivacyPageTitle" xml:space="preserve">
     <value>Datenschutz</value>
@@ -196,7 +258,7 @@ Richtlinien für Apps, die nur minimale Daten verarbeiten.</value>
     <value>Hilfe</value>
   </data>
   <data name="HelpTextExampleMultiMatch" xml:space="preserve">
-    <value>In diesem Beispiel können sogar mehrere Kästchen ausgewählt werden (alle markierten Gelben Kästchen): </value>
+    <value>In diesem Beispiel können sogar mehrere Kästchen ausgewählt werden (alle markierten grünen Kästchen): </value>
   </data>
   <data name="HelpTextExampleNoMatch" xml:space="preserve">
     <value>Im nächsten Beispiel gibt es kein passendes Kästchen. Wird dennoch ein falsches Kästchen ausgewählt, so werden Punkte abgezogen:</value>
@@ -318,5 +380,23 @@ du hast {1} Punkte!</value>
   </data>
   <data name="TitleOnlineHighScore" xml:space="preserve">
     <value>Online</value>
+  </data>
+  <data name="ButtonTextDataPrivacyConsentRemove" xml:space="preserve">
+    <value>Einwilligung widerrufen</value>
+  </data>
+  <data name="AlertTitleDataPrivacyConsentRemove" xml:space="preserve">
+    <value>⚠️ Datenschutz Einwilligung widerrufen?</value>
+  </data>
+  <data name="AlertMessageDataPrivacyConsentRemove" xml:space="preserve">
+    <value>Soll die Datenschutz Einwilligung wirklich widerrufen werden? Diese App kann nur in vollem Umfang genutzt werden, wenn die Datenschutz Einwilligung akzeptiert wird.</value>
+  </data>
+  <data name="ButtonOkText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ButtonCancelText" xml:space="preserve">
+    <value>Abbruch</value>
+  </data>
+  <data name="HelpTextHint" xml:space="preserve">
+    <value>Hinweis: Durch wischen nach links oder rechts kann eine neue Anordnung erzeugt werden 😉</value>
   </data>
 </root>

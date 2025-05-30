@@ -10,7 +10,11 @@ namespace ColorValley;
 public partial class SplashPage : ContentPage
 {
     private bool _isMainPageShowing = false;
+    private bool _isConsentInfoFormShown = false;
 
+#if !PRO_VERSION
+    private readonly IAdConsentService? _adConsentService = null;
+#endif
 
     public SplashPage()
     {
@@ -33,21 +37,29 @@ public partial class SplashPage : ContentPage
 
         this.ImageColorValleyPro.IsVisible = false;
         this.ImageColorValley.IsVisible = true;
+        _adConsentService = IPlatformApplication.Current?.Services.GetService<IAdConsentService>();
 #endif
     }
 
     protected override async void OnAppearing()
     {
         this._isMainPageShowing = false;
+        this._isConsentInfoFormShown = false;
         base.OnAppearing();
 
-#if PRO_VERSION
-        await ShowMainPageForProVersion();
-#else
-    await ShowMainPageAfterAd();
-#endif
+#if !PRO_VERSION
+        if (_adConsentService != null && !_adConsentService.CanRequestAds())
+        {
+            _adConsentService.LoadAndShowConsentFormIfRequired();
+        }
 
+        await ShowMainPageAfterAd();
+#else
+        await ShowMainPageForProVersion();
+#endif
     }
+
+
 
 #if !PRO_VERSION
     private async Task ShowMainPageAfterAd()
@@ -70,7 +82,6 @@ public partial class SplashPage : ContentPage
                     {
                         App.IsInterstitialAdShowing = true;
                         App.MainInterstitialAd.Show();
-                        ShowMainPage();
                     });
                 }
                 else
@@ -84,6 +95,7 @@ public partial class SplashPage : ContentPage
     private void MainInterstitialAdOnOnAdDismissed(object? sender, EventArgs e)
     {
         App.IsInterstitialAdShowing = false;
+        ShowMainPage();
     }
 
     private void MainInterstitialAdOnOnAdFailedToShow(object? sender, IAdError e)

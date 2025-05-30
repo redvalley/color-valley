@@ -16,6 +16,13 @@ public class AppUserSettings : UserSettings
     [JsonInclude]
     public IEnumerable<HighScoreEntry> LocalHighScoreEntries { get; set; } = new List<HighScoreEntry>();
 
+
+    /// <summary>
+    /// The list of high score entries
+    /// </summary>
+    [JsonInclude]
+    public IEnumerable<HighScoreEntry> LastOnlineHighScoreEntries { get; set; } = new List<HighScoreEntry>();
+
     /// <summary>
     /// Determines if the game was started for the first time.
     /// </summary>

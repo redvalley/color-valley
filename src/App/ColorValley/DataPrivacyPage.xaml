@@ -6,7 +6,11 @@
              Title="{x:Static resources:Resources.DataPrivacyPageTitle}"
              >
     <ScrollView>
-        <Label Margin="20" Text="{x:Static resources:Resources.DataPrivacyMainText }" TextColor="White"></Label>
+        <VerticalStackLayout>
+            <Button Margin="20" Text="{x:Static resources:Resources.ButtonTextDataPrivacyConsentRemove }" Clicked="RemoveConsentButton_OnClicked" TextColor="Black" BackgroundColor="White"></Button>
+            <Label Margin="20" Text="{x:Static resources:Resources.DataPrivacyMainText }" TextColor="White"></Label>
+        </VerticalStackLayout>
+        
     </ScrollView>
     
 </ContentPage>

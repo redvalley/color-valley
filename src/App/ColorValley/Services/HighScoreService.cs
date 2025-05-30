@@ -27,7 +27,6 @@ namespace ColorValley.Services
 
             AppUserSettings currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>()??new AppUserSettings();
 
-
             NetworkAccess accessType = Connectivity.Current.NetworkAccess;
 
             if (accessType == NetworkAccess.Internet)
@@ -104,35 +103,54 @@ namespace ColorValley.Services
 
         public async Task<GetOverallScoresResult> GetOverallScores()
         {
-            try
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            AppUserSettings currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
+
+            if (accessType == NetworkAccess.Internet)
             {
-                HttpResponseMessage response = await _client.GetAsync(AppSettings.HighScoreServiceUrl + "scores/top-overall");
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrEmpty(responseBody))
+                try
+                {
+                    HttpResponseMessage response =
+                        await _client.GetAsync(AppSettings.HighScoreServiceUrl + "scores/top-overall");
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    if (string.IsNullOrEmpty(responseBody))
+                    {
+                        return new GetOverallScoresResult()
+                        {
+                            Entries = new List<HighScoreEntry>()
+                        };
+                    }
+
+                    var onlineEntries = JsonSerializer.Deserialize<IEnumerable<HighScoreEntry>>(responseBody) ??
+                                        new List<HighScoreEntry>();
+
+
+                    currentUserSettings.LastOnlineHighScoreEntries = onlineEntries.ToList();
+                    currentUserSettings.SaveEncrypted();
+
+                    return new GetOverallScoresResult()
+                    {
+                        Entries = onlineEntries
+                    };
+
+
+                }
+                catch (HttpRequestException e)
                 {
                     return new GetOverallScoresResult()
                     {
-                        Entries = new List<HighScoreEntry>()
+                        Entries = currentUserSettings?.LastOnlineHighScoreEntries??new List<HighScoreEntry>(),
+                        ErrorMessage = e.Message
                     };
                 }
-
-                return new GetOverallScoresResult()
-                {
-                    Entries = JsonSerializer.Deserialize<IEnumerable<HighScoreEntry>>(responseBody) ??
-                              new List<HighScoreEntry>()
-                };
-
-
             }
-            catch (HttpRequestException e)
+
+            return new GetOverallScoresResult()
             {
-                return new GetOverallScoresResult()
-                {
-                    Entries = new List<HighScoreEntry>(),
-                    ErrorMessage = e.Message
-                };
-            }
+                Entries = currentUserSettings?.LastOnlineHighScoreEntries ?? new List<HighScoreEntry>(),
+            };
         }
 
     }

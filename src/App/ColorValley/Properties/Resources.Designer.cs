@@ -61,6 +61,51 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you really want to withdraw your consent to data protection? This app can only be fully used if data protection consent is accepted..
+        /// </summary>
+        internal static string AlertMessageDataPrivacyConsentRemove {
+            get {
+                return ResourceManager.GetString("AlertMessageDataPrivacyConsentRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚠️ Remove data privacy consent?.
+        /// </summary>
+        internal static string AlertTitleDataPrivacyConsentRemove {
+            get {
+                return ResourceManager.GetString("AlertTitleDataPrivacyConsentRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string ButtonCancelText {
+            get {
+                return ResourceManager.GetString("ButtonCancelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string ButtonOkText {
+            get {
+                return ResourceManager.GetString("ButtonOkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Consent.
+        /// </summary>
+        internal static string ButtonTextDataPrivacyConsentRemove {
+            get {
+                return ResourceManager.GetString("ButtonTextDataPrivacyConsentRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data privacy.
         /// </summary>
         internal static string ButtonTextDataPrivacyDeclaration {
@@ -106,19 +151,13 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Red Valley Software GmbH Privacy Policy for Color Valley
+        ///   Looks up a localized string similar to Privacy Policy of Red Valley Software GmbH for the &quot;Color Valley&quot; App
+        ///Protecting your personal data is important to us. This privacy policy informs you about the processing of your personal data in connection with the use of the &quot;Color Valley&quot; app in accordance with applicable data protection laws:
+        ///- EU General Data Protection Regulation (GDPR)
+        ///- Revised Swiss Federal Act on Data Protection (revFADP)
+        ///- UK GDPR in the United Kingdom
         ///
-        ///The protection of your personal data is important to us. This privacy policy
-        ///informs you about which data is collected and processed when you use Color Valley.
-        ///
-        ///1. Controller
-        ///The controller responsible for data processing in connection with the use of this app is:
-        ///Red Valley Software GmbH
-        ///Am Pumperhölzl 12, 84323 Massing
-        ///Email: rupert.eder@redvalley-software.com
-        ///Website: www.redvalley-software.com
-        ///
-        ///2. Collection and Processing of Personal [rest of string was truncated]&quot;;.
+        ///The app is available in two versions: an ad-supported version and an  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DataPrivacyMainText {
             get {
@@ -163,7 +202,7 @@ namespace ColorValley.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In this example, even multiple boxes can be selected (all marked yellow boxes):.
+        ///   Looks up a localized string similar to In this example, even multiple boxes can be selected (all marked green boxes):.
         /// </summary>
         internal static string HelpTextExampleMultiMatch {
             get {
@@ -195,6 +234,15 @@ namespace ColorValley.Properties {
         internal static string HelpTextGameGoal {
             get {
                 return ResourceManager.GetString("HelpTextGameGoal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: Swiping left or right will generate a new arrangement 😉.
+        /// </summary>
+        internal static string HelpTextHint {
+            get {
+                return ResourceManager.GetString("HelpTextHint", resourceCulture);
             }
         }
         

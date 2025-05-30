@@ -23,6 +23,7 @@
             <Label Margin="20, 50, 20, 20" Text="{x:Static resources:Resources.HelpTextExampleMultiMatch }" TextColor="White" />
             <Image Source="help_multi_match.png" />
 
+            <Label Margin="20, 50, 20, 20" Text="{x:Static resources:Resources.HelpTextHint }" TextColor="White" />
         </VerticalStackLayout>
     </ScrollView>
     

@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using Plugin.AdMob.Configuration;
 #if !PRO_VERSION
 using Plugin.AdMob;
 #endif
@@ -10,11 +11,15 @@ namespace ColorValley
     {
         public static MauiApp CreateMauiApp()
         {
+#if DEBUG
+            AdConfig.UseTestAdUnitIds = true;
+            
+#endif
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<ColorValley.App>()
 #if !PRO_VERSION
-                .UseAdMob()
+                .UseAdMob(automaticallyAskForConsent: false)
 #endif
                 .ConfigureFonts(fonts =>
                 {

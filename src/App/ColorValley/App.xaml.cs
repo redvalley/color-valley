@@ -25,6 +25,7 @@ namespace ColorValley
         /// </summary>
         public IAppOpenAd? AppOpenAd { get; set; }
 #endif
+
         public App()
         {
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace ColorValley
             if (interstitialAdService != null)
             {
                 
-                #if IOS
+#if IOS
                 string interstitialAddUnitId = "ca-app-pub-6864374918270893/1009817964";
 #else
                 //string interstitialAddUnitId = "ca-app-pub-6864374918270893/4065633825";
@@ -75,7 +76,6 @@ namespace ColorValley
                 AppOpenAd.Load();
             }
         }
-
 
         private void MainWindowOnResumed(object? sender, EventArgs e)
         {
