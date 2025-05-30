@@ -7,7 +7,9 @@ using ColorValley.Settings;
 using iJus.Core.Settings;
 using Microsoft.Maui.Controls.Shapes;
 using Plugin.Maui.Audio;
+#if !PRO_VERSION
 using Plugin.AdMob.Services;
+#endif
 
 namespace ColorValley;
 
@@ -657,8 +659,10 @@ public class MainPage : ContentPage
         appUserSettings.SaveEncrypted();
 
         _mainGrid.Remove(_launchOverlayBorder);
+        
         if (!nextLevel)
         {
+            await SaveScore();
             _currentScore = 0;
         }
 
@@ -758,6 +762,21 @@ public class MainPage : ContentPage
 
     private async Task AskTryAgain()
     {
+        if (_levelSettings.Level == LevelSettings.LastLevel)
+        {
+            await SaveScore();
+        }
+
+        await AddLauncherOverlay(true);
+    }
+
+    private async Task SaveScore()
+    {
+        if (_currentScore == 0)
+        {
+            return;
+        }
+
         AppUserSettings currentUserSettings = UserSettings.LoadDecrypted<AppUserSettings>() ?? new AppUserSettings();
 
 
@@ -767,20 +786,13 @@ public class MainPage : ContentPage
             Score = _currentScore,
             Level = _levelSettings.Level
         });
-
-
-
-
-        await AddLauncherOverlay(true);
     }
 
     private void GameTimerOnTick(object? sender, EventArgs e)
     {
         bool showGameGridMoveOutAnimation = _levelSettings.GameTimerIntervallSeconds > 1;
-        if (showGameGridMoveOutAnimation)
-        {
-            UpdateGame(true);
-        }
+        
+        UpdateGame(showGameGridMoveOutAnimation);
     }
 
     private void UpdateGame(bool showGameGridMoveOutAnimation)
