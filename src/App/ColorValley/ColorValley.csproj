@@ -14,7 +14,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<NeutralLanguage>en</NeutralLanguage>
-		<DefineConstants>PRO_VERSION</DefineConstants>
+		<DefineConstants>STANDARD_VERSION</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('PRO_VERSION'))">
