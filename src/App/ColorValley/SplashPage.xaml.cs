@@ -73,7 +73,7 @@ public partial class SplashPage : ContentPage
 
         await Task.Run(async () =>
         {
-            await Task.Delay(3000);
+            await Task.Delay(5000);
             if (App.MainInterstitialAd != null)
             {
                 if (App.MainInterstitialAd.IsLoaded)
