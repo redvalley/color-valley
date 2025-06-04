@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks>net9.0-iOS</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>ColorValley</RootNamespace>
@@ -50,6 +50,13 @@
 		<CreatePackage>false</CreatePackage>
 		<CodesignKey>Apple Distribution: Red Valley Software GmbH (L678J3PV64)</CodesignKey>
 		<CodesignProvision>DistributionProfile RedValleySoftware ColorValley</CodesignProvision>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+		<CreatePackage>false</CreatePackage>
+		<CodesignKey>Apple Development: Rupert Eder (322YYJY2TQ)</CodesignKey>
+		<CodesignProvision>DevelopmentProfile RedValleySoftware ColorValley</CodesignProvision>
+		<MtouchDebug>True</MtouchDebug>
 	</PropertyGroup>
 	
 	<ItemGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('PRO_VERSION'))">
