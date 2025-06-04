@@ -15,6 +15,7 @@ public partial class SplashPage : ContentPage
 #if !PRO_VERSION
     private readonly IAdConsentService? _adConsentService = null;
     private readonly IColorValleyAppOpenAdService _colorValleyAppOpenAdService;
+    private readonly IColorValleyInterstitualAdService _colorValleyInterstitualAdService;
 #endif
 
 
@@ -33,11 +34,14 @@ public partial class SplashPage : ContentPage
 
     }
 #else
-    public SplashPage(IAdConsentService adConsentService, IColorValleyAppOpenAdService colorValleyAppOpenAdService)
+    public SplashPage(IAdConsentService adConsentService, 
+        IColorValleyAppOpenAdService colorValleyAppOpenAdService,
+        IColorValleyInterstitualAdService colorValleyInterstitualAdService)
     {
         InitializeComponent();
         _adConsentService = adConsentService;
         _colorValleyAppOpenAdService = colorValleyAppOpenAdService;
+        _colorValleyInterstitualAdService = colorValleyInterstitualAdService;
 
         this.LabelAppNameColorValleyPro.IsVisible = false;
         this.LabelAppNameColorValley.IsVisible = true;
@@ -76,7 +80,10 @@ public partial class SplashPage : ContentPage
         await Task.Run(async () =>
         {
             await Task.Delay(5000);
-            this._colorValleyAppOpenAdService.ShowAd(ShowMainPage);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                this._colorValleyAppOpenAdService.ShowAd(ShowMainPage);
+            });
         });
     }
 #endif
@@ -102,7 +109,11 @@ public partial class SplashPage : ContentPage
 
         if (Application.Current?.Windows != null)
         {
+#if PRO_VERSION
             Application.Current.Windows[0].Page = new CompanySplashPage();
+#else
+            Application.Current.Windows[0].Page = new CompanySplashPage(_colorValleyInterstitualAdService);
+#endif
         }
     }
 }

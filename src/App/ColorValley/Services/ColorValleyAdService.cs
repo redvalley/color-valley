@@ -32,6 +32,8 @@ public abstract class ColorValleyAdService<TAd, TAdService>(TAdService adService
 
     protected abstract void DoLoadAd();
 
+    protected abstract void DoShowAd();
+
     protected abstract void AttachAdFailedToLoadHandler();
 
     protected abstract void AttachAdLoadedHandler();
@@ -56,11 +58,13 @@ public abstract class ColorValleyAdService<TAd, TAdService>(TAdService adService
 
         if (Ad != null)
         {
-           AttachAdFailedToShowHandler(onAdShownAction);
+            AttachAdFailedToShowHandler(onAdShownAction);
 
-           AttachAdDismissedHandler(onAdShownAction);
+            AttachAdDismissedHandler(onAdShownAction);
+
+            DoShowAd();
         }
-            
+
     }
 
     protected virtual void OnAdDismissed(Action onAdShownAction)

@@ -13,4 +13,9 @@ public static class AppBuilderExtensions
         appBuilder.Services.AddSingleton<IColorValleyInterstitualAdService>(
             provider => new ColorValleyInterstitualAdService(provider.GetRequiredService<IInterstitialAdService>(), AppSettings.AdMobAdUnitIdInterstitial));
     }
+
+    public static void AddPages(this MauiAppBuilder appBuilder)
+    {
+        appBuilder.Services.AddScoped<SplashPage>();
+    }
 }

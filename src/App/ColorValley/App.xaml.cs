@@ -48,6 +48,8 @@ namespace ColorValley
             return mainWindow;
 
         }
+
+        
 #if !PRO_VERSION
         private void InitializeAds()
         {

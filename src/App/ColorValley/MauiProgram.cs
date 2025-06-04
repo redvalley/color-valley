@@ -34,6 +34,8 @@ namespace ColorValley
     		builder.Logging.AddDebug();
 #endif
             builder.AddAppServices();
+            builder.AddPages();
+
             return builder.Build();
         }
     }

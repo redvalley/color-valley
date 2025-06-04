@@ -21,6 +21,11 @@ public class ColorValleyAppOpenAdService : ColorValleyAdService<IAppOpenAd, IApp
         Ad?.Load();
     }
 
+    protected override void DoShowAd()
+    {
+        Ad?.Show();
+    }
+
     protected override void AttachAdFailedToLoadHandler()
     {
         var appOpenAd = this.Ad;
