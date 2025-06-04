@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using Plugin.AdMob.Services;
 
 #if !PRO_VERSION
 using Plugin.AdMob;
@@ -17,7 +18,7 @@ namespace ColorValley
             AdConfig.UseTestAdUnitIds = true;
 #endif      
 #endif
-            var builder = MauiApp.CreateBuilder();
+            MauiAppBuilder builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<ColorValley.App>()
 #if !PRO_VERSION
@@ -32,8 +33,7 @@ namespace ColorValley
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
-
+            builder.AddAppServices();
             return builder.Build();
         }
     }

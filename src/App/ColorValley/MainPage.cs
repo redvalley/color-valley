@@ -1,13 +1,11 @@
-﻿#if !PRO_VERSION
-using Plugin.AdMob;
-#endif
-using ColorValley.Models;
+﻿using ColorValley.Models;
 using ColorValley.Services;
 using ColorValley.Settings;
 using iJus.Core.Settings;
 using Microsoft.Maui.Controls.Shapes;
 using Plugin.Maui.Audio;
 #if !PRO_VERSION
+using Plugin.AdMob;
 using Plugin.AdMob.Services;
 #endif
 
@@ -15,6 +13,9 @@ namespace ColorValley;
 
 public class MainPage : ContentPage
 {
+#if !PRO_VERSION
+    private readonly IColorValleyInterstitualAdService _colorValleyInterstitualAdService;
+#endif
     private readonly Grid _gameGrid = new();
     private readonly List<Button> _outerBoxes = new();
 
@@ -61,8 +62,15 @@ public class MainPage : ContentPage
     private LevelSettings _levelSettings = new LevelSettings();
     private HighScoreService _highScoreService = new HighScoreService();
 
+#if !PRO_VERSION
+    public MainPage(IColorValleyInterstitualAdService colorValleyInterstitualAdService)
+    {
+        _colorValleyInterstitualAdService = colorValleyInterstitualAdService;
+#else
     public MainPage()
     {
+
+#endif
         _gameTimer = Dispatcher.CreateTimer();
         _timeTimer = Dispatcher.CreateTimer();
         _levelSettings = LevelSettings.CreateLevel1Settings();
@@ -766,6 +774,8 @@ public class MainPage : ContentPage
         {
             await SaveScore();
         }
+
+        _colorValleyInterstitualAdService.ShowAd(() => { });
 
         await AddLauncherOverlay(true);
     }
