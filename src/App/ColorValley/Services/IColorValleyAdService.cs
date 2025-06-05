@@ -3,5 +3,5 @@
 public interface IColorValleyAdService
 {
     void LoadAd();
-    void ShowAd(Action onAdShownAction);
+    Task ShowAd(Action onAdShownAction);
 }

@@ -62,6 +62,9 @@ public class MainPage : ContentPage
     private LevelSettings _levelSettings = new LevelSettings();
     private HighScoreService _highScoreService = new HighScoreService();
 
+    public bool IsInterstitualAdShowing { get; set; }
+
+
 #if !PRO_VERSION
     public MainPage(IColorValleyInterstitualAdService colorValleyInterstitualAdService)
     {
@@ -775,7 +778,11 @@ public class MainPage : ContentPage
             await SaveScore();
         }
 
-        _colorValleyInterstitualAdService.ShowAd(() => { });
+        IsInterstitualAdShowing = true;
+        await _colorValleyInterstitualAdService.ShowAd(() =>
+        {
+            IsInterstitualAdShowing = false;
+        });
 
         await AddLauncherOverlay(true);
     }

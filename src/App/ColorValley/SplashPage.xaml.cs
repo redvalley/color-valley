@@ -80,9 +80,9 @@ public partial class SplashPage : ContentPage
         await Task.Run(async () =>
         {
             await Task.Delay(5000);
-            MainThread.BeginInvokeOnMainThread(() =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                this._colorValleyAppOpenAdService.ShowAd(ShowMainPage);
+                await this._colorValleyAppOpenAdService.ShowAd(ShowMainPage);
             });
         });
     }

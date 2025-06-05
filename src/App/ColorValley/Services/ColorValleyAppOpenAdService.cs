@@ -1,5 +1,4 @@
 ﻿#if !PRO_VERSION
-using Android.Gms.Ads.AppOpen;
 using Plugin.AdMob;
 using Plugin.AdMob.Services;
 
@@ -10,6 +9,8 @@ public class ColorValleyAppOpenAdService : ColorValleyAdService<IAppOpenAd, IApp
     public ColorValleyAppOpenAdService(IAppOpenAdService adService, string adUnitId) : base(adService, adUnitId)
     {
     }
+
+    protected override bool IsAdLoaded => Ad?.IsLoaded ?? false;
 
     protected override IAppOpenAd CreateAd()
     {

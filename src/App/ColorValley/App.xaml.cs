@@ -14,6 +14,7 @@ namespace ColorValley
 #if !PRO_VERSION
         private readonly IColorValleyAppOpenAdService _colorValleyAppOpenAdService;
         private readonly IColorValleyInterstitualAdService _colorValleyInterstitualAdService;
+        private bool _appWasDeactivated = false;
 #endif
 
 #if !PRO_VERSION
@@ -43,13 +44,25 @@ namespace ColorValley
             var mainWindow = new Window(splashPage);
                 
 #if !PRO_VERSION
-            mainWindow.Resumed += MainWindowOnResumed;
+            mainWindow.Activated += MainWindowOnActivated;
+            mainWindow.Deactivated += MainWindowOnDeactivated;
 #endif
             return mainWindow;
 
         }
 
-        
+        private void MainWindowOnDeactivated(object? sender, EventArgs e)
+        {
+            if (Windows.First().Page is NavigationPage navigationPage)
+            {
+                if (!(navigationPage.CurrentPage is MainPage mainPage && mainPage.IsInterstitualAdShowing))
+                {
+                    _appWasDeactivated = true;
+                }
+            }
+        }
+
+
 #if !PRO_VERSION
         private void InitializeAds()
         {
@@ -58,9 +71,14 @@ namespace ColorValley
             
         }
 
-        private void MainWindowOnResumed(object? sender, EventArgs e)
+        private async void MainWindowOnActivated(object? sender, EventArgs e)
         {
-            _colorValleyAppOpenAdService.ShowAd(()=>{});
+            if (Windows.First().Page is NavigationPage && _appWasDeactivated)
+            {
+                _appWasDeactivated = false;
+                await _colorValleyAppOpenAdService.ShowAd(() => { });
+            }
+            
         }
 #endif
     }

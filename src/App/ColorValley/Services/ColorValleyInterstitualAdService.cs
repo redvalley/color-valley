@@ -11,6 +11,8 @@ public class ColorValleyInterstitualAdService : ColorValleyAdService<IInterstiti
     {
     }
 
+    protected override bool IsAdLoaded => Ad?.IsLoaded ?? false;
+
     protected override IInterstitialAd CreateAd()
     {
         return AdService.CreateAd(AdUnitId);

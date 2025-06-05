@@ -12,6 +12,8 @@ public abstract class ColorValleyAdService<TAd, TAdService>(TAdService adService
 
     private bool IsAdAvailable => Ad != null;
 
+    protected abstract bool IsAdLoaded { get; }
+
     public void LoadAd()
     {
 
@@ -42,8 +44,9 @@ public abstract class ColorValleyAdService<TAd, TAdService>(TAdService adService
 
     protected abstract void AttachAdDismissedHandler(Action onAdShownAction);
 
-    public void ShowAd(Action onAdShownAction)
+    public async Task ShowAd(Action onAdShownAction)
     {
+        
         if (_isShowingAd)
         {
             return;
@@ -62,7 +65,29 @@ public abstract class ColorValleyAdService<TAd, TAdService>(TAdService adService
 
             AttachAdDismissedHandler(onAdShownAction);
 
-            DoShowAd();
+            await Task.Run(async () =>
+            {
+                
+                if (!IsAdLoaded)
+                {
+                    await Task.Delay(2000);
+                    if (IsAdLoaded)
+                    {
+                        MainThread.BeginInvokeOnMainThread(DoShowAd);
+                    }
+                    else
+                    {
+                        onAdShownAction();
+                    }
+                }
+                else
+                {
+                    MainThread.BeginInvokeOnMainThread(DoShowAd);
+                }
+                    
+            });
+
+            
         }
 
     }
