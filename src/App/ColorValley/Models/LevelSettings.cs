@@ -8,7 +8,7 @@ public class LevelSettings
 
     private readonly Random _random = new();
 
-    public const int DefaultTotalTimeSeconds = 2;
+    public const int DefaultTotalTimeSeconds = 60;
 
     public const int DefaultGameTimerIntervallSeconds = 2;
 
