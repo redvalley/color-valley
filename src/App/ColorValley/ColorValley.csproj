@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks>net9.0-ios</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>ColorValley</RootNamespace>
@@ -18,8 +18,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('PRO_VERSION'))">
-		<ApplicationDisplayVersion>1.1.9</ApplicationDisplayVersion>
-		<ApplicationVersion>19</ApplicationVersion>
+		<ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
+		<ApplicationVersion>22</ApplicationVersion>
 
 
 		<!-- Display name -->
@@ -33,8 +33,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('STANDARD_VERSION'))">
-		<ApplicationDisplayVersion>1.1.9</ApplicationDisplayVersion>
-		<ApplicationVersion>19</ApplicationVersion>
+		<ApplicationDisplayVersion>1.1.12</ApplicationDisplayVersion>
+		<ApplicationVersion>22</ApplicationVersion>
 
 		<!-- Display name -->
 		<ApplicationTitle>Color Valley</ApplicationTitle>
@@ -47,11 +47,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-		<CreatePackage>false</CreatePackage>
+		<MtouchLink>SdkOnly</MtouchLink>
+		<UseInterpreter>true</UseInterpreter>
+		<ProvisioningType>manual</ProvisioningType>
 		<CodesignKey>Apple Distribution: Red Valley Software GmbH (L678J3PV64)</CodesignKey>
 		<CodesignProvision>DistributionProfile RedValleySoftware ColorValley</CodesignProvision>
 	</PropertyGroup>
-
+	
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 		<CreatePackage>false</CreatePackage>
 		<CodesignKey>Apple Development: Rupert Eder (322YYJY2TQ)</CodesignKey>
@@ -67,6 +69,10 @@
 	<ItemGroup Condition="'$(DefineConstants)' != '' and $(DefineConstants.Contains('STANDARD_VERSION'))">
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="White" />
 		<MauiIcon Include="Resources\AppIcon\appicon.png" Color="White" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+		<BundleResource Include="Platforms\iOS\PrivacyInfo.xcprivacy" LogicalName="PrivacyInfo.xcprivacy"  />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,5 +1,4 @@
 ﻿#if !PRO_VERSION
-using Android.Gms.Ads.AppOpen;
 using Plugin.AdMob;
 using Plugin.AdMob.Services;
 

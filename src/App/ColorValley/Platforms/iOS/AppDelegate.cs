@@ -9,14 +9,26 @@ namespace ACAB.App
     {
         protected override MauiApp CreateMauiApp()
         {
-            var app = MauiProgram.CreateMauiApp();
-
-            if (MobileAds.SharedInstance != null)
+            MauiApp? app = null;
+            try
             {
-                Google.MobileAds.MobileAds.SharedInstance.Start(completionHandler: null);    
+                app = MauiProgram.CreateMauiApp();
+
+                if (MobileAds.SharedInstance != null)
+                {
+                    Google.MobileAds.MobileAds.SharedInstance.Start(completionHandler: null);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(@"Error occured during startup: " + e.Message);
+            }
+
+            if (app == null)
+            {
+                throw new InvalidOperationException("App is null, it seems that the app could not be initialized correctly!");
             }
             
-
             return app;
         }
     }

@@ -20,12 +20,24 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
-	<key>UIDeviceFamily</key>
+	<key>CFBundleIdentifier</key>
+	<string>com.redvalley-software.colorvalley</string>
+	<key>CFBundleLocalizations</key>
 	<array>
-		<integer>1</integer>
+		<string>de</string>
+		<string>en</string>
+		<string>fr</string>
 	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Color Valley</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-6864374918270893~2514988248</string>
 	<key>GADIsAdManagerApp</key>
